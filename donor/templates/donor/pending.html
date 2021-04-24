@@ -1,0 +1,102 @@
+{% extends 'base/dash_home.html' %}
+{% block title %} CodeUp Blood | Donor Pending Appointment {% endblock %}
+
+    {% load static %}
+    {% block body %}
+    <div class="content-subheader">
+		
+        <div class="content-subheader__titles">
+                <h2 class="content-subheader__title">Manage / Pending</h2>
+                <nav class="content-subheader__breadcrumb-menu">			
+                        <ul>
+                            <li><a href="{% url 'donor:home' %}">Dashboard</a></li>
+                        </ul>
+                </nav>
+        </div>
+        
+        
+        <div class="content-subheader__options">
+        
+                <div class="content-subheader__search">
+                    <form>
+                        <input type="text" class="subheader-search__input" id="" name="" value="" placeholder="Search ..." />
+                        <input type="submit" class="subheader-search__submit" value="Search" />
+                    </form>
+                </div>
+                
+                <!-- <div class="content-subheader__dropdown">
+                    <span class="content-subheader__more show-more show-more--select show-more--select-gray has-dropdown" data-dropdown="moreoptions">Filter Options</span>
+                    <nav class="dropdown-menu dropdown-menu--content dropdown-menu--subheader" id="moreoptions"> 			
+                        <ul>
+                            <li><a href="#">By Date</a></li>
+                            <li><a href="#">By Name</a></li>
+                            <li><a href="#">By Date of birth</a></li>
+                            <li><a href="#">+ Add filter</a></li>
+                        </ul>
+                    </nav>
+                </div> -->
+        
+        </div>
+        
+    </div>
+    
+
+    
+    <div class="grid grid--margin">
+        
+        <div class="grid__row">
+            <div class="grid__col grid__col--padding bg-white">
+                <div class="table table--18">
+                    <div class="table__header">
+                        <div style="background-color: #5616f5;color: #ffffff;" class="table__row">
+                            <div class="table__cell"></div>
+                            <div class="table__cell">DONOR NO.</div>
+                            <div class="table__cell">DATE</div>
+                            <div class="table__cell">TIME</div>
+                            <div class="table__cell">HOSPITAL</div>
+                            <div class="table__cell">HOSPITAL LOCATION</div>
+                            <div class="table__cell">COUNTDOWN TILL APPOINTMENT</div>
+                            <div class="table__cell"></div>
+                        </div>
+                    </div>
+                    <div class="table__body">
+                        {% if appoint %}
+                        {% for x in appoint %}
+                        <div class="table__row">
+                            <div></div>
+                            <!-- <div class="table__cell"><div class="avatar-thumb"><img src="images/avatar-3.jpg" alt="" title=""/></div></div> -->
+                            <div class="table__cell">{{x.donor_id}}</div>
+                            <div class="table__cell">{{x.zDate}}</div>
+                            <div class="table__cell">{{x.time}}</div>
+                            <div class="table__cell">{{x.hospital}}</div>
+                            <div class="table__cell">{{x.hospital_location}}</div>
+                            <div class="table__cell"><div id="{{x.d_id}}"></div></div>
+                            
+                            <div class="table__cell">
+                                <span class="show-more show-more--ellipsis has-dropdown" data-dropdown="dropd{{x.pk}}"></span>
+                                <nav class="dropdown-menu dropdown-menu--content dropdown-menu--table" id="dropd{{x.pk}}"> 			
+                                    <ul>
+                                        <!-- <li><a href="dashboard__patient-profile.html">View Profile</a></li> -->
+                                        <li><a href="#">Edit</a></li>
+                                        <li><a href="#">Cancel</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                            {% endfor %}
+                            {% else %}
+                            <center><b>NO PENDING APPOINTMENT FOUND</b></center>
+                            {% endif %}
+
+                    </div>
+                    
+                </div>
+                <!-- TABLE end -->
+            </div>
+
+        </div>
+
+    </div> <!-- End of Grid -->
+</div>  <!-- Wrap End -->
+
+    {% endblock %}

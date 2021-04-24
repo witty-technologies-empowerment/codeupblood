@@ -1,0 +1,179 @@
+{% extends 'base/home_base.html' %}
+{% block title %} CodeUp | Saving Lives | FAQs {% endblock %}
+
+    {% load static %}
+    {% block body %}
+                  <!--  PAGE HEADING -->
+
+      <section class="page-header">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-sm-12 text-center">
+
+                    <h3>
+                        FAQ's
+                    </h3>
+
+                    <p class="page-breadcrumb">
+                        <a href="#">Home</a> / FAQ
+                    </p>
+
+
+                </div>
+
+            </div> <!-- end .row  -->
+
+        </div> <!-- end .container  -->
+
+    </section> <!-- end .page-header  -->
+
+    <!--  SECTION FAQ -->
+
+    <section class="section-content-block section-faq">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-12 col-sm-12 text-center">
+                    <h2 class="section-heading">F.A.Q</h2>
+                    <p class="section-subheading">
+                        know more about blood donation and know how you can help people.
+                    </p>
+                </div> <!-- end .col-sm-10  -->
+
+            </div> <!--  end .row  -->
+
+            <div class="row">
+
+                {% if allfaq %}
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="accordion">
+                {% for x in allfaq %}
+                {% if x.path == 'left' %}
+                    <div class="panel panel-default faq-box">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse{{x.idz}}" >{{x.question}} ?</a>
+                            </h4>
+                        </div>
+                        <div id="collapse{{x.idz}}" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                {{x.answer_one}} <br> {{x.answer_two}}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="accordion2">
+                    {% for x in allfaq %}
+                {% if x.path == 'right' %}
+                    <div class="panel panel-default faq-box">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{x.idz}}" >{{x.question}} ?</a>
+                            </h4>
+                        </div>
+                        <div id="collapse{{x.idz}}" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                {{x.answer_one}} <br> {{x.answer_two}}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    </div>
+                    {% if allfaq.has_other_pages %}
+            {% endif %}
+                {% else %}
+                <center>No FAQ's Yet</center>
+                {% endif %}
+
+
+            </div> <!-- end .col-md-6  -->
+                </div> <!-- end .col-md-12  -->                    
+
+
+    </section> <!--  end .section-faq -->
+
+
+    <!-- CLIENT LOGO SECTION  -->
+
+    <section class="section-content-block section-secondary-bg">
+
+        {% if spon %}
+        <div class="container wow fadeInUp">
+            
+            <div class="row section-heading-wrapper">
+
+                <div class="col-md-12 col-sm-12 text-center no-img-separator">
+                    <h2>Meet Our Sponsors</h2>
+                    <span class="heading-separator"></span>
+                    <!-- <h4>The sponsors who give their valuable amount to fulfill our mission.</h4> -->
+                </div> <!-- end .col-sm-10  -->                      
+
+            </div> <!-- end .row  -->
+
+            <div class="row">
+
+                <div class="logo-items owl-carousel logo-layout-1 text-center">
+
+                    <div class="client-logo">
+
+                        <img src="{% static 'home/images/logo_1.jpg' %}" alt="" />
+
+                    </div>
+
+                    
+                </div> <!-- end .testimonial-container  -->
+                <center><a class="btn btn-theme btn-theme margin-top-24" href="#">SPONSOR US TODAY</a></center>
+                <!-- <center><a class="btn btn-theme btn-theme margin-top-24" href="#">ViEW all SPONSOR</a></center> -->
+
+            </div> <!-- end row  -->
+            
+        </div> <!-- end .container  -->
+        {% endif %}
+        
+        <br><br><br>
+        
+        {% if pathn %}
+        <div class="container wow fadeInUp">
+            
+            <div class="row section-heading-wrapper">
+
+                <div class="col-md-12 col-sm-12 text-center no-img-separator">
+                    <h2>Meet Our Partners</h2>
+                    <span class="heading-separator"></span>
+                    <!-- <h4>The sponsors who give their valuable amount to fulfill our mission.</h4> -->
+                </div> <!-- end .col-sm-10  -->                      
+
+            </div> <!-- end .row  -->
+
+
+            <div class="row">
+
+                <div class="logo-items owl-carousel logo-layout-1 text-center">
+
+                    <div class="client-logo">
+
+                        <img src="{% static 'home/images/logo_1.jpg' %}" alt="" />
+
+                    </div>
+
+
+                </div> <!-- end .testimonial-container  -->
+                
+
+            </div> <!-- end row  -->
+
+        </div> <!-- end .container  -->
+        {% endif %}
+
+    </section> <!--  end .section-client-logo -->
+
+
+    <!-- START FOOTER  -->
+    {% endblock %}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}   
+
+<head>
+    <meta charset="UTF-8">
+	<link rel="icon" type="image/png" href="{% static 'home/images/favicon/favicon_.png' %}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CodeUp Blood | Saving Live | Acoount{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/iofrm-style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/iofrm-theme11.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.6/dist/sweetalert2.min.css" rel="stylesheet"> 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.6/dist/sweetalert2.all.min.js"></script>
+</head>
+<body>
+    <div class="form-body">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <div class="website-logo-inside">
+                            <a href="{% url 'home' %}">
+                                <div class="logo">
+                                        <img class="logo-size" src="{% static 'home/images/logo/logo_wh_bk.png' %}" alt="CodeUp Blood Logo" />
+                                </div>
+                            </a>
+                        </div>
+
+{% block body %}
+
+<!-- code goes here -->
+
+{% endblock %}
+	
+</div>
+</div>
+</div>
+</div>
+</div>
+<script src="{% static 'accounts/js/jquery.min.js' %}"></script>
+<script src="{% static 'accounts/js/popper.min.js' %}"></script>
+<script src="{% static 'accounts/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'accounts/js/main.js' %}"></script>
+{% block moreJs %}
+
+{% endblock %}
+</body>
+
+</html>

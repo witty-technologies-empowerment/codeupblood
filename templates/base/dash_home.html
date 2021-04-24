@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="CodeUp Blood Bank - Blood Donation Campaign & Life Saver">
+<meta name="author" content="WittyHub[TetelaINV]">
+<link rel="shortcut icon" href="{% static 'home/images/favicon/favicon_.png' %}" />
+<title>{% block title %} CodeUp Blood | Donor Dashboard {% endblock %}</title>
+<link rel="stylesheet" href="{% static 'dashboard/css/swiper.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/css/jquery.scrollbar.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/css/daterangepicker.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/css/select2.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/css/ion.rangeSlider.min.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/css/dashboard.min.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">  
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet"> 
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.6/dist/sweetalert2.min.css" rel="stylesheet"> 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.6/dist/sweetalert2.all.min.js"></script>
+</head>
+<body>
+
+<div class="dashboard-wrap">
+
+	<header class="sidebar-header">
+		<h1 class="sidebar-header__logo">C<span>odeUp<strong class="blood_st">Blood</strong></span></h1>
+	</header>
+	
+	<!-- Left Sidebar -->
+	<div class="section section--sidebar" id="sidebar">
+	
+			<nav class="sidebar-menu"> 
+				<ul>
+					<li class="dashboard"><a href="{% url 'donor:home' %}"><b>Home</b></a></li>
+          {% if recent %}
+					<li class="appointment Nlxn4G" ><a href="javascript:void(0)"><b>Book Appointment</b></a></li>
+          {% else %}
+					<li class="appointment selected modal-toggle" data-openpopup="appointment"><a href="dashboard.html"><b>Book Appointment</b></a></li>
+          {% endif %}
+					<li class="components has-submenu "><a href="#"><b>Manage<span class="submenu-arrow"></span></b></a>
+						<ul class="sidebar-menu__submenu " >
+							<li class=""><a href="{% url 'donor:pending' %}">Pending</a></li>
+							<li><a href="{% url 'donor:complete' %}">Completed</a></li>
+						</ul>
+					</li>
+					<li class="doctors"><a href="{% url 'donor:medic' %}"><b>Medical Report</b></a></li>
+					<li class="inbox"><a href="{% url 'donor:faq' %}"><b>FAQ's</b></a></li>
+					<li class="components"><a href="{% url 'donor:safety' %}"><b>Safety Tips</b></a></li>
+				</ul>
+			</nav>
+	
+	</div>
+	
+	<!-- Content -->
+	<div class="section section--content" id="content">
+		<header class="content-header">
+		
+			<div class="sidebar-resize"></div>
+			<div class="mobile-menu"><div class="st-burger-icon st-burger-icon--medium"><span></span></div></div>
+			
+			<div class="content-header__user content-header__dropdown">  
+			    <div class="content-header__user-avatar content-header__dropdown-activate" data-dropdown="userdropdown">
+                    
+					<div style="font-family: 'Comfortaa', cursive !important;" class="content-header__user-thumb"><img id="avatar" alt="{{user.username}} Avatar"></div>
+					<!-- <div class="content-header__user-thumb"><img src="{% static 'dashboard/images/avatar-2.jpg' %}" alt="" title=""/></div> -->
+					<span class="content-header__user-name">{{user.first_name | title}} {{user.last_name | title}}</span>
+			    </div>  
+				<nav class="dropdown-menu dropdown-menu--header dropdown-menu--user-menu " id="userdropdown"> 	
+				<h3 class="dropdown-menu__subtitle">User menu</h3>
+				<ul>   
+				    <li><b>User ID = {{user.username|upper}}</b></li>
+				    <li><a href="{% url 'donor:donorProfile' %}">My profile</a></li>
+				    <!-- <li><a href="#">Activity</a></li> -->
+            {% if recent %}
+				    <li><a class="appointment Nlxn4G" href="javascript:void(0)">Book Appointment</a></li>
+            {% else %}
+				    <li><a class="appointment modal-toggle" data-openpopup="appointment" href="#">Book Appointment</a></li>
+            {% endif %}
+				    <!-- <li><a href="#">Support</a></li> -->
+				    <li class="logout"><a href="{% url 'donor:signout' %}" class="button button--general button--red-border">Signout</a></li>
+				</ul>
+				</nav>
+			</div>
+			
+			
+			<div class="mobile-submenu"></div>
+
+			<nav class="content-header__menu">       
+				<ul>
+          {% if recent %}
+					<li class="appointment Nlxn4G" ><a href="#">Book an appointment</a></li>
+          {% else %}
+					<li class="appointment modal-toggle" data-openpopup="appointment"><a href="#">Book an appointment</a></li>
+          {% endif %}
+				</ul>
+			</nav>
+			
+		</header>
+
+		{% block body %}
+
+        {% endblock %}
+
+         <!-- Modal - Appointment --> 
+         {% if not recent %}
+<div class="modal modal--appointment">
+		
+    <div class="modal__overlay modal__overlay--toggle"></div>
+    <div class="modal__wrapper modal-transition">
+      
+    <div class="modal__body">
+      <form method="POST" action="{% url 'donor:home' %}" class="sendAppointment">
+        {% csrf_token %}
+        <div class="modal__header">
+            <h2 class="modal__header-title">Book an appointment</h2>
+            <div class="modal__close modal__overlay--toggle"><span></span></div>
+        </div>
+        <div class="modal__content">					
+    
+            <div class="grid">
+                <div class="grid__row grid__row--margin">
+                    <div class="grid__col grid__col--margin">
+                        <h3 class="grid__col-title">Appointment Information</h3>
+                    </div>		
+                </div>
+                <div class="grid__row grid__row--margin">
+                    <div class="grid__col grid__col--13 grid__col--margin">
+                        <label class="form__label">DATE &amp; TIME</label>
+                        <input type="text" name="timepicker" id="timepicker" class="form__input"  />
+                    </div>
+                </div>
+                <div class="grid__row  grid__row--margin">
+                    <div class="grid__col grid__col--margin">
+                        <h3 class="grid__col-title">Location Information</h3>
+                    </div>		
+                </div>
+                <div class="grid__row grid__row--margin">
+                    <div class="grid__col grid__col--mb-12 grid__col--margin">
+                        <label class="form__label">STATE</label>
+                            <select
+                                onchange="toggleLGA(this);"
+                                name="state"
+                                id="state"
+                                class="custom-select"
+                            >
+                            <option disabled selected>-- Your State --</option>
+                            <option value="abia">Abia</option>
+                            <option value="adamawa">Adamawa</option>
+                            <option value="akwaibom">Akwa Ibom</option>
+                            <option value="anambra">Anambra</option>
+                            <option value="bauchi">Bauchi</option>
+                            <option value="bayelsa">Bayelsa</option>
+                            <option value="benue">Benue</option>
+                            <option value="borno">Borno</option>
+                            <option value="crossriver">Cross River</option>
+                            <option value="delta">Delta</option>
+                            <option value="ebonyi">Ebonyi</option>
+                            <option value="edo">Edo</option>
+                            <option value="ekiti">Ekiti</option>
+                            <option value="enugu">Enugu</option>
+                            <option value="fct">Federal Capital Territory</option>
+                            <option value="gombe">Gombe</option>
+                            <option value="imo">Imo</option>
+                            <option value="jigawa">Jigawa</option>
+                            <option value="kaduna">Kaduna</option>
+                            <option value="kano">Kano</option>
+                            <option value="katsina">Katsina</option>
+                            <option value="kebbi">Kebbi</option>
+                            <option value="kogi">Kogi</option>
+                            <option value="kwara">Kwara</option>
+                            <option value="lagos">Lagos</option>
+                            <option value="nasarawa">Nasarawa</option>
+                            <option value="niger">Niger</option>
+                            <option value="ogun">Ogun</option>
+                            <option value="ondo">Ondo</option>
+                            <option value="osun">Osun</option>
+                            <option value="oyo">Oyo</option>
+                            <option value="plateau">Plateau</option>
+                            <option value="rivers">Rivers</option>
+                            <option value="sokoto">Sokoto</option>
+                            <option value="taraba">Taraba</option>
+                            <option value="yobe">Yobe</option>
+                            <option value="zamfara">Zamfara</option>
+                        </select>
+                    </div>
+                    <div class="grid__col grid__col--mb-12 grid__col--margin">
+                        <label class="form__label">LGA</label>
+                            <select
+                            name="lga"
+                            id="lga"
+                            class="custom-select select-lga"
+                            required
+                            >
+                            <option disabled selected>-- Select a State --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid__row grid__row--margin">
+                    <div class="grid__col grid__col--margin">
+                        <h3 class="grid__col-title">Hospital Information</h3>
+                    </div>		
+                </div>
+                <div class="grid__row grid__row--margin">
+                    <div class="grid__col grid__col--13 grid__col--margin">
+                        <label class="form__label">HOSPITAL</label>
+                        <select class="custom-select" id='hospital' name="hospital">
+                            <option disabled selected>--Select State & LGA--</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid__row grid__row--margin">
+                    <div class="grid__col grid__col--margin">
+                        <input type="submit" name="submit" class="button button--submit button--blue-bg" id="submit" value="ADD APPOINTMENT" />	
+                    </div>
+                </div>
+            </div> <!-- End of Grid -->
+
+        </div> 
+      </form>
+        
+    </div>
+
+    </div>
+</div> 
+{% endif %}
+
+{% if appoints %}
+{% for x in appoints %}
+<div class="modal modal--appointmentEdit">
+		
+  <div class="modal__overlay modal__overlay--toggle"></div>
+  <div class="modal__wrapper modal-transition">
+    
+  <div class="modal__body">
+    <form method="POST" action="{% url 'donor:home' %}" class="sendAppointment">
+      {% csrf_token %}
+      <div class="modal__header">
+          <h2 class="modal__header-title">Edit your appointment</h2>
+          <div class="modal__close modal__overlay--toggle"><span></span></div>
+      </div>
+      <div class="modal__content">					
+  
+          <div class="grid">
+              <div class="grid__row grid__row--margin">
+                  <div class="grid__col grid__col--margin">
+                      <h3 class="grid__col-title">Appointment Information</h3>
+                  </div>		
+              </div>
+              <div class="grid__row grid__row--margin">
+                  <div class="grid__col grid__col--13 grid__col--margin">
+                      <label class="form__label">DATE &amp; TIME</label>
+                      <input type="text" value="{{x.yDate}}" name="timepicker" id="timepicker" class="form__input"  />
+                  </div>
+              </div>
+              <div class="grid__row  grid__row--margin">
+                  <div class="grid__col grid__col--margin">
+                      <h3 class="grid__col-title">Location Information</h3>
+                  </div>		
+              </div>
+              <div class="grid__row grid__row--margin">
+                  <div class="grid__col grid__col--mb-12 grid__col--margin">
+                      <label class="form__label">STATE</label>
+                          <select
+                              onchange="toggleLGA(this);"
+                              name="state"
+                              id="state"
+                              class="custom-select"
+                          >
+                          <option disabled selected>-- Your State --</option>
+                          <option value="abia">Abia</option>
+                          <option value="adamawa">Adamawa</option>
+                          <option value="akwaibom">Akwa Ibom</option>
+                          <option value="anambra">Anambra</option>
+                          <option value="bauchi">Bauchi</option>
+                          <option value="bayelsa">Bayelsa</option>
+                          <option value="benue">Benue</option>
+                          <option value="borno">Borno</option>
+                          <option value="crossriver">Cross River</option>
+                          <option value="delta">Delta</option>
+                          <option value="ebonyi">Ebonyi</option>
+                          <option value="edo">Edo</option>
+                          <option value="ekiti">Ekiti</option>
+                          <option value="enugu">Enugu</option>
+                          <option value="fct">Federal Capital Territory</option>
+                          <option value="gombe">Gombe</option>
+                          <option value="imo">Imo</option>
+                          <option value="jigawa">Jigawa</option>
+                          <option value="kaduna">Kaduna</option>
+                          <option value="kano">Kano</option>
+                          <option value="katsina">Katsina</option>
+                          <option value="kebbi">Kebbi</option>
+                          <option value="kogi">Kogi</option>
+                          <option value="kwara">Kwara</option>
+                          <option value="lagos">Lagos</option>
+                          <option value="nasarawa">Nasarawa</option>
+                          <option value="niger">Niger</option>
+                          <option value="ogun">Ogun</option>
+                          <option value="ondo">Ondo</option>
+                          <option value="osun">Osun</option>
+                          <option value="oyo">Oyo</option>
+                          <option value="plateau">Plateau</option>
+                          <option value="rivers">Rivers</option>
+                          <option value="sokoto">Sokoto</option>
+                          <option value="taraba">Taraba</option>
+                          <option value="yobe">Yobe</option>
+                          <option value="zamfara">Zamfara</option>
+                      </select>
+                  </div>
+                  <div class="grid__col grid__col--mb-12 grid__col--margin">
+                      <label class="form__label">LGA</label>
+                          <select
+                          name="lga"
+                          id="lga"
+                          class="custom-select select-lga"
+                          required
+                          value="lagos"
+                          >
+                          <option disabled selected>-- Select a State --</option>
+                      </select>
+                  </div>
+              </div>
+              <div class="grid__row grid__row--margin">
+                  <div class="grid__col grid__col--margin">
+                      <h3 class="grid__col-title">Hospital Information</h3>
+                  </div>		
+              </div>
+              <div class="grid__row grid__row--margin">
+                  <div class="grid__col grid__col--13 grid__col--margin">
+                      <label class="form__label">HOSPITAL</label>
+                      <select class="custom-select" id='hospital' name="hospital">
+                          <option disabled selected>--Select State & LGA--</option>
+                      </select>
+                  </div>
+              </div>
+              <div class="grid__row grid__row--margin">
+                  <div class="grid__col grid__col--margin">
+                      <input type="submit" name="submit" class="button button--submit button--blue-bg" id="submit" value="ADD APPOINTMENT" />	
+                  </div>
+              </div>
+          </div> <!-- End of Grid -->
+
+      </div> 
+    </form>
+      
+  </div>
+
+  </div>
+</div> 
+{% endfor %}
+{% endif %}
+
+
+{% if homey %}
+<script src="{% static 'dashboard/js/jquery-3.3.1.min.js' %}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="{% static 'dashboard/js/Chart.min.js' %}"></script>
+<script src="{% static 'dashboard/js/chartjs-plugin-style.min.js' %}"></script>
+<script src="{% static 'dashboard/js/charts-custom-dashboard.js' %}"></script>
+<script src="{% static 'dashboard/js/moment.min.js' %}"></script>
+<script src="{% static 'dashboard/js/calendar.js' %}"></script>
+<script src="{% static 'dashboard/js/swiper.min.js' %}"></script>
+<script src="{% static 'dashboard/js/select2.min.js' %}"></script>
+<script src="{% static 'dashboard/js/jquery.scrollbar.js' %}"></script>
+<script src="{% static 'dashboard/js/jquery.countdown.min.js' %}"></script>
+<script src="{% static 'dashboard/js/daterangepicker.min.js' %}"></script>
+<script src="{% static 'dashboard/js/ion.rangeSlider.min.js' %}"></script>
+<script src="{% static 'dashboard/js/jquery.dashboard-custom.js' %}"></script>
+<script src="{% static 'dashboard/js/locationQueue.js' %}"></script>
+<script>
+  var csrf_token = "{{ csrf_token }}"
+</script>
+
+{% if homey %}
+<script>
+  $(document).ready(function() {
+  function dateTime() {
+    // var myDate = Date.parse('{{date}}')
+    var valuex = '{{has_time}}'
+    if(valuex == "True") {
+      var myDate = new Date('{{date}}')
+    } else {
+      var myDate = new Date();
+    }
+    var hrs = myDate.getHours();
+    var greet;
+
+    if (hrs < 12)
+        greet = 'Good Morning, <span>{{user.last_name | title}}.</span>';
+    else if (hrs >= 12 && hrs <= 16)
+        greet = 'Good Afternoon, <span>{{user.last_name | title}}.</span>';
+    else if (hrs >= 16 && hrs <= 24)
+        greet = 'Good Evening, <span>{{user.last_name | title}}.</span>';
+
+    document.getElementById('TwByCV').innerHTML = greet ;
+  }
+
+  setInterval(dateTime, 1000);
+});
+$('.KsEw4').on('click', function(){
+
+})
+</script>
+{% endif %}
+{% if homey %}
+{% for x in appoints %}
+{% if x.status == 'asdf' %}
+<script>
+    // Custom countdown
+	if (jQuery.isFunction(jQuery.fn.countdown)) {
+		$('#time-user{{x.pk}}').countdown("{{x.xDate}}", function(event) {
+		  var totalHoursu1 = event.offset.totalDays * 24 + event.offset.hours;
+		  $(this).html(event.strftime(totalHoursu1 + 'h %M m %S s'));
+		});
+        
+	}	
+</script>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if homey %}
+{% if recent %}
+<script>
+$('.Nlxn4G').on('click', function(){
+  Swal.fire(
+    'Good job!',
+    'You have a pending appointment or you have just recently donated blood',
+    'success'
+  )
+  })
+</script>
+{% endif %}
+{% endif %}
+<script>
+    var pass = '{{homey}}'
+    var user_login = '{{user.username}}'
+
+    function generateAvatar(text, foregroundColor, backgroundColor) {
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+
+        canvas.width = 200;
+        canvas.height = 200;
+
+        // Draw background
+        context.fillStyle = backgroundColor;
+        context.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Draw text
+        context.font = "bold 100px Assistant";
+        context.fillStyle = foregroundColor;
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+        context.fillText(text, canvas.width / 2, canvas.height / 2);
+
+        return canvas.toDataURL("image/png");
+    }
+    document.getElementById("avatar").src = generateAvatar("{{init}}", "white", "{{hex_number}}");
+    
+</script>
+</body>
+
+</html>
+{% else %}
+<script src="{% static 'dashboard/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'dashboard/js/moment.min.js' %}"></script>
+<script src="{% static 'dashboard/js/select2.min.js' %}"></script>
+<script src="{% static 'dashboard/js/daterangepicker.min.js' %}"></script>
+<script src="{% static 'dashboard/js/ion.rangeSlider.min.js' %}"></script>
+<script src="{% static 'dashboard/js/jquery.dashboard-custom.js' %}"></script>
+<script src="{% static 'dashboard/js/locationQueue.js' %}"></script>
+<script>
+  var csrf_token = "{{ csrf_token }}"
+</script>
+<script>
+  var pass = false
+  $(document).ready(function(){
+    $('.wvNRPU').first().attr('checked')
+  })
+    function generateAvatar(text, foregroundColor, backgroundColor) {
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+
+        canvas.width = 200;
+        canvas.height = 200;
+
+        // Draw background
+        context.fillStyle = backgroundColor;
+        context.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Draw text
+        context.font = "bold 100px Assistant";
+        context.fillStyle = foregroundColor;
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+        context.fillText(text, canvas.width / 2, canvas.height / 2);
+
+        return canvas.toDataURL("image/png");
+    }
+    document.getElementById("avatar").src = generateAvatar("{{init}}", "white", "{{hex_number}}");
+    
+    
+    function generateAvatar(text, foregroundColor, backgroundColor) {
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+
+        canvas.width = 200;
+        canvas.height = 200;
+
+        // Draw background
+        context.fillStyle = backgroundColor;
+        context.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Draw text
+        context.font = "bold 100px Assistant";
+        context.fillStyle = foregroundColor;
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+        context.fillText(text, canvas.width / 2, canvas.height / 2);
+
+        return canvas.toDataURL("image/png");
+    }
+    document.getElementById("Pavatar").src = generateAvatar("{{init}}", "white", "{{hex_number}}");
+    
+	
+</script>
+{% if manage %}
+{% for x in appoint %}
+<script>
+  // Set the date we're counting down to
+  var countDownDate = new Date("{{x.passDate}}").getTime();
+  
+  // Update the count down every 1 second
+  var x = setInterval(function() {
+  
+    // Get today's date and time
+    var valuex = '{{has_time}}'
+    if(valuex == 'True') {
+      var now = new Date('{{date}}').getTime()
+    } else {
+      var now = new Date().getTime();
+    }
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
+      
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+    // Output the result in an element with id="demo"
+    document.getElementById("{{x.d_id}}").innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+      
+    // If the count down is over, write some text 
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("{{x.d_id}}").innerHTML = "Appointment Passed";
+    }
+  }, 1000);
+  </script>
+  {% endfor %}
+{% endif %}
+{% if recent %}
+<script>
+$('.Nlxn4G').on('click', function(){
+  Swal.fire(
+    'Good job!',
+    'You have a pending appointment or you have just recently donated blood',
+    'success'
+  )
+  })
+</script>
+{% endif %}
+</body>
+
+</html>
+{% endif %}

@@ -1,0 +1,68 @@
+{% extends 'base/portal_base.html' %}
+{% block title %}CodeUp Blood | Saving Live | Acoount | RECIPIENT Login {% endblock %}
+
+    {% load static %}
+    {% block body %}
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<center><a class="p-b-10" href="{% url 'home' %}"><img alt="CodeUp_Blood_Logo" src="{% static 'home/images/logo/logo_bl_bk.png' %}"></a></center>
+				<form class="login100-form validate-form">
+					<span class="login100-form-title p-b-15">
+						Welcome
+					</span>
+					<span class="login100-form-sub p-b-20">
+						<i class="zmdi zmdi-local-hospital"></i>
+						Login to recipient Portal
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+						<input class="input100" type="text" name="email">
+						<span class="focus-input100" data-placeholder="ID or Email"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<span class="btn-show-pass">
+							<i class="zmdi zmdi-eye"></i>
+						</span>
+						<input class="input100" type="password" name="pass">
+						<span class="focus-input100" data-placeholder="Password"></span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn">
+								Sign In
+							</button>
+						</div>
+					</div>
+
+                    <div class="text-center  p-t-8">
+						<a class="txt2" href="{% url 'accounts:rec_recover' %}">
+							Forgot Password?
+						</a>
+
+					</div>
+
+					<div class="text-center p-t-10">
+						<span class="txt1">
+							Not a Recipient?  
+						</span>
+
+						<a class="txt2" href="{% url 'accounts:rec_reg' %}">
+							Create an account
+						</a>
+
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+
+{% endblock %}

@@ -1,0 +1,356 @@
+{% extends 'base/home_base.html' %}
+{% block title %} CodeUp | Saving Lives | ABOUT {% endblock %}
+
+    {% load static %}
+    {% block body %}
+            <!--  PAGE HEADING -->
+
+            <section class="page-header">
+
+                <div class="container">
+    
+                    <div class="row">
+    
+                        <div class="col-sm-12 text-center">
+    
+                            <h3>
+                                About Us
+                            </h3>
+    
+                            <p class="page-breadcrumb">
+                                <a href="{% url 'home:home' %}">Home</a> / About Us
+                            </p>
+    
+    
+                        </div>
+    
+                    </div> <!-- end .row  -->
+    
+                </div> <!-- end .container  -->
+    
+            </section> <!-- end .page-header  -->
+            
+            <!--  FEATURED ABOUT US SECTION-->
+    
+            <section class="section-content-block">
+     
+                <div class="container">
+                    
+                    <div class="row">
+    
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                            
+                            <div class="about-us-container theme-custom-box-shadow">
+    
+                                <div class="row section-heading-wrapper margin-bottom-11">
+    
+                                    <div class="col-lg-12 col-md-12 col-sm-12 text-left no-img-separator">
+                                        <h2><strong>Who We Are?</strong></h2>
+                                        <span class="heading-separator heading-separator-horizontal"></span>
+                                    </div> <!-- end .col-sm-10  --> 
+    
+                                </div>
+    
+                                <div class="about-details"> 
+    
+                                    <p>At CodeUp <span class="blood_st">Blood</span>, we know how important blood is for life and we  believe every Individual should be given an opportunity to stay alive, which is why we . . . </p>
+
+
+                                    <ul class="custom-bullet-list">
+                                        <li>Connect <span class="blood_st">Blood</span> Donors & Recipients in a convenient and safe way.</li>
+                                        <li>Increase communication with our members.</li>
+                                        <li>Examine critically to ensure alignment.</li>
+                                        <li>Perform extra care from a multi-disciplinary team.</li>
+                                        <li>Are community based organization.</li>
+                                    </ul>
+    
+                                </div> <!--  end .about-details -->  
+    
+                            </div>
+    
+                        </div> <!--  end .col-lg-6 col-md-6 col-sm-12 col-xs-12 -->  
+    
+    
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+    
+                            <figure class="about-img theme-custom-box-shadow">
+                                <a class="venobox wow bounceIn" data-vbtype="video" data-autoplay="true" href="https://www.youtube.com/watch?v=nrJtHemSPW4"><i class="fa fa-play"></i></a>                                
+                                <img src="{% static 'home/images/about_feat_bg.PNG' %}" alt="about" />
+                            </figure> <!-- end .cause-img  -->
+    
+                        </div> <!--  end .col-lg-6 col-md-6 col-sm-12 col-xs-12  -->                    
+    
+                    </div> <!--  end .row  -->
+                </div>
+    
+            </section> <!--  end .section-about-us -->
+    
+            <!-- SECTION TEAM   -->
+    
+            <section class="section-content-block section-custom-bg" data-bg_img='/static/home/images/team_feat_bg.jpg' data-bg_size='cover' data-bg_position='top center' data-bg_opacity="0">
+            
+                <div class="container margin-top-80">
+                    <div class="row section-heading-wrapper-alt">
+    
+                        <div class="col-md-12 col-sm-12 text-center no-img-separator">
+                            <h3 style="color: white;">OUR VISION</h3>
+                            <span class="heading-separator heading-separator-horizontal"></span>
+                            <h2 class="extra-large">To improve healthcare using technology and reduce death rate arising from shortage of blood units, by connecting blood donors & recipients in a safe & convenient manner.  <br>"CodeUp <span class="blood_st">Blood</span>, Your Life-Line to stay alive..."</h2>
+    
+    
+                        </div> <!-- end .col-sm-10  --> 
+    
+                    </div>
+                </div>
+    
+                <div class="container margin-top-48 margin-bottom-48 wow fadeInLeft">
+                    <div class="col-md-12 col-sm-12 text-center no-img-separator">
+                            <h3 style="color: white;">OUR TEAM</h3>
+                            <span class="heading-separator heading-separator-horizontal"></span>
+                            <!-- <h4>&nbsp;</h4> -->
+                        </div> <!-- end .col-sm-10  --> 
+                    
+                    <div class="row">
+                        
+                        <div class="col-md-4 col-sm-12">
+    
+                            <div class="team-layout-1 theme-custom-box-shadow theme-custom-box-animation">
+    
+                                <figure class="team-member">
+                                    <a href="JavaScript:Void(0)" title="Onose Ogaga">
+                                        <img src="{% static 'home/images/ceo.png' %}" alt="Onose Ogaga" />
+                                    </a>
+    
+                                </figure> <!-- end. team-member  -->
+    
+                                <article class="team-info">
+                                    <h3>Onose Oghenevwogaga</h3>                                   
+                                    <h4>Chief Executive Officer</h4>
+                                </article>
+    
+                                <div class="team-content">
+    
+    
+                                </div>                             
+    
+                            </div> <!--  end team layout-1 -->
+    
+                        </div> <!--  end .col-md-4 col-sm-12  -->
+    
+                            <div class="col-md-4 col-sm-12">
+    
+                                <div class="team-layout-1 theme-custom-box-shadow theme-custom-box-animation">
+    
+                                    <figure class="team-member">
+                                        <a href="#" title="Dr. Efiri Tamaradeinyefa">
+                                            <img src="{% static 'home/images/doc.png' %}" alt="Dr. Efiri Tamaradeinyefa"/>
+                                        </a>
+    
+                                    </figure> <!-- end. team-member  -->
+    
+                                    <article class="team-info">
+                                        <h3>Efiri Tamaradeinyefa</h3>                                   
+                                        <h4>Chief Medical Officer</h4>
+                                    </article>
+    
+                                    <div class="team-content">
+    
+                                        <!-- <div class="team-social-share text-center clearfix">
+                                            <a class="fa fa-facebook rectangle" href="#" title="Facebook"></a>
+                                            <a class="fa fa-twitter rectangle" href="#" title="Twitter"></a>
+                                            <a class="fa fa-google-plus rectangle" href="#" title="Google Plus"></a>
+                                            <a class="fa fa-linkedin rectangle" href="#" title="Linkedin"></a>
+                                        </div> end .author-social-box  -->
+    
+                                    </div>                             
+    
+                                </div> <!--  end team-layout-1 -->
+    
+                            </div> <!--  end .col-md-4 col-sm-12  -->
+    
+    
+                            <div class="col-md-4 col-sm-12">
+    
+                                <div class="team-layout-1 theme-custom-box-shadow theme-custom-box-animation">
+    
+                                    <figure class="team-member">
+                                        <a href="#" title="Gabriel Precious">
+                                            <img src="{% static 'home/images/cto.png' %}" alt="Gabriel Precious" />
+                                        </a>                               
+    
+                                    </figure> <!-- end. team-member  -->
+    
+                                    <article class="team-info">
+                                        <h3>Gabriel Precious</h3>                                   
+                                        <h4>Chief Technical Officer</h4>
+                                    </article>
+                                    <div class="team-content">
+    
+                                    </div>                             
+    
+                                </div> <!--  end team-layout-1 -->
+    
+                            </div> <!--  end .col-md-4 col-sm-12  -->  
+    
+    
+                        </div> <!-- end .row  --> 
+                        
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <a class="btn btn-theme margin-top-24" href="#">View All Our Team</a>
+                            </div>
+                        </div>
+    
+                </div> <!-- end .container  -->
+    
+            </section>  
+    
+            <!--  COUNTER SECTION 02  -->
+            
+            <section class="section-content-block section-secondary-bg" >
+    
+                <div class="container wow fadeInUp">
+                    
+                    <div class="row section-heading-wrapper">
+    
+                        <div class="col-md-12 col-sm-12 text-center">
+                            <h2>OUR ACHIEVEMENTS</h2>   
+                            <h4>We have been working with our vision towards saving patients who are in critical need of blood.</h4>
+                        </div> <!-- end .col-sm-12  --> 
+                        
+                    </div>
+                    
+                    <div class="row wow fadeIn">
+
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+    
+                            <div class="counter-block-1 text-center">
+    
+                                <i class="fa fa-heartbeat icon"></i>
+                                <span class="counter">{{saved }}</span>                            
+                                <h4 class="text-capitalize">Lives saved <br><br></h4>
+    
+                            </div>
+    
+                        </div> <!--  end .col-lg-3  -->
+    
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+    
+                            <div class="counter-block-1 text-center">
+    
+                                <i class="fa fa-stethoscope icon"></i>
+                                <span class="counter">{{happy }}</span>                            
+                                <h4 class="text-capitalize">Happy Donors <br><br></h4>
+    
+                            </div>
+    
+                        </div> <!--  end .col-lg-3  -->
+    
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+    
+                            <div class="counter-block-1 text-center">
+    
+                                <i class="fa fa-users icon"></i>
+                                <span class="counter">{{happyd }}</span>                             
+                                <h4 class="text-capitalize">Happy Recipients</h4>
+    
+                            </div>
+    
+                        </div> <!--  end .col-lg-3  -->
+    
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+    
+                            <div class="counter-block-1 text-center">
+    
+                                <i class="fa fa-building icon"></i>
+                                <span class="counter">{{award }}</span>                            
+                                <h4 class="text-capitalize">Total Awards <br><br></h4>
+    
+                            </div> <!--  end .col-lg-3  -->
+                        
+                        
+                    </div> <!-- end row  -->
+    
+                </div> <!--  end .container  -->
+    
+            </section>
+    
+            <!-- SECTION TESTIMONIAL   -->
+    
+            <section class="section-content-block section-custom-bg" data-bg_img='/static/home/images/testimony_feat_bg.jpg' data-bg_size='cover' data-bg_position='top center' data-bg_opacity="0">
+            
+                <div class="container margin-top-80">
+                    <div class="row section-heading-wrapper-alt">
+    
+                        <div class="col-md-12 col-sm-12 text-center no-img-separator">
+                            <h4>Awesome Words From Members</h4>
+                            <span class="heading-separator heading-separator-horizontal"></span>
+                            <h2 class="extra-large">JOIN US TO SAVE LIVES</h2>
+    
+                        </div> <!-- end .col-sm-10  --> 
+    
+                    </div>
+                </div>
+    
+                <div class="container theme-custom-box-shadow  section-pure-white-bg margin-top-48 margin-bottom-48 wow fadeInUp">
+                    
+                    <div class="row">
+    
+                        <div class="col-lg-6 col-md-12 col-sm-12">
+                            
+                            <div class="testimonial-container owl-carousel text-left" data-items  ="1">
+                                {% for x in all_feedback %}
+                                <div class="col-md-12 col-sm-12">
+    
+                                    <div class="testimony-layout-1">
+                                        <h3 class="people-quote">{% if x.donor %}Donor{% elif x.recipient %}Recipient{% endif %} Opinion</h3>
+                                        <p class="testimony-text">
+                                           {{x.message}}      
+                                        </p>
+                                        
+                                        <img src="{{x.picture.url}}" alt="" />
+                                        <h6>{{x.name}}</h6>
+                                        <span>{{x.job}}, {{x.place_work}}, {{x.location}}</span>
+    
+                                    </div> <!-- end .testimony-layout-1  -->
+    
+                                </div> <!--  end col-md-10  -->
+                                {% endfor %}
+                            </div>   <!--  end .row  -->  
+                            {% if all_feedback %} 
+                            <h6 style="margin-left: 20px;">Feedback statistic: {{count_donor}} Donor | {{count_rec}} Recipient</h6>
+                            {% endif %}
+                        </div>
+                    
+                        <div class="col-lg-6 hidden-md hidden-xs hidden-sm no-padding">
+                            <figure>
+                                <img src="{% static 'home/images/testimony_feat_img.png' %}" alt="" class="db"/>
+                            </figure>
+                        </div>
+                        
+                    </div>
+    
+                    
+    
+                </div> <!-- end .container  -->
+    
+            </section>
+    
+            <!-- HIGHLIGHT CTA  -->   
+    
+            <section class="cta-section-1">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                            <h2>We are here to save lives</h2>
+                        <p>
+                            You can give blood at any of our blood donation centers close to you.                            
+                        </p>
+                        </div> <!--  end .col-md-8  -->
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <a class="btn btn-cta-1 wow bounceIn" href="{% url 'accounts:donor_login' %}">Request Appointment</a>
+                        </div> <!--  end .col-md-4  -->
+                    </div> <!--  end .row  -->
+                </div>
+            </section> 
+    {% endblock %}

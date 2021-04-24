@@ -1,0 +1,201 @@
+{% extends 'base/admin_home.html' %}
+{% block title %} CodeUp Blood | Dashboard | All User [DONOR] {% endblock %}
+
+    {% load static %}
+    {% block xtraCSS %}
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{% static 'subadmin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+  <link rel="stylesheet" href="{% static 'subadmin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+  <link rel="stylesheet" href="{% static 'subadmin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css' %}">
+{% endblock %}
+    {% block js %}
+<!-- jQuery -->
+<script src="{% static 'subadmin/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'subadmin/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- DataTables  & Plugins -->
+<script src="{% static 'subadmin/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/jszip/jszip.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/pdfmake/pdfmake.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/pdfmake/vfs_fonts.js' %}"></script>
+<script src="{% static 'subadmin/plugins/datatables-buttons/js/buttons.html5.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/datatables-buttons/js/buttons.print.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'subadmin/dist/js/adminlte.min.js' %}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{% static 'subadmin/dist/js/demo.js' %}"></script>
+<!-- Page specific script -->
+{% endblock %}
+{% block xtraJS %}
+<script>
+    $(function () {
+      $('.xPush').click(function(){
+        var itsID = $(this).attr(id)
+          $('.'+itsID).click()
+      })
+      $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+      //   "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
+    });
+  </script>
+{% endblock %}
+    {% block body %}
+    <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>All Donor</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'subadmin:SAHome' %}">Home</a></li>
+              <li class="breadcrumb-item ">All Users</li>
+              <li class="breadcrumb-item active">Donor</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">List of all Donors</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>User ID</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Donated</th>
+                    <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                      {% for x in all_donor %}
+                  <tr>
+                    <td>{{x.username|upper}}
+                        {% if x.is_new %}
+                        <span class="badge badge-success right">NEW</span>
+                        {% endif %}
+                    </td>
+                    <td>{{x.fullname | title}}</td>
+                    <td>{{x.email}}</td>
+                    <td> 
+                        <div class="color-palette-set">
+                            {% if x.donated %}
+                          <div style="padding: 7px 0 7px 0;" class="bg-success text-center color-palette "><span>Yes</span></div>
+                          {% else %}  
+                          <div style="padding: 7px 0 7px 0;" class="bg-warning text-center color-palette "><span>No</span></div>
+                          {% endif %}
+                        </div>
+                      </td>
+                    <td><div class="btn-group">
+                        <button type="button" class="btn btn-{% if x.active %}success{% else %}danger{% endif %} xPush" id="{{x.username}}">Action</button>
+                        <button type="button" class="btn btn-{% if x.active %}success{% else %}danger{% endif %} dropdown-toggle dropdown-hover dropdown-icon {{x.username}}" data-toggle="dropdown">
+                          <span class="sr-only">Action Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                          <!-- <a class="dropdown-item" href="#">View Profile</a>
+                          <a class="dropdown-item" href="#">Send Mail</a> -->
+                          <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+                          <div class="dropdown-divider"></div>
+                          <form method="POST">
+                            {% csrf_token %}
+                            {% if x.active %}
+                            <button class="dropdown-item text-danger" type="submit" name="btnAct" value="{{x.username}}#deactivate">Deactivate Account</button>
+                            {% else %}
+                            <button class="dropdown-item text-success" type="submit" name="btnAct" value="{{x.username}}#activate">Activate Account</button>
+                            {% endif %}
+                          </form>
+                          <a style="cursor: pointer;" class="dropdown-item text-danger"  data-toggle="modal" data-target="#modal-{{x.username}}"><b>Delete this account</b></a>
+                        </div>
+                      </div></td>
+                  </tr>
+                  {% endfor %}
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                    <th>User ID</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Donated</th>
+                    <th></th>
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  {% for x in all_donor %}
+  <div class="modal fade" id="modal-{{x.username}}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Confirm Delete</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete <br>
+             <b>{{x.username|upper}} </b> | 
+             <b> {{x.fullname|title}}</b> account
+            </p>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-primary " data-dismiss="modal">No</button>
+          <form method="POST">
+            {% csrf_token %}
+            <button class="btn btn-success" type="submit" name="btnAct" value="{{x.username}}#delete"><b>Yes</b></button>
+          </form>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+  {% endfor %}
+
+
+  {% endblock %}

@@ -1,0 +1,178 @@
+{% extends 'base/dash_home.html' %}
+{% block title %} CodeUp Blood | Donor Dashboard {% endblock %}
+
+    {% load static %}
+    {% block body %}
+			
+			<div class="grid grid--margin">
+
+                <div class="grid__row dashboard-intro">
+                    <div class="grid__col grid__col--margin grid__col--padding bg-white">
+                        <div class="grid__row">
+                            <div class="grid__col grid__col--margin grid__col--12">
+                                <div class="dashboard-intro__title " id="TwByCV"><div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div> </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="grid__row">
+                    <div class="grid__col grid__col--16 grid__col--mb-12 grid__col--margin grid__col--padding bg-white widget-icon">
+                        <img width="75" height="75" src="{% static 'dashboard/images/icon/family.png' %}" alt="" title=""/><br><br>
+                            <h4>{{alluser}}</h4>
+                        <h5>Live Saved</h5>
+                </div>
+                <div class="grid__col grid__col--16 grid__col--mb-12 grid__col--margin grid__col--padding bg-white widget-icon">
+                        <img width="75" height="75" src="{% static 'dashboard/images/icon/blood.png' %}" alt="" title=""/><br><br>
+                            <h4>0</h4>
+                        <h5>Pints of blood donated</h5>
+                </div>
+                <div class="grid__col grid__col--16 grid__col--mb-12 grid__col--margin grid__col--padding bg-white widget-icon">
+                        <img width="75" height="75" src="{% static 'dashboard/images/icon/shaking.png' %}" alt="" title=""/><br><br>
+                            <h4>{{appointCom}}</h4>
+                            <h5>Completed Appointment</h5>
+                        </div>
+                        <div class="grid__col grid__col--16 grid__col--mb-12 grid__col--margin grid__col--padding bg-white widget-icon">
+                            <img width="75" height="75" src="{% static 'dashboard/images/icon/love.png' %}" alt="" title=""/><br><br>
+                            <h4>{{appointPend}}</h4>
+                            <h5>Pending Appointment</h5>
+                    </div>
+                    <div class="grid__col grid__col--16 grid__col--mb-12 grid__col--margin grid__col--padding bg-white widget-icon">
+                            <img width="75" height="75" src="{% static 'dashboard/images/icon/ring.png' %}" alt="" title=""/><br><br>
+                            <h4>{{appointUncom}}</h4>
+                            <h5>UnCompleted Appointment</h5>
+                    </div>
+                    <div class="grid__col grid__col--16 grid__col--mb-12 grid__col--margin grid__col--padding bg-white widget-icon">
+                            <img width="75" height="75" src="{% static 'dashboard/images/icon/food.png' %}" alt="" title=""/><br><br>
+                            <h4>0pt</h4>
+                            <h5>Reward Point</h5>
+                    </div>
+    
+                </div>	
+                <div class="grid__row grid__row--d-block">
+                    <div class="grid__col grid__col--margin grid__col--padding bg-white">
+                        <div class="grid__row justify-sb">
+                            <div class="grid__col grid__col--mb-12">
+                                <h3 class="grid__col-title">Activity [<small>Click title for more details</small>]</h3>
+                                <span class="grid__col-subtitle">Last 6 Months</span>
+                            </div>
+                            <!-- <div class="grid__col grid__col--mb-12 d-flex justify-fe">
+                                <span class="show-more show-more--ellipsis has-dropdown" data-dropdown="activitydropdown"></span>
+                            </div> -->
+                        </div>
+                        <!-- <nav class="dropdown-menu dropdown-menu--content" id="activitydropdown"> 			
+                            <ul>
+                                <li><a href="#">More Details</a></li>
+                                <li><a href="#">View Activity</a></li>
+                                <li><a href="#">Edit Settings</a></li>
+                                <li><a href="#">+ Add widget</a></li>
+                            </ul>
+                        </nav> -->
+                        <canvas id="ActivityChart" width="100%" height="40"></canvas>
+                    </div>
+    
+                </div>
+
+                <div class="grid__row grid__row--d-block">
+                    <div class="grid__col grid__col--margin grid__col--padding bg-white">
+                        <div class="grid__row justify-sb">
+                            <div class="grid__col grid__col--mb-12">
+                                <h3 class="grid__col-title">Upcoming Appointments</h3>
+                                <span class="grid__col-subtitle">01 {{xMnth}} - {{zMnth}} {{yMnth}} {{xYear}}</span>
+                            </div>
+                            <div class="grid__col grid__col--mb-12 d-flex justify-fe aligns-fs">
+                                <!-- <span class="show-more show-more--select show-more--select-gray has-dropdown" data-dropdown="upappointdropdown">Select Period</span> -->
+                            </div>
+                        </div>
+    
+                        <nav class="dropdown-menu dropdown-menu--content" id="upappointdropdown"> 			
+                            <ul>
+                                <li><a href="#">Last 7 days</a></li>
+                                <li><a href="#">Last 2 weeks</a></li>
+                                <li><a href="#">Last month</a></li>
+                                <li><a href="#">+ Custom</a></li>
+                            </ul>
+                        </nav>
+                          <div class="appointments">
+                              <div class="appointments__button--next swiper-button-next"></div>
+                            <div class="appointments__button--prev swiper-button-prev"></div>
+                          
+                            {% if appoints %}
+                            <div class="appointments__content swiper-wrapper">
+                                {% for x in appoints %}
+                                  <div class="appointments__slide swiper-slide {% if x.status == 'asdf' %}selected selected--blue {% endif %}{% if x.status == 'CURRENT' %} selected selected--blue {% endif %}">
+                                       <div class="appointment__time" id="time-user{{ x.pk }}">{% if x.status != 'asdf' %} {{x.status}} {% endif %}</div>
+                                    <div class="appointment__header">
+                                    </div>
+                                    <div class="appointment__content">
+                                            <div class="appointment__info-content icon-doctor">{{x.hospital|title}}</div>
+                                        <div class="appointment__info-content icon-location">{{x.hospital_location|title}}</div>
+                                        <div class="appointment__info-content icon-calendar">{{x.yDate}}</div>
+                                        <div class="appointment__info-content icon-clock"><strong>0{{x.time}} - 06:00 p.m.</strong></div>
+                                        {% if x.status == 'PASSED' %}
+                                        <div class="appointment__info-content ">Status: <strong>{{x.statuc|upper}}</strong></div>
+                                        {% endif %}
+                                    </div>
+                                    {% if x.status == 'asdf' %}
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                    <div class="appointment__buttons">
+                                        <!-- <button type="button" class="appointment modal-toggle appointment__button appointment__button--confirm  KsEw4" data-openpopup="appointmentEdit">Edit</button> -->
+                                        <button type="submit" name="actBtn" value="delete-{{x.pkz}}" class="appointment__button appointment__button--cancel ">Cancel</button>
+                                    </div>
+                                </form>
+                                {% endif %}
+                            </div>
+
+                                  {% endfor %}
+                                  {% else %}
+                                  
+                                  <div class="appointments__slide swiper-slide">
+                                      <div class="appointment__time" >No Appointment</div>
+                                      <div class="appointment__buttons">
+                                        <button class="appointment__buttonX appointment__button--confirm modal-toggle" data-openpopup="appointment">Book an appointment</button>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                        </div>
+                    </div>
+                </div>
+			
+
+			
+			
+			<div class="grid__row grid__row--d-block">
+				<div class="grid__col grid__col--margin grid__col--padding bg-white mb0">
+					<div class="grid__row justify-sb">
+						<div class="grid__col grid__col--mb-12">
+							<h3 class="grid__col-title">Your Appointment Calendar</h3>
+							<span class="grid__col-subtitle">APPOINTMENT BY MONTH</span>
+						</div>
+						<div class="grid__col grid__col--mb-12 d-flex justify-fe">
+							<span class="show-more show-more--plus bg-gray10 color-gray600 has-dropdown" data-dropdown="calendardropdown">+</span>
+						</div>
+					</div>
+					<nav class="dropdown-menu dropdown-menu--content" id="calendardropdown"> 			
+						<ul>
+							<li><a href="#">+ Add Appointment</a></li>
+						</ul>
+					</nav>
+					<div id="taskscalendar"><div class="spinner-border text-primary" role="status"><span class="sr-only">Loading your appointment calender...</span></div> </div>
+				</div>
+				
+
+			</div>
+			
+	
+
+		</div>
+
+
+
+	</div>
+	
+   
+</div>  <!-- Wrap End --> 
+{% endblock %}
+ 

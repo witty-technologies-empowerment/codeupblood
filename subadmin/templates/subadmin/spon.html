@@ -1,0 +1,198 @@
+{% extends 'base/admin_home.html' %}
+{% block title %} CodeUp Blood | Dashboard | Sponsorship {% endblock %}
+
+    {% load static %}
+    {% block js %}
+<!-- jQuery -->
+<script src="{% static 'subadmin/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'subadmin/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'subadmin/dist/js/adminlte.min.js' %}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{% static 'subadmin/dist/js/demo.js' %}"></script>
+{% endblock %}
+{% block xtraJS %}
+<script>
+    $('.xSoeu').on('click', function(e){
+        e.preventDefault();
+        var ID = $(this).attr('id')
+        $('.'+ID).removeAttr('style').css('padding-bottom', '5px');
+        $(this).css('display', 'none');
+        $('#'+ID+ID).on('click', function(e){
+            e.preventDefault();
+            $('.'+ID).hide()
+            $('#'+ID).removeAttr('style')
+        })
+    })
+    $('.hysrrs').on('click', function(e){
+        // e.preventDefault();
+        alert('jjj')
+    })
+
+</script>
+{% endblock %}
+    {% block body %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Sponsors</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Sponsors</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Create Sponsor</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+              <div class="form-group">
+                <label for="inputName">Sponsors Name</label>
+                <input type="text" required name="partnerName" id="partnerName" class="form-control" >
+              </div>
+              <div class="form-group">
+                    <label for="exampleInputFile">Logo</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" required name="pimg" class="custom-file-input" id="exampleInputFile">
+                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputStatus">Status</label>
+                    <select id="inputStatus" required name="pStatus" class="form-control custom-select">
+                      <option selected disabled>-- Select one --</option>
+                      <option value="person">Show as Person</option>
+                      <option value="business">Show as Business</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName">Sponsors Type</label>
+                    <input type="text" required name="pType" id="partnerName" class="form-control" >
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" name="pcheck" class="form-check-input" id="exampleCheck">
+                    <label class="form-check-label" for="exampleCheck">Show this sponsors</label>
+                  </div>
+                </div>
+                <div class="card-footer">
+                    <button type="reset" class="btn btn-default ">Clear</button>
+                  <button type="submit" name="actBtn" value="create-new" class="btn btn-primary float-right">Save</button>
+                </div>
+            </form>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <div class="col-md-6">
+          <div class="card card-secondary">
+            <div class="card-header">
+              <h3 class="card-title">All Sponsors</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+                {% if all_part %}
+                {% for x in all_part %}
+                <div class="callout callout-{% if x.show %}success{% else %}warning{% endif %}">
+                    <img src="{{x.picture.url}}" alt="" width="84" height="84">
+                    <h5><b>Partner name:</b> {{x.name}}</h5>
+                    <h5><b>Showing this partner:</b> {% if x.show %}YES{%else%}NO{%endif%}</h5>
+                    <form method="POST">
+                        {% csrf_token %}
+                    <div style="display: none;"  class="form-check {{x.class_id}}">
+                        <input type="checkbox" name="check" {% if x.show %}checked{%endif%} class="form-check-input" id="check{{x.class_id}}">
+                        <label class="form-check-label" for="check{{x.class_id}}">Show this sponsors</label>
+                      </div>
+                        <button type="submit" name="actBtn" value="delete-{{x.class_id}}" class="btn btn-danger">Delete</button>
+                        &nbsp; 
+                        <span>
+                            <button class="btn btn-primary xSoeu" id="{{x.class_id}}">Edit</button>
+                            <button style="display: none;" name="actBtn" value="save-{{x.class_id}}" class="btn btn-success {{x.class_id}}" >Save</button>
+                            &nbsp;
+                            <button style="display: none;" class="btn btn-warning {{x.class_id}}" id="{{x.class_id}}{{x.class_id}}"> X </button>
+                        </span>
+                    </form>
+                      </div>
+                      {% endfor %}
+                      {% else %}
+                      <center><p>No sponsors yet</p></center>
+                      {% endif %}
+
+                      {% if all_part.has_other_pages %}
+        <div class="card-footer">
+          <nav aria-label="Contacts Page Navigation">
+            <ul class="pagination justify-content-center m-0">
+        {% if all_part.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ all_part.previous_page_number }}"> &nbsp; Previous &nbsp;</a></li>
+        {% endif %}
+        {% for i in all_part.paginator.page_range %}
+              {% if all_part.number == i %}
+              <li class="page-item active"><a class="page-link"href="?page={{ i }}">{{ i }}</a></li>
+              {% else %}
+              <li class="page-item"><a class="page-link"href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+        {% endfor %}
+        {% if all_part.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ all_part.next_page_number }}"> &nbsp; Next &nbsp;</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+  <!-- /.card-footer -->
+  {% else %}
+                      <div class="card-footer">
+                        <nav aria-label="Contacts Page Navigation">
+                          <ul class="pagination justify-content-center m-0">
+                      {% for i in all_part.paginator.page_range %}
+                      {% if all_part.number == i %}
+                            <li class="page-item active"><a class="page-link"href="?page={{ i }}">{{ i }}</a></li>
+                            <!-- {% else %}
+                            <li class="page-item"><a class="page-link"href="?page={{ i }}">{{ i }}</a></li> -->
+                            {% endif %}
+                            {% endfor %}
+                            </ul>
+                        </nav>
+                      </div>
+                      <!-- /.card-footer -->
+                    {% endif %}
+                
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+    {% endblock %}

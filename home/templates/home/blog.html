@@ -1,0 +1,238 @@
+{% extends 'base/home_base.html' %}
+{% block title %} CodeUp | Saving Lives | BLOG {% endblock %}
+
+
+{% load static %}
+{% block body %}
+<section class="page-header" data-stellar-background-ratio="1.2">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-sm-12 text-center">
+
+
+                <h3>
+                    Blog Posts
+                </h3>
+
+                <p class="page-breadcrumb">
+                    <a href="{% url 'home' %}">Home</a> / Blog
+                </p>
+
+
+            </div>
+
+        </div> <!-- end .row  -->
+
+    </div> <!-- end .container  -->
+
+</section> <!-- end .page-header  -->
+
+<!--  MAIN CONTENT  -->
+
+<section class="main-content">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-8 col-sm-12">
+
+                {% if allblog %}
+
+                {% for x in allblog %}
+
+                <article class="post single-post">
+
+                    <div class="single-post-content">
+
+                        <a title="" href="#">
+                            <img alt="" src="{{x.picture.url}}" />
+                        </a>
+
+                    </div> <!-- end .bd-view  -->
+
+                    <div class="single-post-title">
+
+                        <h2>
+                            <a href="#">
+                                {{x.title|upper}}
+                            </a>
+                        </h2> <!--  end blog-post-title  -->
+
+                        <p class="single-post-meta">                           
+
+                            <i class="fa fa-user"></i>
+                            &nbsp;{{x.author|title}}
+
+                            &nbsp;<i class="fa fa-book"></i>
+                            &nbsp;<a title="View all posts" href="#"> {{x.category|title}} </a>
+
+                            &nbsp;<i class="fa fa-calendar"></i>
+                            &nbsp;{{x.xDate}}
+
+                        </p>
+
+                        <p>
+                            {{x.Shrt}} ... <a href="#">Read More</a>                                      
+                        </p>
+
+
+                    </div> <!-- end col-sm-8  -->
+
+                </article>
+                {% endfor %}
+
+                {% if allblog.has_other_pages %}
+                <div style="padding-bottom: 20px;" class="blog-pagination text-center clearfix">                
+
+                    <ul class="pagination">
+                        {% if allblog.has_previous %}
+                        <li><a href="?page={{ allblog.previous_page_number }}" class="prev page-numbers"><i class="fa fa-caret-left"></i></a></li>
+                        {% endif %}
+                        {% for i in allblog.paginator.page_range %}
+                            {% if allblog.number == i %}
+                                <li><a href="?page={{ i }}" class="page-numbers current">{{ i }}</a></li>
+                            {% else %}
+                                <li><a href="?page={{ i }}" class="page-numbers">{{ i }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if allblog.has_previous %}
+                        <li><a href="?page={{ allblog.next_page_number }}" class="next page-numbers"><i class="fa fa-caret-right"></i></a></li>          
+                        {% endif %}
+
+                    </ul> <!-- end pagination  -->
+
+                </div>
+                {% endif %}
+
+                {% else %}
+                <center>No Blog Yet</center>
+                {% endif %}
+
+
+
+
+            </div> <!--  end col-sm-8 -->
+
+
+            <div class="col-md-4 col-sm-12">
+
+                <div class="widget site-sidebar">
+
+                    <h2 class="widget-title">Search</h2>
+
+                    <form action="https://templates.bwlthemes.com/blood_donation/v_2/index.html" id="search-form" class="search-form" role="form" method="get">
+
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search....">
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        </div>
+
+                        <input type="hidden" value="submit" />
+
+                    </form> <!-- end #search-form  -->
+
+                <!--</div> --> <!--  end .widget -->            
+
+
+                <!--<div class="widget site-sidebar">
+
+                    <h2 class="widget-title">Categories</h2>
+
+                    <ul class="widget-post-category clearfix">
+                        <li>
+                            <a title="View all posts filed under Environment" href="#">Blood Relation</a>
+                            <span class="pull-right badge">42</span>
+                        </li>
+                        <li>
+                            <a title="View all posts filed under Technology" href="#">AB- Blood donor</a>
+                            <span class="pull-right badge">40</span>
+                        </li>
+                        <li>
+                            <a title="View all posts filed under Health" href="#">Keep Safe Blood</a>
+                            <span class="pull-right badge">32</span>
+                        </li>
+                        <li>
+                            <a title="View all posts filed under Disaster" href="#">Preserve Blood</a>
+                            <span class="pull-right badge">26</span>
+                        </li>
+                        <li>
+                            <a title="View all posts filed under Environment Right" href="#">Donation center</a>
+                            <span class="pull-right badge">18</span>
+                        </li>
+                        <li>
+                            <a title="View all posts filed under Education" href="#">Proper Education</a>
+                            <span class="pull-right badge">12</span>
+                        </li>
+                    </ul>
+
+                </div> --> <!--  end .widget -->
+
+                <!--<div class="widget site-sidebar">
+
+                    <h2 class="widget-title">Recent Posts</h2>
+
+                    <div class="single-recent-post">
+                        <a href="#">Zomato Commits to Making Food Delivery</a>
+                        <span><i class="fa fa-calendar icon-color"></i>&nbsp; April 19, 2017</span>
+                    </div>
+
+                    <div class="single-recent-post">
+                        <a href="#">Make Kalam's House A Knowledge Centre</a>
+                        <span><i class="fa fa-calendar icon-color"></i>&nbsp; April 18, 2017</span>
+                    </div>
+
+                    <div class="single-recent-post">
+                        <a href="#">Central Government Retracts Proposal</a>
+                        <span><i class="fa fa-calendar icon-color"></i>&nbsp; April 17, 2017</span>
+                    </div>
+
+                </div> --> <!--  end .widget -->
+
+                <!--<div class="widget site-sidebar">
+
+                    <h2 class="widget-title">Tags</h2>
+
+                    <ul class="widget-recent-tags clearfix">
+
+                        <li>
+                            <a href="#" title=""> claycold</a> 
+                        </li>
+
+                        <li>
+                            <a href="#" title=""> crushing</a> 
+                        </li>
+
+                        <li>
+                            <a href="#" title=""> chattels</a> 
+                        </li>
+
+                        <li>
+                            <a href="#" title=""> dinarchy</a> 
+                        </li>
+
+                        <li>
+                            <a href="#" title=""> cienaga</a> 
+                        </li>
+
+                        <li>
+                            <a href="#" title=""> doolie</a> 
+                        </li>
+
+                    </ul>--><!--  end .widget-recent-tags -->
+
+                <!--</div> --> <!--  end .widget -->
+
+            </div> <!-- end .col-sm-4  -->
+
+        </div> <!--  end row  -->
+
+    </div> <!--  end container -->
+
+</section> <!-- end .main-content  -->
+
+<!-- START FOOTER  -->
+{% endblock %}

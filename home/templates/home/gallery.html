@@ -1,0 +1,104 @@
+{% extends 'base/home_base.html' %}
+{% block title %} CodeUp | Saving Lives | GALLERY {% endblock %}
+
+    {% load static %}
+    {% block body %}
+    <section class="page-header" data-stellar-background-ratio="1.2">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-sm-12 text-center">
+
+
+                        <h3>
+                           OUR Gallery 
+                        </h3>
+
+                        <p class="page-breadcrumb">
+                            <a href="#">Home</a> / Our Gallery 
+                        </p>
+
+
+                    </div>
+
+                </div> <!-- end .row  -->
+
+            </div> <!-- end .container  -->
+
+        </section> <!-- end .page-header  -->
+
+        <!--  GALLERY CONTENT  -->
+
+        <section class="section-content-block section-secondary-bg">
+
+            <div class="container">
+
+                <div class="row section-heading-wrapper">
+
+                    <div class="col-md-12 col-sm-12 text-center">
+                        <h2 class="section-heading"><span>Photo</span> Gallery</h2>
+                        <p class="section-subheading">
+                            Campaign photos of different parts of world and our prestigious voluntary work
+                        </p>
+                    </div> <!-- end .col-sm-10  -->
+
+                </div> <!-- end .row  -->
+
+            </div> <!--  end .container -->
+
+            <div class="container wow fadeInUp">
+
+
+                <div class="row no-padding-gallery">
+                    {% if getphoto %}
+                    {% for x in getphoto %}
+                    <div class="col-md-3 col-sm-12 gallery-container">
+
+                        <a class="gallery-light-box" data-gall="myGallery" href="{{x.picture.url}}">
+
+                            <figure class="gallery-img">
+
+                                <img src="{{x.picture.url}}" alt="{{x.name}} - [image]" />
+
+                            </figure> <!-- end .cause-img  -->
+
+                        </a> <!-- end .gallery-light-box  -->
+
+                    </div><!-- end .col-sm-3  -->
+                    {% endfor %}
+                    {% endif %}
+
+                </div> <!-- end .row  -->
+
+                {% if getphoto.has_other_pages %}
+                <div style="padding-bottom: 20px;" class="blog-pagination text-center clearfix">                
+
+                    <ul class="pagination">
+                        {% if getphoto.has_previous %}
+                        <li><a href="?page={{ getphoto.previous_page_number }}" class="prev page-numbers"><i class="fa fa-caret-left"></i></a></li>
+                        {% endif %}
+                        {% for i in getphoto.paginator.page_range %}
+                            {% if getphoto.number == i %}
+                                <li><a href="?page={{ i }}" class="page-numbers current">{{ i }}</a></li>
+                            {% else %}
+                                <li><a href="?page={{ i }}" class="page-numbers">{{ i }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if getphoto.has_previous %}
+                        <li><a href="?page={{ getphoto.next_page_number }}" class="next page-numbers"><i class="fa fa-caret-right"></i></a></li>          
+                        {% endif %}
+
+                    </ul> <!-- end pagination  -->
+
+                </div>
+                {% endif %}
+
+            </div><!-- end .container-fluid  -->
+
+        </section> <!-- end .section-content-block  -->
+
+
+        <!-- START FOOTER  -->
+    {% endblock %}

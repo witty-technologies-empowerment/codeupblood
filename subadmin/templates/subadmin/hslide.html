@@ -1,0 +1,233 @@
+{% extends 'base/admin_home.html' %}
+{% block title %} CodeUp Blood | Dashboard | Home Slides{% endblock %}
+
+    {% load static %}
+    {% block js %}
+    
+<!-- jQuery -->
+<script src="{% static 'subadmin/plugins/jquery/jquery.min.js' %}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{% static 'subadmin/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+$.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'subadmin/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- ChartJS -->
+<script src="{% static 'subadmin/plugins/chart.js' %}/Chart.min.js' %}"></script>
+<!-- Sparkline -->
+<script src="{% static 'subadmin/plugins/sparklines/sparkline.js' %}"></script>
+<!-- JQVMap -->
+<script src="{% static 'subadmin/plugins/jqvmap/jquery.vmap.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/jqvmap/maps/jquery.vmap.usa.js' %}"></script>
+<!-- jQuery Knob Chart -->
+<script src="{% static 'subadmin/plugins/jquery-knob/jquery.knob.min.js' %}"></script>
+<!-- daterangepicker -->
+<script src="{% static 'subadmin/plugins/moment/moment.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/daterangepicker/daterangepicker.js' %}"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="{% static 'subadmin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+<!-- Summernote -->
+<script src="{% static 'subadmin/plugins/summernote/summernote-bs4.min.js' %}"></script>
+<!-- overlayScrollbars -->
+<script src="{% static 'subadmin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'subadmin/dist/js/adminlte.js' %}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{% static 'subadmin/dist/js/demo.js' %}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="{% static 'subadmin/dist/js/pages/dashboard.js' %}"></script>
+<script>
+  $('.xSoeu').on('click', function(e){
+      e.preventDefault();
+      var ID = $(this).attr('id')
+      $('.a'+ID).removeAttr('style').css('padding-bottom', '5px');
+      $(this).css('display', 'none');
+      $('#w'+ID+ID).on('click', function(e){
+          e.preventDefault();
+          $('.a'+ID).hide()
+          $('#'+ID).removeAttr('style')
+      })
+  })
+  $('.hysrrs').on('click', function(e){
+      // e.preventDefault();
+      alert('jjj')
+  })
+
+</script>
+{% endblock %}
+    {% block body %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Home Slide</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Home Slide</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Create Home Slide</h3>
+  
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <form method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                <div class="form-group">
+                  <label for="inputName">Title</label>
+                  <input type="text" name="stitle" id="inputName" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="inputName">Sub Title One</label>
+                  <input type="text" name="stitleone" id="inputName" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="inputName">Sub Title Two</label>
+                  <input type="text" name="stitletwo" id="inputName" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="inputName">Sub Title Three</label>
+                  <input type="text" name="stitlethree" id="inputName" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                  <label for="inputDescription">Picture</label>
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" name="spic" class="custom-file-input" id="exampleInputFile">
+                      <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                    <!-- checkbox -->
+                    <div class="form-group clearfix">
+                      <div class="icheck-primary d-inline">
+                        <input type="checkbox" name="scheckd" id="checkboxPrimary1" >
+                        <label for="checkboxPrimary1">Donor &nbsp; &nbsp;
+                        </label>
+                      </div>
+                      <div class="icheck-primary d-inline">
+                        <input type="checkbox" name="scheckr" id="checkboxPrimary2">
+                        <label for="checkboxPrimary2">Recipient
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group clearfix">
+                  <div class="icheck-primary d-inline">
+                    <input type="checkbox" checked name="scheck" id="checkboxPrimary1">
+                    <label for="checkboxPrimary1">Show this photo</label>
+                  </div>
+                  </div>
+                 <div class="row">
+          <div class="col-12">
+            <a href="#" class="btn btn-secondary">Cancel</a>
+            <input type="submit" name="actBtn" value="Save Changes" class="btn btn-success float-right">
+          </div>
+        </div>
+      </form>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <div class="col-md-6">
+            <div class="card card-secondary">
+              <div class="card-header">
+                <h3 class="card-title">All Home Slides</h3>
+  
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                {% if all_hslide %} {% for x in all_hslide %}
+						<div class="callout callout-{% if x.show %}success{% else %}warning{% endif %}">
+							<img src="{{x.picture.url}}" alt="" width="84" height="84">
+							<h5><b>Slide title:</b> {{x.sub_title}}</h5>
+							<h5><b>Slide sub-title 1:</b> {{x.line_one}}</h5>
+							<h5><b>Slide sub-title 2:</b> {{x.line_two}}</h5>
+							<h5><b>Slide sub-title 3:</b> {{x.line_three}}</h5>
+							<h5><b>Slide Path:</b> {% if x.donor %}DONOR{%elif x.recipient%}RECIPIENT{%endif%}</h5>
+              <h5><b>Showing this Slide:</b> {% if x.show %}YES{%else%}NO{%endif%}</h5>
+							<form method="POST">
+                        {% csrf_token %}
+                    <div style="display: none;"  class="form-check as{{x.pk}}">
+                        <input type="checkbox" name="gcheckw" {% if x.show %}checked{%endif%} class="form-check-input" id="check{{x.pk}}">
+                        <label class="form-check-label" for="check{{x.pk}}">Show this Slide</label>
+                      </div>
+                        <button type="submit" name="actBtn" value="delete-{{x.pk}}" class="btn btn-danger">Delete</button>
+                        &nbsp; 
+                        <span>
+                            <button class="btn btn-primary xSoeu" id="s{{x.pk}}">Edit</button>
+                            <button style="display: none;" name="actBtn" value="save-{{x.pk}}" class="btn btn-success as{{x.pk}}" >Save</button>
+                            &nbsp;
+                            <button style="display: none;" class="btn btn-warning as{{x.pk}}" id="ws{{x.pk}}s{{x.pk}}"> X </button>
+                        </span>
+                    </form>
+						</div>{% endfor %} {% else %}
+						<center>
+							<p>No Slide Photo yet</p>
+						</center>{% endif %} {% if all_hslide.has_other_pages %}
+						<div class="card-footer">
+							<nav aria-label="Contacts Page Navigation">
+								<ul class="pagination justify-content-center m-0">{% if all_hslide.has_previous %}
+									<li class="page-item"><a class="page-link" href="?page={{ all_hslide.previous_page_number }}"> &nbsp; Previous &nbsp;</a>
+									</li>{% endif %} {% for i in all_hslide.paginator.page_range %} {% if all_hslide.number == i %}
+									<li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a>
+									</li>{% else %}
+									<li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a>
+									</li>{% endif %} {% endfor %} {% if all_hslide.has_next %}
+									<li class="page-item"><a class="page-link" href="?page={{ all_hslide.next_page_number }}"> &nbsp; Next &nbsp;</a>
+									</li>{% endif %}</ul>
+							</nav>
+						</div>
+						<!-- /.card-footer -->{% else %}
+						<div class="card-footer">
+							<nav aria-label="Contacts Page Navigation">
+								<ul class="pagination justify-content-center m-0">{% for i in all_hslide.paginator.page_range %} {% if all_hslide.number == i %}
+									<li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a>
+									</li>
+									<!-- {% else %}
+                            <li class="page-item"><a class="page-link"href="?page={{ i }}">{{ i }}</a></li> -->{% endif %} {% endfor %}</ul>
+							</nav>
+						</div>
+						<!-- /.card-footer -->{% endif %}
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+       
+      </section>
+    <!-- add code -->
+
+  </div>
+  <!-- /.content-wrapper -->
+    {% endblock %}b

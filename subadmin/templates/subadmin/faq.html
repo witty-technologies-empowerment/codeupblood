@@ -1,0 +1,206 @@
+{% extends 'base/admin_home.html' %}
+{% block title %} CodeUp Blood | Dashboard | FAQ's{% endblock %}
+
+    {% load static %}
+    {% block js %}
+    
+<!-- jQuery -->
+<script src="{% static 'subadmin/plugins/jquery/jquery.min.js' %}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{% static 'subadmin/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+$.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'subadmin/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- ChartJS -->
+<script src="{% static 'subadmin/plugins/chart.js' %}/Chart.min.js' %}"></script>
+<!-- Sparkline -->
+<script src="{% static 'subadmin/plugins/sparklines/sparkline.js' %}"></script>
+<!-- JQVMap -->
+<script src="{% static 'subadmin/plugins/jqvmap/jquery.vmap.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/jqvmap/maps/jquery.vmap.usa.js' %}"></script>
+<!-- jQuery Knob Chart -->
+<script src="{% static 'subadmin/plugins/jquery-knob/jquery.knob.min.js' %}"></script>
+<!-- daterangepicker -->
+<script src="{% static 'subadmin/plugins/moment/moment.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/daterangepicker/daterangepicker.js' %}"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="{% static 'subadmin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+<!-- Summernote -->
+<script src="{% static 'subadmin/plugins/summernote/summernote-bs4.min.js' %}"></script>
+<!-- overlayScrollbars -->
+<script src="{% static 'subadmin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'subadmin/dist/js/adminlte.js' %}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{% static 'subadmin/dist/js/demo.js' %}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="{% static 'subadmin/dist/js/pages/dashboard.js' %}"></script>
+<script>
+  $('.xSoeu').on('click', function(e){
+      e.preventDefault();
+      var ID = $(this).attr('id')
+      $('.a'+ID).removeAttr('style').css('padding-bottom', '5px');
+      $(this).css('display', 'none');
+      $('#o'+ID+ID).on('click', function(e){
+          e.preventDefault();
+          $('.a'+ID).hide()
+          $('#'+ID).removeAttr('style')
+      })
+  })
+  $('.hysrrs').on('click', function(e){
+      // e.preventDefault();
+      alert('jjj')
+  })
+
+</script>
+{% endblock %}
+    {% block body %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- addcode -->
+    <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>All Faq</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Faqs</li>
+              </ol>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+
+      <section class="content">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Create FAQ's</h3>
+  
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                  <form method="POST">
+                      {% csrf_token %}
+                <div class="form-group">
+                  <label for="inputName">Question</label>
+                  <input type="text" id="inputName" required name="question" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="inputDescription">Answer Space One</label>
+                  <textarea id="inputDescription" required name="anwser" class="form-control" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="inputDescription">Answer Space Two</label>
+                  <textarea id="inputDescription" required name="anwser2" class="form-control" rows="4"></textarea>
+                </div>
+                <div class="form-group clearfix">
+                    <div class="icheck-primary d-inline">
+                      <input type="checkbox" name="sdash" id="checkboxPrimary1">
+                      <label for="checkboxPrimary1"> Show on Dashbooard
+                      </label>
+                    </div> &nbsp; &nbsp;
+                    <div class="icheck-primary d-inline">
+                      <input type="checkbox" name="shome" id="checkboxPrimary2">
+                      <label for="checkboxPrimary2"> Show on Home
+                      </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                        <input type="reset" class="btn btn-secondary" value="Reset">
+                      <input type="submit" name="actBtn" value="Save Changes" class="btn btn-success float-right">
+                    </div>
+                  </div>
+                </form>
+            </div>
+            </div>
+            <!-- /.card -->
+          </div>
+          <div class="col-md-6">
+            <div class="card card-secondary">
+              <div class="card-header">
+                <h3 class="card-title">All FAQ's</h3>
+  
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                {% if all_faq %}
+                {% for x in all_faq %}
+                <div class="callout callout-danger">
+                    <h5><b>Question:</b> {{x.question}}</h5>
+                    <h5><b>Answer Space One:</b> {{x.anwserOne}}</h5>
+                    <h5><b>Answer Space Two:</b> {{x.anwserTwo}}</h5>
+                    <h5><b>Showing Dashboard:</b> {% if x.sdash %}YES{%else%}NO{%endif%}</h5>
+                    <h5><b>Showing Home:</b> {% if x.shome %}YES{%else%}NO{%endif%}</h5>
+                    <form method="POST">
+                        {% csrf_token %}
+                    <div style="display: none;"  class="form-check as{{x.pkz}}">
+                        <input type="checkbox" name="check" {% if x.sdash %}checked{%endif%} class="form-check-input" id="checkz{{x.pkz}}">
+                        <label class="form-check-label" for="checkz{{x.pkz}}">Show on Dashboard</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="checkbox" name="checko" {% if x.shome %}checked{%endif%} class="form-check-input" id="check{{x.pkz}}">
+                        <label class="form-check-label" for="check{{x.pkz}}">Show on Home</label>
+                      </div>
+                        <button type="submit" name="actBtn" value="delete-{{x.pkz}}" class="btn btn-danger">Delete</button>
+                        &nbsp; 
+                        <span>
+                            <button class="btn btn-primary xSoeu" id="s{{x.pkz}}">Edit</button>
+                            <button style="display: none;" name="actBtn" value="save-{{x.pkz}}" class="btn btn-success as{{x.pkz}}" >Save</button>
+                            &nbsp;
+                            <button style="display: none;" class="btn btn-warning as{{x.pkz}}" id="os{{x.pkz}}s{{x.pkz}}"> X </button>
+                        </span>
+                    </form>
+                      </div>
+                      {% endfor %}
+                      {% else %}
+                      <center><p>No FAQ's yet</p></center>
+                      {% endif %} {% if all_faq.has_other_pages %}
+						<div class="card-footer">
+							<nav aria-label="Contacts Page Navigation">
+								<ul class="pagination justify-content-center m-0">{% if all_faq.has_previous %}
+									<li class="page-item"><a class="page-link" href="?page={{ all_faq.previous_page_number }}"> &nbsp; Previous &nbsp;</a>
+									</li>{% endif %} {% for i in all_faq.paginator.page_range %} {% if all_faq.number == i %}
+									<li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a>
+									</li>{% else %}
+									<li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a>
+									</li>{% endif %} {% endfor %} {% if all_faq.has_next %}
+									<li class="page-item"><a class="page-link" href="?page={{ all_faq.next_page_number }}"> &nbsp; Next &nbsp;</a>
+									</li>{% endif %}</ul>
+							</nav>
+						</div>
+						<!-- /.card-footer -->{% else %}
+						<div class="card-footer">
+							<nav aria-label="Contacts Page Navigation">
+								<ul class="pagination justify-content-center m-0">{% for i in all_faq.paginator.page_range %} {% if all_faq.number == i %}
+									<li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a>
+									</li>
+									<!-- {% else %}
+                            <li class="page-item"><a class="page-link"href="?page={{ i }}">{{ i }}</a></li> -->{% endif %} {% endfor %}</ul>
+							</nav>
+						</div>
+						<!-- /.card-footer -->{% endif %}
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      </section>
+  </div>
+  <!-- /.content-wrapper -->
+    {% endblock %}b

@@ -1,0 +1,34 @@
+{% extends 'base/portal_base.html' %}
+{% block title %}CodeUp Blood | Saving Live | Acoount | Donor SignUp {% endblock %}
+
+    {% load static %}
+    {% block body %}
+                        <h3>Password Reset</h3>
+                        <p>To reset your password, enter the email address or user id you use to sign up to codeup blood</p>
+                        <form>
+                            <input class="form-control" type="text" name="username" placeholder="E-mail Address" required>
+                            <div class="form-button full-width">
+                                <button id="submit" type="submit" class="ibtn btn-forget">Send Reset Link</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="form-sent">
+                        <div class="website-logo-inside">
+                            <a href="{% url 'home' %}">
+                                <div class="logo">
+                                    <img class="logo-size" src="{% static 'home/images/logo/logo_wh_bk.png' %}" alt="CodeUp Blood Logo" />
+                                </div>
+                            </a>
+                        </div>
+                        <div class="tick-holder">
+                            <div class="tick-icon"></div>
+                        </div>
+                        <h3>Password link sent</h3>
+                        <p>Please check your inbox <a href="http://brandio.io/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a4cdcbc2d6c9e4cdcbc2d6c9d0c1c9d4c8c5d0c18acdcb">[email&#160;protected]</a></p>
+                        <div class="info-holder">
+                            <span>Unsure if that email address was correct?</span> <a href="#">We can help</a>.
+                        </div>
+                    <div class="other-links">
+                            <span>Or back to </span><a href="{% url 'accounts:donor_login' %}">Sign In</a>
+                        </div>
+                        {% endblock %}

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+
+ {% load static %}   
+<head>
+        <meta charset="utf-8">
+        <title>{% block title %} CodeUp | Saving Lives {% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="description" content="CodeUp Blood - Blood Donation Campaign & Life Saver">
+        <meta name="author" content="WittyHub[TetelaINV]">
+        <link rel="shortcut icon" href="{% static 'home/images/favicon/favicon_.png' %}" />
+        <meta name="keywords" content="blood, donation, codeupblood, codeup blood, CodeUp Blood, blood donation" />
+
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <!-- The styles -->
+        <!-- CSS only -->
+        <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}" />
+        <link href="{% static 'home/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" >
+        <link href="{% static 'home/css/animate.css' %}" rel="stylesheet" type="text/css" >
+        <link href="{% static 'home/css/owl.carousel.css' %}" rel="stylesheet" type="text/css" >
+        <link href="{% static 'home/css/venobox.css' %}" rel="stylesheet" type="text/css" >
+        <link rel="stylesheet" href="{% static 'home/css/styles.css' %}" />
+        <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script> -->
+        <style type="text/css">
+            /* Set the size of the div element that contains the map */
+            #maps {
+              height: 400px;
+              /* The height is 400 pixels */
+              width: 100%;
+              /* The width is the width of the web page */
+            }
+          </style>
+          <script>
+            // Initialize and add the map
+            function initMap() {
+              // The location of wittyhub
+              const wittyhub = { lat: 5.5566502, lng: 5.7818744 };
+              // The map, centered at wittyhub
+              const map = new google.maps.Map(document.getElementById("maps"), {
+                zoom: 15,
+                center: wittyhub,
+                zoomControl: false,
+                mapTypeControl: false,
+                scaleControl: false,
+                streetViewControl: false,
+                rotateControl: false,
+                fullscreenControl: false
+              });
+              // The marker, positioned at wittyhub
+              const marker = new google.maps.Marker({
+                position: wittyhub,
+                map: map,
+              });
+            }
+          </script>
+    <style type="text/css">
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      #right-panel {
+        font-family: "Roboto", "sans-serif";
+        line-height: 30px;
+        padding-left: 10px;
+      }
+
+      #right-panel select,
+      #right-panel input {
+        font-size: 15px;
+      }
+
+      #right-panel select {
+        width: 100%;
+      }
+
+      #right-panel i {
+        font-size: 12px;
+      }
+    </style>
+    <!-- <script>
+      // This example retrieves autocomplete predictions programmatically from the
+      // autocomplete service, and displays them as an HTML list.
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+      function initService() {
+        const displaySuggestions = function (predictions, status) {
+          if (
+            status != google.maps.places.PlacesServiceStatus.OK ||
+            !predictions
+          ) {
+            alert(status);
+            return;
+          }
+          predictions.forEach((prediction) => {
+            const li = document.createElement("li");
+            li.appendChild(document.createTextNode(prediction.description));
+            document.getElementById("results").appendChild(li);
+          });
+        };
+        const service = new google.maps.places.AutocompleteService();
+        service.getQueryPredictions(
+          { input: "pizza near Syd" },
+          displaySuggestions
+        );
+      }
+    </script> -->
+        <!--  -->
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script> -->
+
+    <body> 
+
+        <div id="preloader">
+            <span class="margin-bottom"><img src="{% static 'home/images/loader.gif' %}" alt="" /></span>
+        </div>
+
+        <!--  HEADER -->
+
+        <header class="main-header clearfix" data-sticky_header="true">
+
+            <div class="top-bar clearfix">
+
+                <div class="container">
+
+                    <div class="row">
+
+                        <div class="col-md-8 col-sm-12">
+
+                            <p>
+                                <span><i class="fa fa-home address"></i> <strong id="Z3CzUu">Address: </strong>  WittyHub, 28 Jakpa Road, Effurun, Nigeria.</span>
+                                <span>&nbsp;<i class="fa fa-envelope-o"></i> <strong id="RbUAsT">Mail:</strong> lifeline@codeupblood.com</span>
+                            </p>
+
+                        </div>
+
+                        <div class="col-md-4col-sm-12">
+                            <div class="top-bar-social">
+                                <a target="_blank" href="https://facebook.com/codeup.blood/"><i class="fa fa-facebook rounded-box"></i></a>
+                                <a target="_blank" href="https://twitter.com/CodeUpBlood"><i class="fa fa-twitter rounded-box"></i></a>
+                                <!-- <a target="_blank" href=""><i class="fa fa-google-plus rounded-box"></i></a> -->
+                                <a target="_blank" href="https://www.instagram.com/codeupblood/"><i class="fa fa-instagram rounded-box"></i></a>
+                                <a target="_blank" href="https://www.youtube.com/channel/UC45_gCtBass9sNYUPPVcFGA"><i class="fa fa-youtube rounded-box"></i></a>
+                            </div>   
+                        </div> 
+
+                    </div>
+
+                </div> <!--  end .container -->
+
+            </div> <!--  end .top-bar  -->
+
+            <section class="header-wrapper navgiation-wrapper">
+
+                <div class="navbar navbar-default">			
+                    <div class="container">
+
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="logo" href="{% url 'home' %}"><img alt="" src="{% static 'home/images/logo/logo_bl_bk.png' %}"></a>
+                        </div>
+
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav navbar-right">
+                                
+                                <!-- <li>
+                                    <a href="{% url 'home' %}" title="Home">Home</a>
+                                </li> -->
+
+                                <li><a href="{% url 'home:about' %}" title="About Us">About Us</a></li>
+                                <li>
+                                    <a href="{% url 'home:camp' %}" title="Campaigns">Campaigns</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'home:blog' %}" title="Blog">Blog</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'home:hos' %}" title="Hospital">Hospital</a>
+                                </li>
+
+                                <li><a href="{% url 'home:contact' %}" title="Contact">Contact</a></li>
+                                {% if path == 'None' %}
+                                <li>
+                                    <a href="#" title="Portal">Portal</a>
+                                    <ul class="drop-down">
+                                        <li><a href="{% url 'accounts:donor_login' %}">Donor</a></li>
+                                        <li><a href="{% url 'accounts:rec_login' %}">Recipient</a></li>
+                                    </ul>
+                                </li>
+                                {% else %}
+                                <li>
+                                    {% if path == 'admin' %}
+                                    <li><a href="{% url 'home:contact' %}" title="View Admin">View Admin</a></li>
+                                    {% elif path == 'donor' %}
+                                    <li><a href="{% url 'donor:home' %}" title="Dashboard">Dashboard</a></li>
+                                    {% else %}
+                                    <li><a href="{% url 'donor:home' %}" title="Dashboard">Dashboard</a></li>
+                                    {% endif %}
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </header> <!-- end main-header  -->
+        {% block body %}
+
+        <!-- code goes here -->
+
+        {% endblock %}
+        <footer>            
+
+            <section class="footer-widget-area footer-widget-area-bg">
+
+                <div class="container">
+
+                    <div class="row">
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                            <div class="about-footer">
+
+                                <div class="row">
+
+                                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                        <img src="{% static 'home/images/logo/logo_wh_bk.png' %}" alt="" />
+                                    </div> <!--  end col-lg-3-->
+
+                                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                                        <p>
+                                            CodeUp <span class="blood_st">Blood</span> system was developed to save lives by connecting blood donors & recipients as well as creating an access for those who need it. A pint of <span class="blood_st">blood</span> can save lives.
+                                        </p>
+                                    </div> <!--  end .col-lg-9  -->
+
+                                </div> <!--  end .row -->
+
+                            </div> <!--  end .about-footer  -->
+
+                        </div> <!--  end .col-md-12  -->
+
+                    </div> <!--  end .row  -->
+
+                    <div class="row"> 						                      
+
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+
+                            <div class="footer-widget">
+
+                                <div class="sidebar-widget-wrapper">
+
+                                    <div class="footer-widget-header clearfix">
+                                        <h3>Contact Us</h3>
+                                    </div>  <!--  end .footer-widget-header --> 
+
+
+                                    <div class="textwidget">                                       
+
+                                        <i class="fa fa-envelope-o fa-contact"></i> <p><a href="mailto:lifeline@codeupblood.com">lifeline@codeupblood.com</a><br/><a href="mailto:support@codeupblood.com">support@codeupblood.com</a></p>
+
+                                        <i class="fa fa-location-arrow fa-contact"></i> <p>WittyHub, 28 Jakpa Rd<br/>Effurun, Warri, Delta, NG.</p>
+
+                                        <i class="fa fa-phone fa-contact"></i> <p>Office:&nbsp; +234 (0) 807 591 2957<br/>Mobile:&nbsp;  +234 (0) 809 551 0327</p>                              
+
+                                    </div>
+
+                                </div> <!-- end .footer-widget-wrapper  -->
+
+                            </div> <!--  end .footer-widget  -->
+
+                        </div> <!--  end .col-md-4 col-sm-12 -->   
+
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+
+                            <div class="footer-widget clearfix">
+
+                                <div class="sidebar-widget-wrapper">
+
+                                    <div class="footer-widget-header clearfix">
+                                        <h3>Support Links</h3>
+                                    </div>  <!--  end .footer-widget-header --> 
+
+
+                                    <ul class="footer-useful-links">
+
+                                        <li>
+                                            <a href="{% url 'home:blog' %}">
+                                                <i class="fa fa-caret-right fa-footer"></i>
+                                                Blog
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="{% url 'home:gallery' %}">
+                                                <i class="fa fa-caret-right fa-footer"></i>
+                                                Gallery
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="{% url 'home:camp' %}">
+                                                <i class="fa fa-caret-right fa-footer"></i>
+                                                Campaigns
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="{% url 'home:faq' %}">
+                                                <i class="fa fa-caret-right fa-footer"></i>
+                                                FAQ's
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a target="_blank" href="{% url 'survey:sHome' %}">
+                                                <i class="fa fa-caret-right fa-footer"></i>
+                                                Take a Survey
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="{% url 'home:team' %}">
+                                                <i class="fa fa-caret-right fa-footer"></i>
+                                                Team 
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="{% url 'home:test' %}">
+                                                <i class="fa fa-caret-right fa-footer"></i>
+                                                Testimonials
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="{% url 'accounts:donor_login' %}">
+                                                <i class="fa fa-caret-right fa-footer"></i>
+                                                Donor
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="{% url 'home:serv' %}">
+                                                <i class="fa fa-caret-right fa-footer"></i>
+                                                Services
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="{% url 'accounts:rec_login' %}">
+                                                <i class="fa fa-caret-right fa-footer"></i>
+                                                Recipient
+                                            </a>
+                                        </li>                                       
+
+                                    </ul>
+
+                                </div> <!--  end .footer-widget  -->        
+
+                            </div> <!--  end .footer-widget  -->            
+
+                        </div> <!--  end .col-md-4 col-sm-12 -->    
+
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+
+                            <div class="footer-widget">
+                                <div class="sidebar-widget-wrapper">
+                                    <div class="footer-widget-header clearfix">
+                                        <h3>Subscribe Us</h3>
+                                    </div>
+                                    <p>Signup for regular newsletter and stay up to date with our latest news.</p>
+                                    <small class="errx"></small>
+                                    <div class="footer-subscription">
+                                        <form class="sub_btn">
+                                            <p>
+                                                <input id="mc4wp_email" class="form-control" required placeholder="Enter Your Email" name="email" type="email">
+                                            </p>
+                                            <p>
+                                                <input class="btn btn-default" value="Subscribe Now" type="submit">
+                                            </p>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div> <!--  end .col-md-4 col-sm-12 -->  
+
+                    </div> <!-- end row  -->
+
+                </div> <!-- end .container  -->
+
+            </section> <!--  end .footer-widget-area  -->
+
+            <!--FOOTER CONTENT  -->
+
+            <section class="footer-contents">
+
+                <div class="container">
+
+                    <div class="row clearfix">
+                        
+                        <div class="col-md-12 col-sm-12 text-center">
+                            <p class="copyright-text"> Copyright &copy; <script>document.write(new Date().getFullYear());</script> - CodeUp <span class="blood_st">Blood</span> With <strong><span class="blood_st">❤ </span></strong> by WittyHub. All Rights Reserved. </p>
+                        </div>  <!-- end .col-sm-6  -->
+
+                    </div> <!-- end .row  -->                                    
+
+                </div> <!--  end .container  -->
+
+            </section> <!--  end .footer-content  -->
+
+        </footer>
+
+        <!-- END FOOTER  -->
+
+        <!-- Back To Top Button  -->
+
+        <a id="backTop">Back To Top</a>
+
+        <!-- <script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script> -->
+        <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCU-Zbb4BcWLWMzJ18ZGrwa_28rawS60DY&callback=initMap&libraries=places&v=weekly"
+      async
+    ></script>
+        <script src="{% static 'home/js/jquery.min.js' %}"></script>
+        <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'home/js/wow.min.js' %}"></script>
+        <script src="{% static 'home/js/jquery.backTop.min.js' %}"></script>
+        <script src="{% static 'home/js/waypoints.min.js' %}"></script>
+        <script src="{% static 'home/js/waypoints-sticky.min.js' %}"></script>
+        <script src="{% static 'home/js/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'home/js/jquery.stellar.min.js' %}"></script>
+        <script src="{% static 'home/js/jquery.counterup.min.js' %}"></script>
+        <script src="{% static 'home/js/venobox.min.js' %}"></script>
+        <script src="{% static 'home/js/custom-scripts.js' %}"></script>
+        <script>
+            // $(document).ready(function(){
+            //     $('#your_phone').inputmask('+234-812 3456 789');
+            //     })
+            //     var xwidth = $(window).width()
+            //     if(xwidth < 464) {
+            //         $("#Z3CzUu").hide()
+            //     } else {
+            //         $("#Z3CzUu").show()
+            //     }
+                
+                // var xwidth = window.innerWidth;
+                // var x = document.getElementById("Z3CzUu");
+                // if (xwidth < 464) {
+                //     x.style.display = "none";
+                // } else {
+                //     x.style.display = "";
+                // }
+        </script>
+    </body>
+
+
+</html>

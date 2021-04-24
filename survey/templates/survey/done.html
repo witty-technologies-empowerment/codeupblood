@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+    {% load static %}
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+	<meta name="theme-color" content="#EF3D32" />
+	<meta name="Cache-Control" content="max-age=300" />
+	<meta name="description" content="CodeUp Blood - [Blood Donation Survey]" />
+	<meta name="keywords" content="CodeUp Blood, Code Up Blood, codeup blood, code up blood, codeup blood survey" />
+	<meta name="author" content="Codeup Blood" />
+	<link rel="apple-touch-icon" href="{% static 'home/images/favicon/favicon_.png' %}" />
+	<link rel="shortcut icon" href="{% static 'home/images/favicon/favicon_.png' %}" />
+	<link rel="icon" href="{% static 'home/images/favicon/favicon_.png' %}" />
+	<title>CodeUp Blood Donation Survey</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{% static 'survey/assets/css/bootstrap.min.css' %}">
+	<!-- External Css -->
+	<link rel="stylesheet" href="{% static 'survey/assets/css/line-awesome.min.css' %}">
+	<!-- Custom Css -->
+	<link rel="stylesheet" type="text/css" href="{% static 'survey/css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'survey/css/covid.css' %}">
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
+	<!-- Favicon -->
+	<link rel="icon" href="{% static 'survey/images/favicon.png' %}">
+	<link rel="apple-touch-icon" href="{% static 'survey/images/apple-touch-icon.png' %}">
+	<link rel="apple-touch-icon" sizes="72x72" href="{% static 'survey/images/icon-72x72.png' %}">
+	<link rel="apple-touch-icon" sizes="114x114" href="{% static 'survey/images/icon-114x114.png' %}">
+</head>
+
+<body>
+	<div class="ugf-covid covid-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<nav class="navbar navbar-expand-md anfra-nav">
+						<a class="navbar-brand" href="{% url 'home'%}">
+							<img src="{% static 'home/images/logo/logo_bl_bk.png' %}" alt="">
+						</a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <i class="las la-bars"></i>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="navbar-nav ml-auto">
+								<li class="nav-item"> <a class="nav-link" href="#">Contact Us</a>
+								</li>
+								<li class="nav-item"> <a class="nav-link nav-button" href="{% url 'home'%}">Visit Site</a>
+								</li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
+					<div class="covid-wrap">
+						<h2>CodeUp <span style="color: #EF3D32;">Blood</span> Donation Survey</h2>
+						<form method="POST">
+                            {% csrf_token %}
+							<div class="covid-test-wrap test-step test-report active">
+                                <div class="step-block">
+								<div class="test-progress">
+                                        <img src="{% static 'survey/images/big-green-check.png' %}" class="img-fluid" alt="">
+                                    </div>
+                                    <h3>Thanks for your submission</h3>
+                                    <h4>Stay Healthy <span class="line">&#73;</span> Stay Safe</h4>
+                                    <button class="button">Refresh</button>
+                                </div>
+
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div style="bottom: 5px;" class="row">
+				<div class="col">
+					<div class="footer">
+						<div class="footer-social"> 
+                            <a href="https://facebook.com/codeup.blood/" target="_blank"><i class="lab la-facebook-f"></i></a>
+							<a href="https://twitter.com/CodeUpBlood" target="_blank"><i class="lab la-twitter"></i></a>
+							<a href="https://www.instagram.com/codeupblood/" target="_blank"><i class="lab la-instagram"></i></a>
+							<a href="https://www.youtube.com/channel/UC45_gCtBass9sNYUPPVcFGA" target="_blank"><i class="lab la-youtube"></i></a>
+						</div>
+						<div class="copyright-text">
+							<p>Copyright &copy;
+								<script>
+									document.write(new Date().getFullYear());
+								</script>- CodeUp <span style="color: #EF3D32;">Blood</span> by WittyHub. All Rights Reserved.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="{% static 'survey/assets/js/jquery.min.js' %}"></script>
+	<script src="{% static 'survey/assets/js/popper.min.js' %}"></script>
+	<script src="{% static 'survey/assets/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'survey/js/cudstom.js' %}"></script>
+</body>
+
+</html>

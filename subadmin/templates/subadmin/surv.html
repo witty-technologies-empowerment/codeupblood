@@ -1,0 +1,164 @@
+{% extends 'base/admin_home.html' %}
+{% block title %} CodeUp Blood | Dashboard | Say Hello {% endblock %}
+
+    {% load static %}
+    {% block js %}
+<!-- jQuery -->
+<script src="{% static 'subadmin/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'subadmin/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'subadmin/dist/js/adminlte.min.js' %}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{% static 'subadmin/dist/js/demo.js' %}"></script>
+{% endblock %}
+    {% block body %}
+    <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>All Survey</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Survey</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            {% if all_part %}
+            {% for x in all_part %}
+            <div class="col-md-3">
+              <div class="card card-outline card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">{{x.name |title}} Survey
+                      {% if x.new %}
+                    <span class="badge badge-success right">NEW</span>
+                    {% endif %}
+                  </h3>
+  
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                  </div>
+                  <!-- /.card-tools -->
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                        <!-- Custom Tabs -->
+                          <div class="card-header d-flex p-0">
+                            <ul class="nav nav-pills ml-auto p-2">
+                              <li class="nav-item"><a class="nav-link active" href="#taba_{{x.pkz}}" data-toggle="tab">Details</a></li>
+                              <li class="nav-item"><a class="nav-link" href="#tab_{{x.pkz}}" data-toggle="tab">Answers</a></li>
+                            </ul>
+                          </div><!-- /.card-header -->
+                            <div class="tab-content">
+                              <div class="tab-pane active" id="taba_{{x.pkz}}">
+                                <dl>
+                                    <dt>Full Name:</dt>
+                                    <dd>{{x.name|title}}</dd>
+                                    <dt>Email:</dt>
+                                    <dd>{{x.email}}</dd>
+                                    <dt>Phone:</dt>
+                                    <dd>{{x.phone}}</dd>
+                                    <dt>Gender:</dt>
+                                    <dd>{{x.gender |title}}</dd>
+                                    <dt>Submited:</dt>
+                                    <dd>{{x.ago}}</dd>
+                                  </dl>
+                              </div>
+                              <!-- /.tab-pane -->
+                              <div class="tab-pane" id="tab_{{x.pkz}}">
+                                <dl>
+                                    <dt>Q1? - If you or your loved one is in critical need of blood, what will you do?:</dt>
+                                    <dd>A1 - {{x.a1}}</dd>
+                                    <dt>Q2? - How would you rate blood donation in Nigeria?:</dt>
+                                    <dd>A2 - {{x.a2|upper}}</dd>
+                                    <dt>Q3? - How would you rate blood banking in Nigeria?:</dt>
+                                    <dd>A3 - {{x.a3|upper}}</dd>
+                                    <dt>Q4? - Are you willing to donate blood for free?:</dt>
+                                    <dd>A4 - {{x.a4|upper}}</dd>
+                                    <dt>Q5? - Would you like to donate blood and get paid for it?:</dt>
+                                    <dd>A5 - {{x.a5|upper}}</dd>
+                                    <dt>Q6? - Would you like an online platform that will connect you and your loved ones in need of blood to a blood donor?:</dt>
+                                    <dd>A6 - {{x.a6|upper}}</dd>
+                                    <dt>Q7? - How much would you sincerely want to pay for the online platform that connects?:</dt>
+                                    <dd>A7 - {{x.a7}}</dd>
+                                    <dt>Q8? - Would you recommend an online platform that connects blood donors and recipients?:</dt>
+                                    <dd>A8 - {{x.a8|upper}}</dd>
+                                    <dt>Q9? - How would you want the blood banking system in Nigeria to improve?:</dt>
+                                    <dd>A9 - {{x.a9}}</dd>
+                                    <dt>Q10? - Would you like to be part of an innovative life saving platform that connects blood donor and recipients online in a convenient way?:</dt>
+                                    <dd>A10 - {{x.a10|upper}}</dd>
+                                  </dl>
+                              </div>
+                              <!-- /.tab-pane -->
+                            </div>
+                            <!-- /.tab-content -->
+                        <!-- ./card -->
+                    
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            {% endfor %}
+            {% else %}
+            <center>No Data Found</center>
+            {% endif %}
+            <!-- /.col -->
+            
+          </div>
+          {% if all_part.has_other_pages %}
+        <div class="card-footer">
+          <nav aria-label="Contacts Page Navigation">
+            <ul class="pagination justify-content-center m-0">
+        {% if all_part.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ all_part.previous_page_number }}"> &nbsp; Previous &nbsp;</a></li>
+        {% endif %}
+        {% for i in all_part.paginator.page_range %}
+              {% if all_part.number == i %}
+              <li class="page-item active"><a class="page-link"href="?page={{ i }}">{{ i }}</a></li>
+              {% else %}
+              <li class="page-item"><a class="page-link"href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+        {% endfor %}
+        {% if all_part.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ all_part.next_page_number }}"> &nbsp; Next &nbsp;</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+  <!-- /.card-footer -->
+  {% else %}
+                      <div class="card-footer">
+                        <nav aria-label="Contacts Page Navigation">
+                          <ul class="pagination justify-content-center m-0">
+                      {% for i in all_part.paginator.page_range %}
+                      {% if all_part.number == i %}
+                            <li class="page-item active"><a class="page-link"href="?page={{ i }}">{{ i }}</a></li>
+                            <!-- {% else %}
+                            <li class="page-item"><a class="page-link"href="?page={{ i }}">{{ i }}</a></li> -->
+                            {% endif %}
+                            {% endfor %}
+                            </ul>
+                        </nav>
+                      </div>
+                      <!-- /.card-footer -->
+                    {% endif %}
+      
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+    {% endblock %}

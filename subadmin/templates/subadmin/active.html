@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CodeUp Blood AdminLTE | Activate</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'subadmin/plugins/fontawesome-free/css/all.min.css' %}">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="{% static 'subadmin/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'subadmin/dist/css/adminlte.min.css' %}">
+</head>
+<body class="hold-transition register-page">
+<div class="register-box">
+  <div class="card card-outline card-primary">
+    <div class="card-header text-center">
+        <a href="{% url 'home:home' %}" class="h1">CodeUp <span style="color: #EF3D32;">Blood</span> </a><span class="h1"><b>Admin</b></span>
+    </div>
+    <div class="card-body">
+        <p class="login-box-msg">New registration for admin</p>
+
+        {% if exist == 'yes' %}
+        <p class="login-box-msg">Confirm and click send</p>
+        <form method="POST">
+          {% csrf_token %}
+          <div class="input-group mb-3">
+            <p><b>Email:</b> {{demail}}</p>
+            <div class="input-group-append">
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <p><b>Code:</b> {{code}}</p>
+            <div class="input-group-append">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <div class="icheck-primary">
+              </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block">Send</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+        {% elif exist == 'nsubpk' %}
+         <div class="input-group">
+            <p style="text-align: center; color: red; font-size: 25px">4.0.4</p>
+            <div class="input-group-append">
+            </div>
+          </div>
+          <div style="text-align: center;" class="input-group mb-3">
+            <p>Invalid request</p>
+            <div class="input-group-append">
+            </div>
+          </div>
+          {% elif exist == 'sending' %}
+         <div class="input-group mb-3">
+            <p style="color: green; font-size: 25px">Code Sent</p>
+            <div class="input-group-append">
+            </div>
+          </div>
+          {% elif exist == 'notsent' %}
+         <div class="input-group mb-3">
+            <p style="color: black; font-size: 20px">Unable to send code to <b>{{demail}}</b> now, <br><b style="color: red; font-size: 20px">Try again later</b></p>
+            <div class="input-group-append">
+            </div>
+          </div>
+          {% elif exist == 'sent' %}
+         <div class="input-group mb-3">
+            <p style="color: black; font-size: 25px">Code has already been sent to {{demail}}, {% if used %}and has been used{% else %}but has not been used{% endif %}</p>
+            <div class="input-group-append">
+            </div>
+          </div>
+        {% else %}
+        <div class="input-group mb-3">
+            <p>No request found for <b>{{demail}}</b></p>
+            <div class="input-group-append">
+            </div>
+          </div>
+        {% endif %}
+    </div>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div>
+<!-- /.register-box -->
+
+
+
+{% if not comp %}
+<div class="modal fade" id="send-e-code">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Send Activation Code</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h6>Where Should the code be sent to</h6>
+            <div class="form-group row">
+            <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="inputEmaila" placeholder="Email" required>
+            </div>
+        </div>
+        <p style="color: red;font-size: 14px"><b>NOTE:</b>&hellip; If you dont recieve a code after 30min &hellip; it means your request was declined by coinpandafx Team</p>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary sendCode" data-dismiss="modal">Request</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+    {% endif %}
+
+
+<!-- jQuery -->
+<script src="{% static 'subadmin/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'subadmin/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'subadmin/dist/js/adminlte.min.js' %}"></script>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

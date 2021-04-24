@@ -1,0 +1,16 @@
+# Group 1 - Google
+# User-Agent: Googlebot
+
+# Disallow: /directory/
+# Disallow: /page1
+# Disallow: /page2
+
+
+
+# Group 2 - Bing
+# User-Agent: Bingbot
+User-Agent: *
+
+Disallow: /
+Allow: /api/v2/api-token-auth/
+Allow: /api/v2/user/

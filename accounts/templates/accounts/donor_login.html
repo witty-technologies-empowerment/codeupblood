@@ -1,0 +1,94 @@
+{% extends 'base/portal_base.html' %}
+{% block title %}CodeUp Blood | Saving Live | Acoount | Donor SignIn {% endblock %}
+
+    {% load static %}
+    {% block moreJs %}
+    <script>
+        $('#submit').on('click', function(){
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 10000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+  
+          Toast.fire({
+            icon: 'success',
+            title: 'Sign In . . . .'
+          })
+        })
+      </script>
+      <script>
+        $(document).ready(function(){
+            var user = localStorage.getItem('currentUser');
+            if(user != null) {
+                $('#username').val(user);
+                $('#chk1').prop('checked', true);
+            }
+        })
+        $('#chk1').on('click', function(){
+            if($('#username').val().length == 0){
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+        
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'No username to remember'
+                })
+                $('#chk1').prop('checked', false);
+            } else {
+                localStorage.setItem('currentUser',$('#username').val())
+            }
+            
+        })
+       
+    </script>
+      {% endblock %}
+    {% block body %}
+                        <h3>WELCOME</h3>
+                        <p>Sign-in to your Donor account</p>
+                        <div class="page-links">
+                            <a href="{% url 'accounts:donor_login' %}" class="active">Sign In</a><a href="{% url 'accounts:donor_reg' %}">Sign Up</a>
+                        </div>
+                        {% if display %}
+                        <div style=" background-color: #F66868;border-color: #EB0D0D;" class="alert alert-danger alert-dismissible fade show with-icon" role="alert">
+                            {{error|upper}}
+                            {% if xdisplay %}
+                            <br>
+                            <a style="color: #000;" href="{% url 'home:contact' %}#helloOne">Contact Support</a>
+                            {% endif %}
+                            {% if not display %}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input class="form-control" type="text" name="username" id="username" autocomplete="off" placeholder="E-mail or User ID" required>
+                            <input class="form-control" type="password" name="password"  autocomplete="off" placeholder="Password" required>
+                            <input type="checkbox" id="chk1">
+                            <label style="padding-right: 215px;" for="chk1">Remember me</label>
+                            <div class="form-button">
+                                <button id="submit" type="submit" class="ibtn">SIGN IN</button> <a href="{% url 'accounts:donor_recover' %}">Forget password?</a>
+                            </div>
+                        </form>
+                        <!-- <div class="other-links">
+                            <span>Or login with</span><a href="#">Facebook</a><a href="#">Google</a><a href="#">Linkedin</a>
+                        </div> -->
+                    {% endblock %}

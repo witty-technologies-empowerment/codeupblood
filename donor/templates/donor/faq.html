@@ -1,0 +1,60 @@
+{% extends 'base/dash_home.html' %}
+{% block title %} CodeUp Blood | Donor FAQ's {% endblock %}
+
+    {% load static %}
+    {% block body %}
+<div class="content-subheader">
+		
+    <div class="content-subheader__titles">
+            <h2 class="content-subheader__title">FAQ's</h2>
+            <nav class="content-subheader__breadcrumb-menu">			
+                    <ul>
+                        <li><a href="{% url 'donor:home' %}">Dashboard</a></li>
+                    </ul>
+            </nav>
+    </div>
+    
+    
+    
+</div>
+
+
+
+<div class="grid grid--margin">
+    
+
+    {% if get_all_faq %}
+    <div class="grid__row">
+        <div class="accordion">
+            {% for x in get_all_faq %}
+            <div class="accordion__item">
+              <input class="accordion__input wvNRPU" id="acc{{x.pk}}" type="radio" name="accordion" >
+              <label class="accordion__label" for="acc{{x.pk}}">{{x.title}}<span></span></label>
+              <div class="accordion__content">
+                <p>{{x.answer_space_one}}</p>
+                <p>{{x.answer_space_two}}</p>
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <div class="grid grid--margin">
+        
+
+        <div class="grid__row">
+            <div class="grid__col grid__col--mb-12 grid__col--margin grid__col--padding bg-white">
+                <h3 class="grid__col-title"><center>No FAQ at this moment</center></h3>
+            </div>
+        </div>
+
+    </div> <!-- End of Grid -->
+    {% endif %}
+
+</div> <!-- End of Grid -->
+
+
+
+
+</div>  <!-- Wrap End -->
+{% endblock %}

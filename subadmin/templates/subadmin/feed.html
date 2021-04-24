@@ -1,0 +1,201 @@
+{% extends 'base/admin_home.html' %}
+{% block title %} CodeUp Blood | Dashboard | FEEDBACK{% endblock %}
+
+    {% load static %}
+    {% block xtraCSS %}
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{% static 'subadmin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+  <link rel="stylesheet" href="{% static 'subadmin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+  <link rel="stylesheet" href="{% static 'subadmin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css' %}">
+{% endblock %}
+    {% block js %}
+<!-- jQuery -->
+<script src="{% static 'subadmin/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'subadmin/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- DataTables  & Plugins -->
+<script src="{% static 'subadmin/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/jszip/jszip.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/pdfmake/pdfmake.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/pdfmake/vfs_fonts.js' %}"></script>
+<script src="{% static 'subadmin/plugins/datatables-buttons/js/buttons.html5.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/datatables-buttons/js/buttons.print.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'subadmin/dist/js/adminlte.min.js' %}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{% static 'subadmin/dist/js/demo.js' %}"></script>
+<!-- Page specific script -->
+{% endblock %}
+{% block xtraJS %}
+<script>
+    $(function () {
+      $('.xPush').click(function(){
+        var itsID = $(this).attr(id)
+          $('.'+itsID).click()
+      })
+      $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+      //   "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
+    });
+  </script>
+{% endblock %}
+    {% block body %}
+   <!-- Content Wrapper. Contains page content -->
+   <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">All Feedback</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Feedback</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">List Of All Feedbacks</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Username</th>
+                    <th>Category</th>
+                    <th>Feedback(s)</th>
+                    <th>Published</th>
+                    <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    {% for x in  all_feed %}
+                  <tr>
+                    <td>{{x.username}}</td>
+                    <td>{% if x.donor %}<div style="padding: 7px 0 7px 0;" class="bg-success text-center color-palette "><span>Donor</span></div> {% elif x.recipient %} <div style="padding: 7px 0 7px 0;" class="bg-success text-center color-palette "><span>Recipient</span></div> {% endif %}</td>
+                    <td>{{x.shrt}}</td>
+                    <td>{% if x.publish %} Yes {% else %} No {% endif %}</td>
+                    <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-{{x.pk}}">
+                      View
+                    </button></td>
+                  </tr>
+                  {% endfor %}
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                    <th>Username</th>
+                    <th>Category</th>
+                    <th>Feedback(s)</th>
+                    <th>Published</th>
+                    <th></th>
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  {% if all_feed %}
+  {% for x in all_feed %}
+  <div class="modal fade" id="modal-{{x.pk}}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Feeback from {{x.username}}</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Feedback Details&hellip;</p>
+          <p><b>Picture:</b> <img src="{{x.picture.url}}" alt="" width="84" height="84"></p>
+          <p><b>Username:</b> {{x.username|upper}}</p>
+          <p><b>Name:</b> {{x.name|title}}</p>
+          <p><b>Job:</b> {{x.job}}</p>
+          <p><b>Place Work:</b> {{x.place_work|title}}</p>
+          <p><b>Location:</b> {{x.location|title}}</p>
+          <p><b>Message:</b> {{x.message}}</p>
+          <p><b>Published:</b> {% if x.publish %} Yes {% else %} No {% endif %}</p>
+          <p> {% if x.donor %}<div class="form-group clearfix">
+            <div class="icheck-primary d-inline">
+              <input type="checkbox" checked disabled name="sdash" id="checkboxPrimary1">
+              <label for="checkboxPrimary1">Donor</label>
+            </div>
+          </div>{% else %}<div class="form-group clearfix">
+            <div class="icheck-primary d-inline">
+              <input type="checkbox" disabled name="sdash" id="checkboxPrimary1">
+              <label for="checkboxPrimary1">Donor</label>
+            </div>{% endif %}</p>
+          <p> {% if x.recipient %}<div class="form-group clearfix">
+            <div class="icheck-primary d-inline">
+              <input type="checkbox" checked disabled name="sdash" id="checkboxPrimary2">
+              <label for="checkboxPrimary2">Recipient</label>
+            </div>
+          </div>{% else %}<div class="form-group clearfix">
+            <div class="icheck-primary d-inline">
+              <input type="checkbox"  disabled name="sdash" id="checkboxPrimary2">
+              <label for="checkboxPrimary2">Recipient</label>
+            </div>{% endif %}</p>
+        </div>
+        <form method="POST">
+          {% csrf_token %}
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-primary float-right" data-dismiss="modal">Close</button>
+            <button type="submit" name="actBtn" class="btn btn-danger float-right" value="delete-{{x.pk}}">Delete</button>
+            {% if x.publish %}
+            <button type="submit" name="actBtn" class="btn btn-success float-right" value="unpublish-{{x.pk}}">Unpublish</button>
+            {% else %}
+            <button type="submit" name="actBtn" class="btn btn-success float-right" value="publish-{{x.pk}}">Publish</button>
+            {% endif %}
+          </div>
+          </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+  {% endfor %}
+  {% endif %}
+    {% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base/portal_base.html' %}
+{% block title %}CodeUp Blood | Saving Live | Acoount | Donor Recover Password {% endblock %}
+
+    {% load static %}
+    {% block body %}
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<center><a class="p-b-10" href="{% url 'home' %}"><img alt="CodeUp_Blood_Logo" src="{% static 'home/images/logo/logo_bl_bk.png' %}"></a></center>
+				<form class="login100-form validate-form">
+					<span class="login100-form-title p-b-15 p-b-10">
+						Recover Password
+					</span>
+                    <span class="login100-form-sub p-b-20">
+						Recover your donor account password
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+						<input class="input100" type="text" name="email">
+						<span class="focus-input100" data-placeholder="ID or Email"></span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn">
+								Reset Request
+							</button>
+						</div>
+					</div>
+
+					<div class="text-center p-t-10">
+						<span class="txt1">
+							Back to   
+						</span>
+
+						<a class="txt2" href="{% url 'accounts:donor_login' %}">
+							Sign In
+						</a>
+
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+
+{% endblock %}

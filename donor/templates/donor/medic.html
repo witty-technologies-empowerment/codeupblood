@@ -1,0 +1,41 @@
+{% extends 'base/dash_home.html' %}
+{% block title %} CodeUp Blood | Donor Completeed Appointment {% endblock %}
+
+    {% load static %}
+    {% block body %}
+    <div class="content-subheader">
+		
+        <div class="content-subheader__titles">
+                <h2 class="content-subheader__title">Medical Report</h2>
+                <nav class="content-subheader__breadcrumb-menu">			
+                        <ul>
+                            <li><a href="{% url 'donor:home' %}">Dashboard</a></li>
+                        </ul>
+                </nav>
+        </div>
+        
+        
+        
+    </div>
+    
+
+    
+    <div class="grid grid--margin">
+        
+
+        <div class="grid__row">
+            <div class="grid__col grid__col--mb-12 grid__col--margin grid__col--padding bg-white">
+                <h3 class="grid__col-title">Medical Report</h3>
+                <span class="grid__col-subtitle">View your medical report.</span>
+                <p>You have no medical report!</p>
+                <!-- <pre>grid__col</pre> -->
+            </div>
+        </div>
+
+    </div> <!-- End of Grid -->
+    
+    
+
+
+</div>  <!-- Wrap End -->
+    {% endblock %}

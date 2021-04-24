@@ -1,0 +1,104 @@
+{% extends 'base/home_base.html' %}
+{% block title %} CodeUp | Saving Lives | TESTIMONIES {% endblock %}
+
+    {% load static %}
+    {% block body %}
+     <!--  PAGE HEADING -->
+        
+          <!--  PAGE HEADING -->
+        
+          <section class="page-header">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-sm-12 text-center">
+
+                        <h3>
+                            TESTIMONIES
+                        </h3>
+
+                        <p class="page-breadcrumb">
+                            <a href="#">Home</a> /  TESTIMONIES
+                        </p>
+
+
+                    </div>
+
+                </div> <!-- end .row  -->
+
+            </div> <!-- end .container  -->
+
+        </section> <!-- end .page-header  -->
+        
+        <!--  START TESTIMONIAL LAYOUT 01 -->
+
+        <section class="section-content-block">
+       </section> <!--  end .section-testimonial -->
+        
+        
+        <!-- SECTION TESTIMONIAL   -->
+
+        <section class="section-content-block section-custom-bg" data-bg_img='/static/home/images/testimony_feat_bg.jpg' data-bg_size='cover' data-bg_position='top center' data-bg_opacity="0">
+            
+            <div class="container margin-top-80">
+                <div class="row section-heading-wrapper-alt">
+
+                    <div class="col-md-12 col-sm-12 text-center no-img-separator">
+                        <h4>Awesome Words From Members</h4>
+                        <span class="heading-separator heading-separator-horizontal"></span>
+                        <h2 class="extra-large">JOIN WITH US AND SAVE LIFE</h2>
+
+                    </div> <!-- end .col-sm-10  --> 
+
+                </div>
+            </div>
+
+            <div class="container theme-custom-box-shadow  section-pure-white-bg margin-top-48 margin-bottom-48">
+                
+                <div class="row">
+
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        
+                        <div class="testimonial-container owl-carousel text-left" data-items  ="1">
+                            {% for x in all_feedback %}
+                            <div class="col-md-12 col-sm-12">
+
+                                <div class="testimony-layout-1">
+                                    <h3 class="people-quote">{% if x.donor %}Donor{% elif x.recipient %}Recipient{% endif %} Opinion</h3>
+                                    <p class="testimony-text">
+                                       {{x.message}}      
+                                    </p>
+                                    
+                                    <img src="{{x.picture.url}}" alt="" />
+                                    <h6>{{x.name}}</h6>
+                                    <span>{{x.job}}, {{x.place_work}}, {{x.location}}</span>
+
+                                </div> <!-- end .testimony-layout-1  -->
+
+                            </div> <!--  end col-md-10  -->
+                            {% endfor %}
+                        </div>   <!--  end .row  -->   
+                        {% if all_feedback %} 
+                        <h6 style="margin-left: 20px;">Feedback statistic: {{count_donor}} Donor | {{count_rec}} Recipient</h6>
+                        {% endif %}
+                    </div>
+                
+                    <div class="col-lg-6 hidden-md hidden-xs hidden-sm no-padding">
+                        <figure>
+                            <img src="images/testimony_feat_img.png" alt="" class="db"/>
+                        </figure>
+                    </div>
+                    
+                </div>
+
+                
+
+            </div> <!-- end .container  -->
+
+        </section>
+        
+        
+        <!-- START FOOTER  -->
+    {% endblock %}

@@ -1,0 +1,332 @@
+{% extends 'base/admin_home.html' %} {% block title %} CodeUp Blood | Dashboard | Home{% endblock %} {% load static %} {% block xtraCSS %}
+<!-- Taggit -->
+<link rel="stylesheet" href="{% static 'subadmin/tag/css/tagsinput.css' %}">{% endblock %} {% block js %}
+<!-- jQuery -->
+<script src="{% static 'subadmin/plugins/jquery/jquery.min.js' %}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{% static 'subadmin/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+	$.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'subadmin/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- ChartJS -->
+<script src="{% static 'subadmin/plugins/chart.js' %}/Chart.min.js' %}"></script>
+<!-- Sparkline -->
+<script src="{% static 'subadmin/plugins/sparklines/sparkline.js' %}"></script>
+<!-- JQVMap -->
+<script src="{% static 'subadmin/plugins/jqvmap/jquery.vmap.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/jqvmap/maps/jquery.vmap.usa.js' %}"></script>
+<!-- jQuery Knob Chart -->
+<script src="{% static 'subadmin/plugins/jquery-knob/jquery.knob.min.js' %}"></script>
+<!-- daterangepicker -->
+<script src="{% static 'subadmin/plugins/moment/moment.min.js' %}"></script>
+<script src="{% static 'subadmin/plugins/daterangepicker/daterangepicker.js' %}"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="{% static 'subadmin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+<!-- Summernote -->
+<script src="{% static 'subadmin/plugins/summernote/summernote-bs4.min.js' %}"></script>
+<!-- overlayScrollbars -->
+<script src="{% static 'subadmin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'subadmin/dist/js/adminlte.js' %}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{% static 'subadmin/dist/js/demo.js' %}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="{% static 'subadmin/dist/js/pages/dashboard.js' %}"></script>
+<!-- Taggit-->
+<script src="{% static 'subadmin/tag/js/tagsinput.js' %}"></script>
+<script>
+	$('.7T5U2').hide()
+	  $('.DF5FD').on('click', function(){
+	    if($(this).prop('checked')){
+	      $('.7T5U2').show()
+	    } else {
+	      $('.7T5U2').hide()
+	    }
+	  })
+</script>{% endblock %} {% block body %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+	<!-- addcode -->
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1>Campaign</h1>
+				</div>
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item"><a href="#">Home</a>
+						</li>
+						<li class="breadcrumb-item active">Campaigns Edit</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<!-- /.container-fluid -->
+	</section>
+	<section class="content">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card card-primary">
+					<div class="card-header">
+						<h3 class="card-title">Create Campaign</h3>
+						<div class="card-tools">
+							<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse"> <i class="fas fa-minus"></i>
+							</button>
+						</div>
+					</div>
+					<div class="card-body">
+						<form method="POST" enctype="multipart/form-data">{% csrf_token %}
+							<div class="form-group">
+								<div class="form-group">
+									<label for="exampleInputFile">Campaign Picture</label>
+									<div class="input-group">
+										<div class="custom-file">
+											<input type="file" name="photoA" class="custom-file-input" id="exampleInputFile">
+											<label class="custom-file-label" for="exampleInputFile">Choose file</label>
+										</div>
+									</div>
+								</div>
+								<label for="inputClientCompany">Campaign Title</label>
+								<input type="text" name="ctitle" id="inputClientCompany" class="form-control" value="">
+							</div>
+							<div class="form-group">
+								<label for="inputProjectLeader">Campaign Author</label>
+								<input type="text" name="caut" id="inputProjectLeader" class="form-control" value="">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputFile">Author Picture</label>
+								<div class="input-group">
+									<div class="custom-file">
+										<input type="file" name="photoB" class="custom-file-input" id="exampleInputFile">
+										<label class="custom-file-label" for="exampleInputFile">Choose file</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputProjectLeader">Campaign Bio</label>
+								<input type="text" name="cbio" id="inputProjectLeader" class="form-control" value="">
+							</div>
+							<div class="form-group">
+								<label for="CampaignTag">Campaign Tags</label>
+								<input type="text" required data-role="tagsinput" id="CampaignTag" class="form-control" name="ctag">
+							</div>
+							<div class="form-group">
+								<label for="inputProjectLeader">Campaign Message</label>
+								<textarea name="cmess" required class="form-control" id="" cols="30" rows="5"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="inputProjectLeader">Campaign Start time</label>
+								<input type="time" name="cst" id="inputProjectLeader" class="form-control" value="">
+							</div>
+							<div class="form-group">
+								<label for="inputProjectLeader">Campaign Stop time</label>
+								<input type="time" name="cet" id="inputProjectLeader" class="form-control" value="">
+							</div>
+							<div class="form-group">
+								<label for="inputProjectLeader">Campaign Locations</label>
+								<input type="text" name="cloc" id="inputProjectLeader" class="form-control" value="">
+							</div>
+							<div class="form-group">
+								<label for="inputProjectLeader">Campaign Date</label>
+								<input type="date" name="cdat" id="inputProjectLeader" class="form-control" value="">
+							</div>
+							<div class="form-group">
+								<label for="inputProjectLeader">Campaign Cost</label>
+								<input type="text" name="ccost" id="inputProjectLeader" class="form-control" value="free">
+							</div>
+							<div class="form-group">
+								<label for="inputProjectLeader">Event Category</label>
+								<input type="text" name="ccat" id="inputProjectLeader" class="form-control" value="">
+							</div>
+							<div class="form-group">
+								<label for="inputProjectLeader">Social Url</label>
+								<input type="url" name="curl" id="inputProjectLeader" class="form-control" value="">
+							</div>
+							<div class="form-group">
+								<label for="inputProjectLeader">Campaign Organizer</label>
+								<input type="text" name="corg" id="inputProjectLeader" class="form-control" value="">
+							</div>
+							<div class="form-group">
+								<label for="inputProjectLeader">Organizer phone</label>
+								<input type="text" name="corgn" id="inputProjectLeader" class="form-control" value="">
+							</div>
+							<div class="form-group">
+								<label for="inputProjectLeader">Organizer Email</label>
+								<div class="input-group mb-3">
+									<div class="input-group-prepend"> <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+									</div>
+									<input type="email" name="cemail" class="form-control" placeholder="Email">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputProjectLeader">Organizer Url</label>
+								<input type="url" name="curl2" id="inputProjectLeader" class="form-control" value="">
+							</div>
+							<div class="form-check">
+								<input type="checkbox" name="ccheck" class="form-check-input DF5FD" id="exampleCheck">
+								<label class="form-check-label" for="exampleCheck">Venue details Available</label>
+							</div>
+							<div class="form-group 7T5U2">
+								<label for="inputProjectLeader">Venue Phone</label>
+								<input type="text" name="cvenc" id="inputProjectLeader" class="form-control" value="">
+							</div>
+							<div class="form-group 7T5U2">
+								<label for="inputProjectLeader">Venue Email</label>
+								<div class="input-group mb-3">
+									<div class="input-group-prepend"> <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+									</div>
+									<input type="email" name="cvenemail" class="form-control" placeholder="Email">
+								</div>
+							</div>
+							<div class="form-group 7T5U2">
+								<label for="inputProjectLeader">Venue Url</label>
+								<input type="text" name="curl" id="inputProjectLeader" class="form-control" value="">
+							</div>
+							<div class="form-group">
+								<label for="inputProjectLeader">Venue Facebook</label>
+								<div class="column">
+									<div class="col-lg-12">
+										<div class="input-group">
+											<div class="input-group-prepend"> <span class="input-group-text">
+                            <input name="blogfacec" type="checkbox">
+                          </span>
+											</div>
+											<input name="blogface" type="text" class="form-control">
+										</div>
+										<!-- /input-group -->
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputProjectLeader">Venue Twitter</label>
+								<div class="column">
+									<div class="col-lg-12">
+										<div class="input-group">
+											<div class="input-group-prepend"> <span class="input-group-text">
+                            <input name="blogtwic" type="checkbox">
+                          </span>
+											</div>
+											<input name="blogtwi" type="text" class="form-control">
+										</div>
+										<!-- /input-group -->
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputProjectLeader">Venue Youtube</label>
+								<div class="column">
+									<div class="col-lg-12">
+										<div class="input-group">
+											<div class="input-group-prepend"> <span class="input-group-text">
+                                    <input name="blogyouc" type="checkbox">
+                                  </span>
+											</div>
+											<input name="blogyou" type="text" class="form-control">
+										</div>
+										<!-- /input-group -->
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputProjectLeader">Venue Instagram</label>
+								<div class="column">
+									<div class="col-lg-12">
+										<div class="input-group">
+											<div class="input-group-prepend"> <span class="input-group-text">
+                                            <input name="bloglinkc" type="checkbox">
+                                          </span>
+											</div>
+											<input name="bloglink" type="text" class="form-control">
+										</div>
+										<!-- /input-group -->
+									</div>
+								</div>
+							</div>
+							<!-- /input-group -->
+							<div class="row">
+								<div class="col-12">
+									<input type="reset" value="Clear" class="btn btn-secondary">
+									<input type="submit" name="actBtn" value="Save Changes" class="btn btn-success float-right">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- /.card-body -->
+			<!-- /.card -->
+			<div class="col-md-6">
+				<div class="card card-secondary">
+					<div class="card-header">
+						<h3 class="card-title">All Campaign</h3>
+						<div class="card-tools">
+							<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse"> <i class="fas fa-minus"></i>
+							</button>
+						</div>
+					</div>
+					<div class="card-body">{% if all_camp %} {% for x in all_camp %}
+						<div class="callout callout-{% if x.show %}success{% else %}warning{% endif %}">
+							<img src="{{x.picture.url}}" alt="" width="84" height="84">
+							<h5><b>Campaign title:</b> {{x.title}}</h5>
+							<h5><b>Campaign Author:</b> {{x.author}}</h5>
+							<h5><b>Campaign Author Bio:</b> {{x.author_bio}}</h5>
+							<h5><b>Campaign Category:</b> <span class="badge badge-primary">{{x.event_category}}</span></h5>
+							<h5><b>Campaign Date:</b> {{x.date}}</h5>
+							<h5><b>Campaign Start Time:</b> {{x.start_time}}</h5>
+							<h5><b>Campaign End Time:</b> {{x.stop_time}}</h5>
+							<h5><b>Campaign Location:</b> {{x.location}}</h5>
+							<h5><b>Campaign Cost:</b> {{x.cost}}</h5>
+							<h5><b>Campaign Message:</b> {{x.shrt_message}} .....</h5>
+							<div style="display:flex">
+								<h5><b>Tags: <span class="mr-2"></span></b></h5>
+								{% for tag in x.tagz %} <span class="mr-2 mb-3 badge badge-primary">#{{ tag }}</span>
+								{% endfor %}</div>
+							<h5><b>Campaign Facebook:</b> {% if x.facebook %}<a target="_blank" href="{{x.facebook}}">facebook link</a>{% else %}No Link{% endif %}</h5>
+							<h5><b>Campaign Twitter:</b> {% if x.twitter %}<a target="_blank" href="{{x.twitter}}">twitter link</a>{% else %}No Link{% endif %}</h5>
+							<h5><b>Campaign Instagram:</b> {% if x.instagram %}<a target="_blank" href="{{x.instagram}}">instagram link</a>{% else %}No Link{% endif %}</h5>
+							<h5><b>Campaign Youtube:</b> {% if x.youtube %}<a target="_blank" href="{{x.youtube}}">youtube link</a>{% else %}No Link{% endif %}</h5>
+							<h5><b>Campaign Status:</b> {% if x.upcoming %} <span class="badge badge-primary"> UPCOMING </span>{% elif current%} <span class="badge badge-success"> CURRENT </span> {% elif passed%} <span class="badge badge-danger"> PASSED </span> {% else %} <span class="badge badge-default"> Can't get data </span> {% endif %}</h5>
+							<h5><b>Showing Status:</b> {% if x.show %} <span class="text-success">Showing</span> {% else %}<span class="text-danger">Not Showing</span>{% endif %}</h5>
+							<form method="POST">{% csrf_token %}
+								<button type="submit" name="actBtn" value="delete-{{x.pkz}}" class="btn btn-danger">Delete</button>&nbsp; {% if x.show %}
+								<button type="submit" name="actBtn" value="hide-{{x.pkz}}" class="btn btn-warning">Hide</button>{% else %}
+								<button type="submit" name="actBtn" value="show-{{x.pkz}}" class="btn btn-success">Show</button>{% endif %}</form>
+						</div>{% endfor %} {% else %}
+						<center>
+							<p>No Campaign yet</p>
+						</center>{% endif %} {% if all_camp.has_other_pages %}
+						<div class="card-footer">
+							<nav aria-label="Contacts Page Navigation">
+								<ul class="pagination justify-content-center m-0">{% if all_camp.has_previous %}
+									<li class="page-item"><a class="page-link" href="?page={{ all_camp.previous_page_number }}"> &nbsp; Previous &nbsp;</a>
+									</li>{% endif %} {% for i in all_camp.paginator.page_range %} {% if all_camp.number == i %}
+									<li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a>
+									</li>{% else %}
+									<li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a>
+									</li>{% endif %} {% endfor %} {% if all_camp.has_next %}
+									<li class="page-item"><a class="page-link" href="?page={{ all_camp.next_page_number }}"> &nbsp; Next &nbsp;</a>
+									</li>{% endif %}</ul>
+							</nav>
+						</div>
+						<!-- /.card-footer -->{% else %}
+						<div class="card-footer">
+							<nav aria-label="Contacts Page Navigation">
+								<ul class="pagination justify-content-center m-0">{% for i in all_camp.paginator.page_range %} {% if all_camp.number == i %}
+									<li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a>
+									</li>
+									<!-- {% else %}
+                            <li class="page-item"><a class="page-link"href="?page={{ i }}">{{ i }}</a></li> -->{% endif %} {% endfor %}</ul>
+							</nav>
+						</div>
+						<!-- /.card-footer -->{% endif %}</div>
+					<!-- /.card-body -->
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<!-- /.content-wrapper -->{% endblock %}b

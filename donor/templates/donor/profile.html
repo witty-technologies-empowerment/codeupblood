@@ -1,0 +1,232 @@
+{% extends 'base/dash_home.html' %}
+{% block title %} CodeUp Blood | Donor Profile {% endblock %}
+
+    {% load static %}
+    {% block body %}
+<div class="content-subheader">
+		
+    <div class="content-subheader__titles">
+            <h2 class="content-subheader__title">{{user.username | upper}} / profile</h2>
+            <nav class="content-subheader__breadcrumb-menu">			
+                    <ul>
+                        <li><a href="{% url 'donor:home' %}">Dashboard</a></li>
+                    </ul>
+            </nav>
+    </div>
+    
+    
+    
+</div>
+
+
+
+
+		
+		<div class="grid grid--margin">
+
+			<div class="grid__row dashboard-intro">
+				<div class="grid__col grid__col--margin grid__col--padding bg-white">
+					<div class="grid__row">
+						
+						<div class="grid__col grid__col--margin grid__col--45">
+						        <div class="patient-info">
+									<div class="patient-info__thumb"><img id="Pavatar" alt="{{user.username}} Avatar"></div>
+									<!-- <div class="patient-info__thumb"><img src="images/avatar-2.jpg" alt="" title=""/></div> -->
+									<div class="patient-info__details"> 
+										<div class="patient-info__title">{{user.first_name | title}} {{user.last_name | title}}</div>
+										<div class="patient-info__row">
+											<div class="patient-info__col"><span>User ID:</span> {{user.username | upper}} </div>
+                                            <div class="patient-info__col"><span>Phone:</span> {{phone}}</div>
+											<div class="patient-info__col"><span>Address:</span> {{address}} </div>
+										</div>
+										<div class="patient-info__row">
+											<div class="patient-info__col"><span>Email:</span> {{user.email | lower}}</div>
+											<div class="patient-info__col"><span>Date Joined:</span> {{user.date_joined}}</div>
+											<div class="patient-info__col"><span>Last Login:</span> {{user.last_login}}</div>
+										</div>
+										<div class="patient-info__row">
+											<div class="patient-info__col patient-info__col--important"><span>Gender:</span> {{gender | title}}</div>
+											<div class="patient-info__col patient-info__col--important"><span>Blood Type:</span> {{blood | upper}}</div>
+											<!-- <div class="patient-info__col patient-info__col--important"><span>Diseases:</span> Diabetis</div> -->
+										</div>
+									</div>
+							</div>
+						</div>
+						<div class="grid__col grid__col--margin grid__col--15 d-flex justify-fe aligns-fs">
+							<!-- <span class="show-more show-more--select show-more--select-gray has-dropdown" data-dropdown="moreoptions">Edit your profile</span> -->
+						</div>
+						<nav class="dropdown-menu dropdown-menu--content" id="moreoptions"> 			
+							<ul>
+								<li><a href="#">Upload photo</a></li>
+								<li><a href="#">Edit info</a></li>
+								<li><a href="#">Edit settings</a></li>
+								<li><a href="#">+ Add widget</a></li>
+							</ul>
+						</nav>
+					</div>
+                    {% if medi %}
+					<div class="grid__row">
+						<div class="grid__col grid__col--14 grid__col--margin grid__col--padding bg-gray10 mb0">
+							<div class="grid__row justify-sb">
+								<div class="grid__col grid__col--mb-12">
+									<h3 class="grid__col-title">Blood Pressure</h3>
+									<span class="grid__col-subinfo gradient-blue gradient-text">120/80</span>
+									<span class="grid__col-subtitle">NORMAL (mm/Hg)</span>
+								</div>
+								<div class="grid__col grid__col--mb-12 d-flex justify-fe">
+									<span class="show-more show-more--plus bg-white color-gray600 has-dropdown" data-dropdown="tasksdropdown">+</span>
+								</div>
+							</div>
+							
+							<nav class="dropdown-menu dropdown-menu--content" id="tasksdropdown"> 			
+								<ul>
+									<li><a href="#">More Details</a></li>
+									<li><a href="#">View Activity</a></li>
+									<li><a href="#">Edit Settings</a></li>
+									<li><a href="#">+ Edit widget</a></li>
+								</ul>
+							</nav>
+							<canvas id="BpChart" width="100%" height="20"></canvas>
+						</div>
+						<div class="grid__col grid__col--14 grid__col--margin grid__col--padding bg-gray10 mb0">
+							<div class="grid__row justify-sb">
+								<div class="grid__col grid__col--mb-12">
+									<h3 class="grid__col-title">Heart Rate</h3>
+									<span class="grid__col-subinfo gradient-lightblue gradient-text">80</span>
+									<span class="grid__col-subtitle">NORMAL (bpm)</span>
+								</div>
+								<div class="grid__col grid__col--mb-12 d-flex justify-fe">
+									<span class="show-more show-more--plus bg-white color-gray600 has-dropdown" data-dropdown="newpatientsdropdown">+</span>
+								</div>
+							</div>
+							<nav class="dropdown-menu dropdown-menu--content" id="newpatientsdropdown"> 			
+								<ul>
+									<li><a href="#">More Details</a></li>
+									<li><a href="#">View Patients</a></li>
+									<li><a href="#">Edit Settings</a></li>
+									<li><a href="#">+ Edit widget</a></li>
+								</ul>
+							</nav>
+							<canvas id="HrChart" width="100%" height="20"></canvas>
+						</div>
+						<div class="grid__col grid__col--14 grid__col--margin grid__col--padding bg-gray10 mb0">
+							<div class="grid__row justify-sb">
+								<div class="grid__col grid__col--mb-12">
+									<h3 class="grid__col-title">Glucose</h3>
+									<span class="grid__col-subinfo gradient-pink gradient-text">92</span>
+									<span class="grid__col-subtitle">HIGH (mg/dl)</span>
+								</div>
+								<div class="grid__col grid__col--mb-12 d-flex justify-fe">
+									<span class="show-more show-more--plus bg-white color-gray600 has-dropdown" data-dropdown="alertdropdown">+</span>
+								</div>
+							</div>
+							<nav class="dropdown-menu dropdown-menu--content" id="alertdropdown"> 			
+								<ul>
+									<li><a href="#">More Details</a></li>
+									<li><a href="#">View Alerts</a></li>
+									<li><a href="#">Edit Settings</a></li>
+									<li><a href="#">+ Edit widget</a></li>
+								</ul>
+							</nav>
+							<canvas id="GlChart" width="100%" height="20"></canvas>
+						</div>
+						<div class="grid__col grid__col--14 grid__col--margin grid__col--padding bg-gray10 mb0">
+							<div class="grid__row justify-sb">
+								<div class="grid__col grid__col--mb-12">
+									<h3 class="grid__col-title">Cholesterol</h3>
+									<span class="grid__col-subinfo">120</span>
+									<span class="grid__col-subtitle">HIGH (mg/dl)</span>
+								</div>
+								<div class="grid__col grid__col--mb-12 d-flex justify-fe">
+									<span class="show-more show-more--plus bg-white color-gray600 has-dropdown" data-dropdown="alertdropdown">+</span>
+								</div>
+							</div>
+							<nav class="dropdown-menu dropdown-menu--content" id="alertdropdown"> 			
+								<ul>
+									<li><a href="#">More Details</a></li>
+									<li><a href="#">View Alerts</a></li>
+									<li><a href="#">Edit Settings</a></li>
+									<li><a href="#">+ Edit widget</a></li>
+								</ul>
+							</nav>
+							<canvas id="ClChart" width="100%" height="20"></canvas>
+						</div>
+					</div>
+                    {% else %}
+                    <div class="grid__row">
+                        <div class="grid__col grid__col--mb-12 grid__col--margin grid__col--padding bg-white">
+                            <h3 class="grid__col-title">Medical Report</h3>
+                            <span class="grid__col-subtitle">View your medical report.</span>
+                            <p>You have no medical report!</p>
+                            <!-- <pre>grid__col</pre> -->
+                        </div>
+                    </div>
+                    {% endif %}
+				</div>
+			</div>
+			
+			
+            <div class="grid__row grid__row--d-block">
+                <div class="grid__col grid__col--margin grid__col--padding bg-white">
+                    <div class="grid__row justify-sb">
+                        <div class="grid__col grid__col--mb-12">
+                            <h3 class="grid__col-title">Upcoming Appointments</h3>
+                            <span class="grid__col-subtitle">01 {{xMnth}} - {{zMnth}} {{yMnth}} {{xYear}}</span>
+                        </div>
+                        <div class="grid__col grid__col--mb-12 d-flex justify-fe aligns-fs">
+                            <!-- <span class="show-more show-more--select show-more--select-gray has-dropdown" data-dropdown="upappointdropdown">Select Period</span> -->
+                        </div>
+                    </div>
+
+                    <nav class="dropdown-menu dropdown-menu--content" id="upappointdropdown"> 			
+                        <ul>
+                            <li><a href="#">Last 7 days</a></li>
+                            <li><a href="#">Last 2 weeks</a></li>
+                            <li><a href="#">Last month</a></li>
+                            <li><a href="#">+ Custom</a></li>
+                        </ul>
+                    </nav>
+                      <div class="appointments">
+                          <div class="appointments__button--next swiper-button-next"></div>
+                        <div class="appointments__button--prev swiper-button-prev"></div>
+                      
+                        {% if appoints %}
+                        <div class="appointments__content swiper-wrapper">
+                            {% for x in appoints %}
+                              <div class="appointments__slide swiper-slide {% if x.status == 'asdf' %}selected selected--blue {% endif %}{% if x.status == 'CURRENT' %} selected selected--blue {% endif %}">
+                                   <div class="appointment__time" id="time-user{{ x.pk }}">{% if x.status != 'asdf' %} {{x.status}} {% endif %}</div>
+                                <div class="appointment__header">
+                                </div>
+                                <div class="appointment__content">
+                                        <div class="appointment__info-content icon-doctor">{{x.hospital}}</div>
+                                    <div class="appointment__info-content icon-location">{{x.hospital_location}}</div>
+                                    <div class="appointment__info-content icon-calendar">{{x.yDate}}</div>
+                                    <div class="appointment__info-content icon-clock"><strong>{{x.time}} - 06:00pm</strong></div>
+                                </div>
+                                {% if x.status == 'asdf' %}
+                                <div class="appointment__buttons">
+                                    <button class="appointment__button appointment__button--confirm">Edit</button>
+                                    <button class="appointment__button appointment__button--cancel">Cancel</button>
+                                </div>
+                              </div>
+                              {% endif %}
+
+                              {% endfor %}
+                              {% else %}
+                              
+                              <div class="appointments__slide swiper-slide">
+                                  <div class="appointment__time" >No Appointment</div>
+                                  <div class="appointment__buttons">
+                                      <button class="appointment__buttonX appointment__button--confirm modal-toggle" data-openpopup="appointment">Book an appointment</button>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                    </div>
+                </div>
+            </div>
+			
+		</div>
+
+</div>  <!-- Wrap End -->
+{% endblock %}
