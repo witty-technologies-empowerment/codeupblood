@@ -1,106 +1,112 @@
-
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
+{% load static %}
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CodeUp Blood AdminLTE | Activate</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{% static 'subadmin/plugins/fontawesome-free/css/all.min.css' %}">
   <!-- icheck bootstrap -->
   <link rel="stylesheet" href="{% static 'subadmin/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{% static 'subadmin/dist/css/adminlte.min.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.6/dist/sweetalert2.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.6/dist/sweetalert2.all.min.js"></script>
 </head>
-<body class="hold-transition register-page">
-<div class="register-box">
-  <div class="card card-outline card-primary">
-    <div class="card-header text-center">
-        <a href="{% url 'home:home' %}" class="h1">CodeUp <span style="color: #EF3D32;">Blood</span> </a><span class="h1"><b>Admin</b></span>
-    </div>
-    <div class="card-body">
-        {% if not comp %}
-      <p class="login-box-msg">Register as a new admin</p>
-      <center><small style="color: blue">Note that the admin account is only used to login to the admin section, If you use on normal login&hellip; you will get <b>ERRORS</b></small> <br><br></center>
-      {% if show %}
-      {% if error %}
-      <center>
-        <p style="color: red; font-size: 14px">{{error}}</p>
-      </center>
-      {% endif %}
-      {% endif %}
 
-      <form method="POST">
-        {% csrf_token %}
-        <div class="input-group mb-3">
+<body class="hold-transition register-page">
+  <div class="register-box">
+    <div class="card card-outline card-primary">
+      <div class="card-header text-center">
+        <a href="{% url 'home:home' %}" class="h1">CodeUp <span style="color: #EF3D32;">Blood</span> </a><span
+          class="h1"><b>Admin</b></span>
+      </div>
+      <div class="card-body">
+        {% if not comp %}
+        <p class="login-box-msg">Register as a new admin</p>
+        <center><small style="color: blue">Note that the admin account is only used to login to the admin section, If
+            you use on normal login&hellip; you will get <b>ERRORS</b></small> <br><br></center>
+        {% if show %}
+        {% if error %}
+        <center>
+          <p style="color: red; font-size: 14px">{{error}}</p>
+        </center>
+        {% endif %}
+        {% endif %}
+
+        <form method="POST">
+          {% csrf_token %}
+          <div class="input-group mb-3">
             <div class="input-group-prepend xadd">
-                <a href="#send-e-code" data-toggle="modal"  class="btn btn-success xreq">Request</a>
+              <a href="#send-e-code" data-toggle="modal" class="btn btn-success xreq">Request</a>
             </div>
             <input name="code" type="text" required class="form-control" placeholder="e-Code">
             <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-qrcode"></span>
-                </div>
+              <div class="input-group-text">
+                <span class="fas fa-qrcode"></span>
               </div>
-          </div>
-        <div class="input-group mb-3">
-          <input name="fname" type="text" required class="form-control" placeholder="First name">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
             </div>
           </div>
-        </div>
-        <div class="input-group mb-3">
-          <input name="lname" type="text" required class="form-control" placeholder="Last name">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
+          <div class="input-group mb-3">
+            <input name="fname" type="text" required class="form-control" placeholder="First name">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="input-group mb-3">
-          <input name="username" type="text" required class="form-control" placeholder="Username">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user-plus"></span>
+          <div class="input-group mb-3">
+            <input name="lname" type="text" required class="form-control" placeholder="Last name">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="input-group mb-3">
-          <input name="email" type="email" required class="form-control xemail" placeholder="Email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
+          <div class="input-group mb-3">
+            <input name="username" type="text" required class="form-control" placeholder="Username">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user-plus"></span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="input-group mb-3">
-          <input name="password" type="password" required class="form-control" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+          <div class="input-group mb-3">
+            <input name="email" type="email" required class="form-control xemail" placeholder="Email">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="input-group mb-3">
-          <input name="password2" type="password" required class="form-control" placeholder="Retype password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+          <div class="input-group mb-3">
+            <input name="password" type="password" required class="form-control" placeholder="Password">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
             </div>
           </div>
-        </div>
+          <div class="input-group mb-3">
+            <input name="password2" type="password" required class="form-control" placeholder="Retype password">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
           <!-- /.col -->
           <div class="col-12">
             <button type="submit" class="btn btn-primary btn-block">Register</button>
           </div>
           <!-- /.col -->
-        </div>
+      </div>
       </form>
 
 
@@ -109,21 +115,23 @@
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
-</div>
-<!-- /.register-box -->
+  </div>
+  <!-- /.register-box -->
 
-{% else %}
-    <p class="login-box-msg">Registered Successfully <br> Awaiting Activation</p>
-    <p class="login-box-msg">
-        <div class="d-flex justify-content-center">
-        <div style='width: 24px; height: 24px; color: green;' class="spinner-border" role="status">
-        </div>
-      </div> <center>checking...</center></p>
-    {% endif %}
+  {% else %}
+  <p class="login-box-msg">Registered Successfully <br> Awaiting Activation</p>
+  <p class="login-box-msg">
+  <div class="d-flex justify-content-center">
+    <div style='width: 24px; height: 24px; color: green;' class="spinner-border" role="status">
+    </div>
+  </div>
+  <center>checking...</center>
+  </p>
+  {% endif %}
 
 
-{% if not comp %}
-<div class="modal fade" id="send-e-code">
+  {% if not comp %}
+  <div class="modal fade" id="send-e-code">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -134,72 +142,90 @@
         </div>
         <div class="modal-body">
           <h6>Where Should the code be sent to</h6>
-            <div class="form-group row">
+          <div class="form-group row">
             <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
               <input name="code" type="email" class="form-control" id="inputEmaila" placeholder="Email" required>
             </div>
+          </div>
+          <p style="color: red;font-size: 14px"><b>NOTE:</b>&hellip; If you dont recieve a code after 30min &hellip; it
+            means your request was declined by CodeUp <span style="color: #EF3D32;">Blood</span> Team</p>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary sendCode" data-dismiss="modal">Request</button>
+          </div>
         </div>
-        <p style="color: red;font-size: 14px"><b>NOTE:</b>&hellip; If you dont recieve a code after 30min &hellip; it means your request was declined by CodeUp <span style="color: #EF3D32;">Blood</span> Team</p>
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary sendCode" data-dismiss="modal">Request</button>
-        </div>
+        <!-- /.modal-content -->
       </div>
-      <!-- /.modal-content -->
+      <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal-dialog -->
-  </div>
     {% endif %}
 
 
-<!-- jQuery -->
-<script src="{% static 'subadmin/plugins/jquery/jquery.min.js' %}"></script>
-<!-- Bootstrap 4 -->
-<script src="{% static 'subadmin/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-<!-- AdminLTE App -->
-<script src="{% static 'subadmin/dist/js/adminlte.min.js' %}"></script>
-<!-- Code injected by live-server -->
-{% if not comp %}
+    <!-- jQuery -->
+    <script src="{% static 'subadmin/plugins/jquery/jquery.min.js' %}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{% static 'subadmin/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static 'subadmin/dist/js/adminlte.min.js' %}"></script>
+    <!-- Code injected by live-server -->
+    {% if not comp %}
 
-<script type="text/javascript">
-    
-    // MAIN //
+    <script type="text/javascript">
 
-    $('.xemail').on('input', function() {
+      // MAIN //
+
+      $('.xemail').on('input', function () {
         var input = $(this).val()
-        $('#inputEmaila').attr('value',input)
-    })
-    $('#inputEmaila').on('input', function() {
+        $('#inputEmaila').attr('value', input)
+      })
+      $('#inputEmaila').on('input', function () {
         var input = $(this).val()
-        $('.xemail').attr('value',input)
-    })
+        $('.xemail').attr('value', input)
+      })
 
-    // Send Code
-    // $('#inputEmaila').on('input', function(){
-    //     var demail = $(this).val();
-    //     $('.xreq').remove()
-    //     $('.xadd').append(
-    //         `
-    //     <a href="#modal-default" data-toggle="modal" class="btn btn-success xreq">Request</a>
-    //         `)
-    // })
-    var protocolName = window.location.protocol;
-    var hostName = window.location.hostname;
-    var portNumb = window.location.port;
+      // Send Code
+      // $('#inputEmaila').on('input', function(){
+      //     var demail = $(this).val();
+      //     $('.xreq').remove()
+      //     $('.xadd').append(
+      //         `
+      //     <a href="#modal-default" data-toggle="modal" class="btn btn-success xreq">Request</a>
+      //         `)
+      // })
+      $('.xreq').click()
+      var protocolName = window.location.protocol;
+      var hostName = window.location.hostname;
+      var portNumb = window.location.port;
 
 
-    if(protocolName == 'http:'){
-    URL = protocolName+'//'+hostName+':'+portNumb
-    } else {
-    URL = protocolName+'//'+hostName
-    }
-    $('.sendCode').click(function(){
-    alert('Please Wait...')
-    var email = $('#inputEmaila').val()
-    $('.xreq').remove()
-    $('.xadd').append(
-      `
+      if (protocolName == 'http:') {
+        URL = protocolName + '//' + hostName + ':' + portNumb
+      } else {
+        URL = protocolName + '//' + hostName
+      }
+      $('.sendCode').click(function () {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 5000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+
+        Toast.fire({
+          icon: 'success',
+          title: 'Please Wait...'
+        })
+        // alert('Please Wait...')
+        var email = $('#inputEmaila').val()
+        $('.xreq').remove()
+        $('.xadd').append(
+          `
       <a href="javascript:void(0);" class="btn btn-success xreq">
         <div class="d-flex justify-content-center">
           <div style='width: 18px; height: 18px;' class="spinner-border" role="status">
@@ -207,60 +233,157 @@
         </div>
         </a>
       `)
-    $.ajax({
-      type: 'GET',
-      url: URL+'/api/v1/confirm/'+email,
-      success: function(response) {
-        if(response.status == 200) {
-          $.ajax({
-            type: 'GET',
-            url: URL+'/api/v1/Send_code/'+email,
-            success: function(response) {
-                if(response.status == 200) {
-                  alert(response.email + ' Your code is on it way...')
-                  $('.xreq').remove()
-                  $('.xadd').append(
-                    `
+        $.ajax({
+          type: 'GET',
+          url: URL + '/api/v1/confirm/' + email,
+          success: function (response) {
+            if (response.status == 200) {
+              $.ajax({
+                type: 'GET',
+                url: URL + '/api/v1/Send_code/' + email,
+                success: function (response) {
+                  if (response.status == 200) {
+                    const Toast = Swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      showConfirmButton: false,
+                      timer: 5000,
+                      timerProgressBar: true,
+                      didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                      }
+                    })
+
+                    Toast.fire({
+                      icon: 'success',
+                      title: response.email + ', Your code is on it way...'
+                    })
+                    // alert(response.email + ' Your code is on it way...')
+                    $('.xreq').remove()
+                    $('.xadd').append(
+                      `
                     <a href="javascript:void(0);" class="btn btn-success xreq">Enter Code</a>
                     `)
-                }else if(response.status == 406) {
-                  alert(response.email + ' Already Exists...')
-                  $('.xreq').remove()
-                  $('.xadd').append(
-                    `
+                  } else if (response.status == 406) {
+                    const Toast = Swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      showConfirmButton: false,
+                      timer: 5000,
+                      timerProgressBar: true,
+                      didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                      }
+                    })
+
+                    Toast.fire({
+                      icon: 'danger',
+                      title: response.email + ', Already Exists...'
+                    })
+                    // alert(response.email + ' Already Exists...')
+                    $('.xreq').remove()
+                    $('.xadd').append(
+                      `
                     <a href="#modal-default" data-toggle="modal" class="btn btn-success xreq">Request</a>
                     `)
-                  $(function() {location.reload();})
+                    $(function () { location.reload(); })
 
-                } else {
-                  alert(response.email + " We're sorry! your e-Code did not process...")
-                  $(function() {location.reload();})
-                }
-              },
+                  } else {
+                    const Toast = Swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      showConfirmButton: false,
+                      timer: 5000,
+                      timerProgressBar: true,
+                      didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                      }
+                    })
+
+                    Toast.fire({
+                      icon: 'warning',
+                      title: response.email + ", We're sorry! your e-Code did not process..."
+                    })
+                    // alert(response.email + " We're sorry! your e-Code did not process...")
+                    $(function () { location.reload(); })
+                  }
+                },
                 error: function () {
-                    alert(email + " We're sorry! your e-Code did not process...");
-                    $(function() {location.reload();})
+                  const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 5000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                  })
+
+                  Toast.fire({
+                    icon: 'warning',
+                    title: response.email + ", We're sorry! your e-Code did not process..."
+                  })
+                  // alert(email + " We're sorry! your e-Code did not process...");
+                  $(function () { location.reload(); })
                 }
-            })
-        } else {
-          alert('A user with ' + response.email + ' Already Exists...')
-            $('.xreq').remove()
-            $('.xadd').append(
-              `
+              })
+            } else {
+              const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 5000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+              })
+
+              Toast.fire({
+                icon: 'danger',
+                title: 'A user with ' + response.email + ' Already Exists...'
+              })
+              // alert('A user with ' + response.email + ' Already Exists...')
+              $('.xreq').remove()
+              $('.xadd').append(
+                `
               <a href="#modal-default" data-toggle="modal" class="btn btn-success xreq">Request</a>
               `)
-              $(function() {location.reload();})
+              $(function () { location.reload(); })
 
-        }
-      },
-      error: function () {
-        alert(email + " We're sorry! your e-Code did not process...");
-        $(function() {location.reload();})
-      }
-    })
-  })
+            }
+          },
+          error: function () {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
 
-</script>
-{% endif %}
+            Toast.fire({
+              icon: 'warning',
+              title: response.email + ", We're sorry! your e-Code did not process..."
+            })
+            // alert(email + " We're sorry! your e-Code did not process...");
+            $(function () { location.reload(); })
+          }
+        })
+      })
+
+    </script>
+    {% endif %}
 </body>
+
 </html>

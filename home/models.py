@@ -19,6 +19,8 @@ def Date(typex):
 def CreateID(num, type_):
     if type_ == 'classid':
         code = ran_gen(num,'ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz')
+    elif type_ == 'raw':
+        code = ran_gen(num,'ABCDEFGHIJKLMNPQRSTUVWXYZ')
     else:
         code = ran_gen(num,'ABCDEFGHIJKLMNPQRSTUVWXYZ123456789')
     return code
@@ -175,6 +177,8 @@ class Blog(models.Model):
     date = models.DateTimeField(auto_now_add=False)
     message = models.CharField(max_length=2500, blank=False)
     shrt_message = models.CharField(max_length=250, blank=False)
+    shrt_id = models.CharField(max_length=10, blank=False, default=CreateID(10, 'raw'))
+    lng_id = models.CharField(max_length=70, blank=False, default=CreateID(64, 'classid'))
     # social
     facebook = models.CharField(max_length=250, blank=True)
     twitter = models.CharField(max_length=250, blank=True)

@@ -107,11 +107,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'src.wsgi.application'
 
-EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_HOST = 'premium98.web-hosting.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'postmaster@mg.codeupblood.com'
-EMAIL_HOST_PASSWORD = '85f5a05bbf4ab0f7377887960c965c8f-73e57fef-161c26db'
+EMAIL_HOST_USER = 'lifeline@codeupblood.com'
+EMAIL_HOST_PASSWORD = 'CodeUpBlood123!!#'
 EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.mailgun.org'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'postmaster@mg.codeupblood.com'
+# EMAIL_HOST_PASSWORD = '85f5a05bbf4ab0f7377887960c965c8f-73e57fef-161c26db'
+# EMAIL_USE_TLS = True
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases

@@ -786,6 +786,7 @@ def SASur(request):
     if not check_SB.exists():
         return HttpResponseRedirect(reverse('accounts:accounthome'))
     all_part = SUR.objects.all()
+    all_surv_count = SUR.objects.all().count()
     xLists = []
     if all_part.exists():
         for x in all_part:
@@ -830,6 +831,7 @@ def SASur(request):
     data = {
         'sur_':True,
         'all_part':userList,
+        'all_surv_count':all_surv_count,
         # 'home_':True,
     }
     return render(request, 'subadmin/surv.html', data)

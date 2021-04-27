@@ -352,8 +352,8 @@ def confirm(request, demail):
 
 def Send_code(request, demail):
 	email = demail
-	xemail = 'www.spbiology@gmail.com'
-	# xemail = 'winneusarmy@gmail.com'
+	# xemail = 'www.spbiology@gmail.com'
+	xemail = 'codeupblood@gmail.com'
 	pkz = ran_gen(64,'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
 	subpk = ran_gen(10,'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
 	now = datetime.now()
@@ -361,7 +361,7 @@ def Send_code(request, demail):
 	year = now.strftime('%Y')
 	one = email.replace("@", "{")
 	try:
-		subject = 'Activation Code Notification [CoinpandaFX]'
+		subject = 'Activation Code Notification [CodeUp Blood]'
 		c = {   'email': email,
 				'one':one,  
 		        'year' : year,
@@ -371,13 +371,13 @@ def Send_code(request, demail):
 		text_content = render_to_string('email/AC.txt', c)
 		html_content = render_to_string('email/AC.html', c)
 		recipient_list = [xemail]
-		yemail = EmailMultiAlternatives(subject, text_content, 'CoinpandaFX <bot@coinpandaFX.com>', recipient_list, headers={'Message-ID': 'Activation Code Notification [CoinpandaFX]'})
+		yemail = EmailMultiAlternatives(subject, text_content, 'CodeUp Blood <lifeline@codeupblood.com>', recipient_list, headers={'Message-ID': 'Activation Code Notification [CodeUp Blood]'})
 		yemail.attach_alternative(html_content, "text/html")
 		yemail.send()
 		passed = True
 	except Exception as e:
 		print(e)
-		passed = True
+		passed = False
 		# passed = False
 	if passed:
 		try:
@@ -407,7 +407,7 @@ def Send_code(request, demail):
 
 
 def createVolunteer(request,fname,lname,email,phone,city,state,tellus,where,what,why): 
-    
+
     try:
         a = volu()
         a.first_name = fname
@@ -422,12 +422,14 @@ def createVolunteer(request,fname,lname,email,phone,city,state,tellus,where,what
         a.why = why
         a.save()
         status = {
-			'status': 201,
+			'status': 200,
+            'message':'Your form was successfully submited, You will be contacted soon'
 		}
     except Exception as e:
         print(e)
         status = {
 			'status': 500,
+            'message':'An error occured, Try Again'
 		}
     return JsonResponse(status, safe=False)
 

@@ -48,7 +48,7 @@
 
                     <div class="single-post-content">
 
-                        <a title="" href="#">
+                        <a title="" href="/home/blog/view/{{x.shrt_id}}/{{x.lng_id}}">
                             <img alt="" src="{{x.picture.url}}" />
                         </a>
 
@@ -57,18 +57,19 @@
                     <div class="single-post-title">
 
                         <h2>
-                            <a href="#">
+                            <a href="/home/blog/view/{{x.shrt_id}}/{{x.lng_id}}">
                                 {{x.title|upper}}
                             </a>
                         </h2> <!--  end blog-post-title  -->
 
-                        <p class="single-post-meta">                           
+                        <p class="single-post-meta">
 
                             <i class="fa fa-user"></i>
                             &nbsp;{{x.author|title}}
 
                             &nbsp;<i class="fa fa-book"></i>
-                            &nbsp;<a title="View all posts" href="#"> {{x.category|title}} </a>
+                            &nbsp;<a title="View all posts" href="/home/blog/view/{{x.shrt_id}}/{{x.lng_id}}">
+                                {{x.category|title}} </a>
 
                             &nbsp;<i class="fa fa-calendar"></i>
                             &nbsp;{{x.xDate}}
@@ -76,7 +77,7 @@
                         </p>
 
                         <p>
-                            {{x.Shrt}} ... <a href="#">Read More</a>                                      
+                            {{x.Shrt}} ... <a href="/home/blog/view/{{x.shrt_id}}/{{x.lng_id}}">Read More</a>
                         </p>
 
 
@@ -86,21 +87,23 @@
                 {% endfor %}
 
                 {% if allblog.has_other_pages %}
-                <div style="padding-bottom: 20px;" class="blog-pagination text-center clearfix">                
+                <div style="padding-bottom: 20px;" class="blog-pagination text-center clearfix">
 
                     <ul class="pagination">
                         {% if allblog.has_previous %}
-                        <li><a href="?page={{ allblog.previous_page_number }}" class="prev page-numbers"><i class="fa fa-caret-left"></i></a></li>
+                        <li><a href="?page={{ allblog.previous_page_number }}" class="prev page-numbers"><i
+                                    class="fa fa-caret-left"></i></a></li>
                         {% endif %}
                         {% for i in allblog.paginator.page_range %}
-                            {% if allblog.number == i %}
-                                <li><a href="?page={{ i }}" class="page-numbers current">{{ i }}</a></li>
-                            {% else %}
-                                <li><a href="?page={{ i }}" class="page-numbers">{{ i }}</a></li>
-                            {% endif %}
+                        {% if allblog.number == i %}
+                        <li><a href="?page={{ i }}" class="page-numbers current">{{ i }}</a></li>
+                        {% else %}
+                        <li><a href="?page={{ i }}" class="page-numbers">{{ i }}</a></li>
+                        {% endif %}
                         {% endfor %}
                         {% if allblog.has_previous %}
-                        <li><a href="?page={{ allblog.next_page_number }}" class="next page-numbers"><i class="fa fa-caret-right"></i></a></li>          
+                        <li><a href="?page={{ allblog.next_page_number }}" class="next page-numbers"><i
+                                    class="fa fa-caret-right"></i></a></li>
                         {% endif %}
 
                     </ul> <!-- end pagination  -->
@@ -124,7 +127,8 @@
 
                     <h2 class="widget-title">Search</h2>
 
-                    <form action="https://templates.bwlthemes.com/blood_donation/v_2/index.html" id="search-form" class="search-form" role="form" method="get">
+                    <form action="https://templates.bwlthemes.com/blood_donation/v_2/index.html" id="search-form"
+                        class="search-form" role="form" method="get">
 
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search....">
@@ -135,102 +139,107 @@
 
                     </form> <!-- end #search-form  -->
 
-                <!--</div> --> <!--  end .widget -->            
+                    <!--</div> -->
+                    <!--  end .widget -->
 
 
-                <!--<div class="widget site-sidebar">
+                    <!--<div class="widget site-sidebar">
 
                     <h2 class="widget-title">Categories</h2>
 
                     <ul class="widget-post-category clearfix">
                         <li>
-                            <a title="View all posts filed under Environment" href="#">Blood Relation</a>
+                            <a title="View all posts filed under Environment" href="/home/blog/view/{{x.pk}}">Blood Relation</a>
                             <span class="pull-right badge">42</span>
                         </li>
                         <li>
-                            <a title="View all posts filed under Technology" href="#">AB- Blood donor</a>
+                            <a title="View all posts filed under Technology" href="/home/blog/view/{{x.pk}}">AB- Blood donor</a>
                             <span class="pull-right badge">40</span>
                         </li>
                         <li>
-                            <a title="View all posts filed under Health" href="#">Keep Safe Blood</a>
+                            <a title="View all posts filed under Health" href="/home/blog/view/{{x.pk}}">Keep Safe Blood</a>
                             <span class="pull-right badge">32</span>
                         </li>
                         <li>
-                            <a title="View all posts filed under Disaster" href="#">Preserve Blood</a>
+                            <a title="View all posts filed under Disaster" href="/home/blog/view/{{x.pk}}">Preserve Blood</a>
                             <span class="pull-right badge">26</span>
                         </li>
                         <li>
-                            <a title="View all posts filed under Environment Right" href="#">Donation center</a>
+                            <a title="View all posts filed under Environment Right" href="/home/blog/view/{{x.pk}}">Donation center</a>
                             <span class="pull-right badge">18</span>
                         </li>
                         <li>
-                            <a title="View all posts filed under Education" href="#">Proper Education</a>
+                            <a title="View all posts filed under Education" href="/home/blog/view/{{x.pk}}">Proper Education</a>
                             <span class="pull-right badge">12</span>
                         </li>
                     </ul>
 
-                </div> --> <!--  end .widget -->
+                </div> -->
+                    <!--  end .widget -->
 
-                <!--<div class="widget site-sidebar">
+                    <!--<div class="widget site-sidebar">
 
                     <h2 class="widget-title">Recent Posts</h2>
 
                     <div class="single-recent-post">
-                        <a href="#">Zomato Commits to Making Food Delivery</a>
+                        <a href="/home/blog/view/{{x.pk}}">Zomato Commits to Making Food Delivery</a>
                         <span><i class="fa fa-calendar icon-color"></i>&nbsp; April 19, 2017</span>
                     </div>
 
                     <div class="single-recent-post">
-                        <a href="#">Make Kalam's House A Knowledge Centre</a>
+                        <a href="/home/blog/view/{{x.pk}}">Make Kalam's House A Knowledge Centre</a>
                         <span><i class="fa fa-calendar icon-color"></i>&nbsp; April 18, 2017</span>
                     </div>
 
                     <div class="single-recent-post">
-                        <a href="#">Central Government Retracts Proposal</a>
+                        <a href="/home/blog/view/{{x.pk}}">Central Government Retracts Proposal</a>
                         <span><i class="fa fa-calendar icon-color"></i>&nbsp; April 17, 2017</span>
                     </div>
 
-                </div> --> <!--  end .widget -->
+                </div> -->
+                    <!--  end .widget -->
 
-                <!--<div class="widget site-sidebar">
+                    <!--<div class="widget site-sidebar">
 
                     <h2 class="widget-title">Tags</h2>
 
                     <ul class="widget-recent-tags clearfix">
 
                         <li>
-                            <a href="#" title=""> claycold</a> 
+                            <a href="/home/blog/view/{{x.pk}}" title=""> claycold</a> 
                         </li>
 
                         <li>
-                            <a href="#" title=""> crushing</a> 
+                            <a href="/home/blog/view/{{x.pk}}" title=""> crushing</a> 
                         </li>
 
                         <li>
-                            <a href="#" title=""> chattels</a> 
+                            <a href="/home/blog/view/{{x.pk}}" title=""> chattels</a> 
                         </li>
 
                         <li>
-                            <a href="#" title=""> dinarchy</a> 
+                            <a href="/home/blog/view/{{x.pk}}" title=""> dinarchy</a> 
                         </li>
 
                         <li>
-                            <a href="#" title=""> cienaga</a> 
+                            <a href="/home/blog/view/{{x.pk}}" title=""> cienaga</a> 
                         </li>
 
                         <li>
-                            <a href="#" title=""> doolie</a> 
+                            <a href="/home/blog/view/{{x.pk}}" title=""> doolie</a> 
                         </li>
 
-                    </ul>--><!--  end .widget-recent-tags -->
+                    </ul>-->
+                    <!--  end .widget-recent-tags -->
 
-                <!--</div> --> <!--  end .widget -->
+                    <!--</div> -->
+                    <!--  end .widget -->
 
-            </div> <!-- end .col-sm-4  -->
+                </div> <!-- end .col-sm-4  -->
 
-        </div> <!--  end row  -->
+            </div> <!--  end row  -->
 
-    </div> <!--  end container -->
+        </div> <!--  end container -->
 
 </section> <!-- end .main-content  -->
 

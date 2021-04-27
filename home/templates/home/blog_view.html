@@ -33,6 +33,7 @@
 <section class="section-content-block">
 
     <div class="container">
+        {% for x in blog %}
 
         <div class="row">
 
@@ -41,29 +42,31 @@
                 <article class="post single-post-inner">
 
                     <div class="post-inner-featured-content">
-                        <img alt="" src="{% static 'home/images/blog_3.jpg' %}">
+                        <img alt="" src="{{x.picture.url}}">
                     </div>
 
                     <div class="single-post-inner-title">
-                        <h2>Attendance Allowance campaign campd</h2>
-                        <p class="single-post-meta"><i class="fa fa-user"></i>&nbsp; Deborah Beck &nbsp; &nbsp; <i class="fa fa-share"></i>&nbsp; Environment, Pet & Education</p>
+                        <h2>{{x.title|upper}}</h2>
+                        <p class="single-post-meta"><i class="fa fa-user"></i>&nbsp; {{x.author|title}}&nbsp; &nbsp; <i
+                                class="fa fa-share"></i>&nbsp; {{x.category|title}} &nbsp; &nbsp;<i
+                                class="fa fa-calendar"></i>
+                            &nbsp;{{x.xDate}}</p>
                     </div>
 
                     <div class="single-post-inner-content">
                         <p>
-                            The theme of this year’s World Blood Donor Day is “Blood connects us all”. It focuses on thanking blood donors and highlights the dimension of “sharing” and “connection” between blood donors and patients. In addition, we have adopted the slogan “Share life, give blood”, to draw attention to the roles that voluntary donation systems play in encouraging people to care for one another and promote community cohesion.
+                            {{x.message}}
                         </p>
-                        <p>
+                        <!-- <p>
                             The campaign aims to highlight stories of people whose lives have been saved through blood donation, to motivate regular blood donors to continue giving blood, and motivate people in good health who have never given blood to begin doing so, particularly young people.
-                        </p>
+                        </p> -->
                     </div>
 
                     <div class="single-post-inner-meta">
                         <div class="tag-list">
-                            <a href="#">Donation</a>
-                            <a href="#">Blood</a>
-                            <a href="#">Happy</a>
-                            <a href="#">People</a>
+                            {% for y in xLists %}
+                            <a href="#">{{y}}</a>
+                            {% endfor %}
                         </div>
                     </div>
 
@@ -73,52 +76,63 @@
                 <div class="article-author clearfix">
 
                     <div class="topic-bold-header clearfix">
-                        <h4>Article by <a href="#">Deborah Beck</a></h4>
+                        <h4>Article by <a href="#">{{x.author|title}}</a></h4>
                     </div> <!-- end .topic-bold-header  -->
 
                     <figure class="author-avatar">
                         <a href="#">
-                            <img src="{% static 'home/images/user_1.jpg '%}" alt="Avatar">
+                            <img src="{{x.author_picture.url}}" alt="Avatar">
                         </a>
                     </figure>
 
                     <div class="about_author">
-                        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam feugiat vitae ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
+                        {{x.author_bio}}
                     </div>
 
                     <div class="social-icons margin-top-11 clearfix">
-                        <a class="fa fa-facebook social_icons" href="#" data-original-title="Facebook"></a>
-                        <a class="fa fa-twitter social_icons" href="https://twitter.com/#" data-original-title="Twitter"></a>
-                        <a class="fa fa-flickr social_icons" href="http://www.flickr.com/photos/#" data-original-title="Flickr"></a>
-                        <a class="fa fa-youtube social_icons" href="http://www.youtube.com/#" data-original-title="Youtube"></a>
-                        <a class="fa fa-linkedin social_icons" href="#" data-original-title="Linkedin"></a>
+                        <a class="fa fa-facebook social_icons" href="https://facebook.com/" target="_blank"
+                            data-original-title="Facebook"></a>
+                        <a class="fa fa-twitter social_icons" href="https://twitter.com/" target="_blank"
+                            data-original-title="Twitter"></a>
+                        <a class="fa fa-instagram social_icons" href="https://www.instagram.com/" target="_blank"
+                            data-original-title="Instagram"></a>
                     </div>
 
                 </div> <!-- end .article-author  -->
 
                 <div class="post-nav-section clearfix">
 
-                    <a class="btn btn-primary fr" href="#">Next Blog <i class="fa fa-angle-double-right"></i></a>
-                    <a class="btn btn-primary" href="#"><i class="fa fa-angle-double-left"></i> Previous Blog</a>
+                    {% if n_pkz.show %}
+                    <a class="btn btn-primary fr" href="/home/blog/view/{{n_pkz.shrt}}/{{n_pkz.lng}}">Next Blog <i
+                            class="fa fa-angle-double-right"></i></a>
+                    {% endif %}
+                    {% if p_pkz.show %}
+                    <a class="btn btn-primary" href="/home/blog/view/{{p_pkz.shrt}}/{{p_pkz.lng}}"><i
+                            class="fa fa-angle-double-left"></i> Previous Blog</a>
+                    {% endif %}
 
                 </div> <!-- end .post-nav-section  -->
 
                 <div class="related-post">
 
                     <div class="topic-bold-header clearfix">
-                        <h4>Related Posts</h4>
+                        <h4>Topr 3 Related Posts by {{x.author|title}}</h4>
                     </div> <!-- end .topic-bold-header  -->
 
                     <ul>
-                        <li><a href="#">- Make Kalam's House A Knowledge Centre</a></li>
-                        <li><a href="#">- TRAI Pledges to Protect Net Neutrality </a></li>
-                        <li><a href="#">-  Improve Safety Measures For Women Passengers</a></li>
+                        {% if recent %}
+                        {% for s in recent %}
+                        <li><a href="/home/blog/view/{{s.shrt}}/{{s.lng}}">- {{s.title}}</a></li>
+                        {% endfor %}
+                        {% else %}
+                        <li><a href="/home/blog/view/{{x.shrt}}/{{x.lng}}">- {{x.title}}</a></li>
+                        {% endif %}
                     </ul>
 
                 </div> <!-- end .related-post  -->
 
                 <div class="comments-area" id="comments">
-                    <a href="#respond" class="article-add-comments"><i class="fa fa-plus"></i></a>         
+                    <a href="#respond" class="article-add-comments"><i class="fa fa-plus"></i></a>
                     <div class="topic-bold-header clearfix">
                         <h4>4 comments to this article</h4>
                     </div> <!-- end .topic-bold-header  -->
@@ -145,8 +159,10 @@
                                 </p>
 
                                 <div class="comment_text">
-                                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+                                    egestas.
+                                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+                                    egestas.
                                 </div>
 
                             </article>
@@ -170,8 +186,10 @@
                                 </p>
 
                                 <div class="comment_text">
-                                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+                                    egestas.
+                                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+                                    egestas.
                                 </div>
 
                             </article>
@@ -183,7 +201,8 @@
                                     <article class="clearfix">
                                         <header>
                                             <h5>Mahbub Alam Khan</h5>
-                                            <p><span>on jan 19th, 2013 at 3:05 Pm - </span><!-- <a href="#">Reply</a>--></p>
+                                            <p><span>on jan 19th, 2013 at 3:05 Pm - </span><!-- <a href="#">Reply</a>-->
+                                            </p>
                                         </header>
 
                                         <figure class="comment-avatar">
@@ -193,8 +212,10 @@
                                         </figure>
 
                                         <div class="comment_text">
-                                            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                                            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                                            Pellentesque habitant morbi tristique senectus et netus et malesuada fames
+                                            ac turpis egestas.
+                                            Pellentesque habitant morbi tristique senectus et netus et malesuada fames
+                                            ac turpis egestas.
                                         </div>
 
                                     </article>
@@ -222,8 +243,10 @@
                                 </p>
 
                                 <div class="comment_text">
-                                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+                                    egestas.
+                                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+                                    egestas.
                                 </div>
 
                             </article>
@@ -234,7 +257,8 @@
 
                     <div class="comments-nav-section clearfix">
 
-                        <a href="#" class="btn btn-primary fr">Newer Comments <i class="fa fa-angle-double-right"></i></a>
+                        <a href="#" class="btn btn-primary fr">Newer Comments <i
+                                class="fa fa-angle-double-right"></i></a>
                         <a href="#" class="btn btn-primary"><i class="fa fa-angle-double-left"></i> Older Comments</a>
 
                     </div> <!-- end comments-nav-section-->
@@ -249,7 +273,7 @@
 
                             <div class="form-group">
 
-                                <input type="text" class="form-control" id="author" placeholder="Name">                                            
+                                <input type="text" class="form-control" id="author" placeholder="Name">
                             </div>
 
                             <div class="form-group">
@@ -263,7 +287,8 @@
 
                             <div class="form-group">
 
-                                <textarea class="form-control" rows="5" name="comment" id="comment" placeholder="Write Your Comment"></textarea>
+                                <textarea class="form-control" rows="5" name="comment" id="comment"
+                                    placeholder="Write Your Comment"></textarea>
                             </div>
 
                             <div class="form-group">
@@ -285,10 +310,11 @@
 
                     <h2 class="widget-title">Search</h2>
 
-                    <form action="https://templates.bwlthemes.com/blood_donation/v_2/index.html" id="search-form" class="search-form" role="form" method="get">
+                    <form action="https://templates.bwlthemes.com/blood_donation/v_2/index.html" id="search-form"
+                        class="search-form" role="form" method="get">
 
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search....">
+                            <input type="text" class="form-control" title="Blog Campaign Tag categogy Author" placeholder="Blog Campaign Tag categogy Author">
                             <span class="input-group-addon"><i class="fa fa-search"></i></span>
                         </div>
 
@@ -296,7 +322,7 @@
 
                     </form> <!-- end #search-form  -->
 
-                </div> <!--  end .widget -->            
+                </div> <!--  end .widget -->
 
 
                 <div class="widget site-sidebar">
@@ -304,30 +330,12 @@
                     <h2 class="widget-title">Categories</h2>
 
                     <ul class="widget-post-category clearfix">
+                        {% for cat in cats %}
                         <li>
-                            <a title="View all posts filed under Environment" href="#">Blood Relation</a>
-                            <span class="pull-right badge">42</span>
+                            <a title="{{cat.cat|title}}" href="#">{{cat.cat|title}}</a>
+                            <span class="pull-right badge">{{cat.no}}</span>
                         </li>
-                        <li>
-                            <a title="View all posts filed under Technology" href="#">AB- Blood donor</a>
-                            <span class="pull-right badge">40</span>
-                        </li>
-                        <li>
-                            <a title="View all posts filed under Health" href="#">Keep Safe Blood</a>
-                            <span class="pull-right badge">32</span>
-                        </li>
-                        <li>
-                            <a title="View all posts filed under Disaster" href="#">Preserve Blood</a>
-                            <span class="pull-right badge">26</span>
-                        </li>
-                        <li>
-                            <a title="View all posts filed under Environment Right" href="#">Donation center</a>
-                            <span class="pull-right badge">18</span>
-                        </li>
-                        <li>
-                            <a title="View all posts filed under Education" href="#">Proper Education</a>
-                            <span class="pull-right badge">12</span>
-                        </li>
+                        {% endfor %}
                     </ul>
 
 
@@ -335,22 +343,16 @@
 
                 <div class="widget site-sidebar">
 
-                    <h2 class="widget-title">Recent Posts</h2>
+                    <h2 class="widget-title">Other Posts</h2>
+
+                    {% for d in others %}
 
                     <div class="single-recent-post">
-                        <a href="#">Zomato Commits to Making Food Delivery</a>
-                        <span><i class="fa fa-calendar icon-color"></i>&nbsp; April 19, 2017</span>
+                        <a href="/home/blog/view/{{d.shrt}}/{{d.lng}}">{{d.title}}</a>
+                        <span><i class="fa fa-calendar icon-color"></i>&nbsp; {{d.date}}</span>
                     </div>
 
-                    <div class="single-recent-post">
-                        <a href="#">Make Kalam's House A Knowledge Centre</a>
-                        <span><i class="fa fa-calendar icon-color"></i>&nbsp; April 18, 2017</span>
-                    </div>
-
-                    <div class="single-recent-post">
-                        <a href="#">Central Government Retracts Proposal</a>
-                        <span><i class="fa fa-calendar icon-color"></i>&nbsp; April 17, 2017</span>
-                    </div>
+                    {% endfor %}
 
                 </div> <!--  end .widget -->
 
@@ -359,30 +361,14 @@
                     <h2 class="widget-title">Tags</h2>
 
                     <ul class="widget-recent-tags clearfix">
+                        
+                        {% for tag in tags %}
 
                         <li>
-                            <a href="#" title=""> claycold</a> 
+                            <a href="#" title="{{tag|title}}"> {{tag}}</a>
                         </li>
 
-                        <li>
-                            <a href="#" title=""> crushing</a> 
-                        </li>
-
-                        <li>
-                            <a href="#" title=""> chattels</a> 
-                        </li>
-
-                        <li>
-                            <a href="#" title=""> dinarchy</a> 
-                        </li>
-
-                        <li>
-                            <a href="#" title=""> cienaga</a> 
-                        </li>
-
-                        <li>
-                            <a href="#" title=""> doolie</a> 
-                        </li>
+                        {% endfor %}
 
                     </ul><!--  end .widget-recent-tags -->
 
@@ -391,6 +377,8 @@
             </div> <!-- end .col-sm-4  -->
 
         </div> <!--  end row  -->
+
+        {% endfor %}
 
     </div> <!--  end container -->
 

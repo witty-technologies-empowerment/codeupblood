@@ -1,0 +1,12 @@
+$('._8VWYiH').on('input', function () { var valueLen = $(this).val().split(' ').length; console.log(valueLen); if (!$(this).val().endsWith(' ')) { if (valueLen <= 50) { $('.QZhLxC').text(valueLen).removeAttr('style', 'disabled') } else { $('.QZhLxC').text(valueLen).css('color', 'red') } } }); $('._9IuNX4').on('input', function () { var valueLen = $(this).val().split(' ').length; console.log(valueLen); if (!$(this).val().endsWith(' ')) { if (valueLen <= 50) { $('.tVL1Wb ').text(valueLen).removeAttr('style', 'disabled') } else { $('.tVL1Wb ').text(valueLen).css('color', 'red') } } }); $('.WK86B5').on('input', function () { var valueLen = $(this).val().split(' ').length; console.log(valueLen); if (!$(this).val().endsWith(' ')) { if (valueLen <= 50) { $('.FLnylM').text(valueLen).removeAttr('style', 'disabled') } else { $('.FLnylM').text(valueLen).css('color', 'red') } } })
+
+var protocolName=window.location.protocol;var hostName=window.location.hostname;var portNumb=window.location.port;if(protocolName=='http:'){URL=protocolName+'//'+hostName+':'+portNumb}else{URL=protocolName+'//'+hostName} $('.L3O5BI').submit(function(e){e.preventDefault();let fname,lname,email,area,phone,city,state,tellus,where,what,why;fname=$('.KDkiuT').val();lname=$('._2Uqb25').val();email=$('.xrv5Mi').val();area=$('.XFmUZD').val();phone=$('._1ore3i').val();city=$('.z048ds').val();state=$('.QmmRaq').val();tellus=$('._8VWYiH').val();where=$('.DTpzmk').val();what=$('._9IuNX4').val();why=$('.WK86B5').val();phone=area+phone;let url=URL+`/api/v1/create/volunteer/${fname}/${lname}/${email}/${phone}/${city}/${state}/${tellus}/${where}/${what}/${why}`;$.ajax({type:'GET',url:url,success:function(response){if(response.status==200){Swal.fire('Great!',response.message,'success');$('.KDkiuT').val('');$('._2Uqb25').val('');$('.xrv5Mi').val('');$('.XFmUZD').val('');$('._1ore3i').val('');$('.z048ds').val('');$('.QmmRaq').val('');$('._8VWYiH').val('');$('.DTpzmk').val('');$('._9IuNX4').val('');$('.WK86B5').val('');}else{Swal.fire('Oops!',response.message,'danger');}}})})
+
+// fetch(URL + '/api/v1/getAppointment/' + user_login, {
+//     method: "GET",
+// })
+//     .then(res => res.body)
+//     .then(function (res) {
+//         res.status
+//     })
+//     .catch(err => console.log(err))
