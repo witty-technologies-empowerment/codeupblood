@@ -1,0 +1,144 @@
+{% extends 'base/home_base.html' %}
+{% block title %} CodeUp | Support Us | PAYMENT {% endblock %}
+
+{% load static %}
+{% block body %}
+<section class="payment_modal__wrapper py-5">
+
+    <!-- bank payment  -->
+    <section class="payment_modal__payment" id="modalBankPayment">
+        <div class="payment_modal__payment_content container wow zoomInUp">
+            <div class="card payment_modal__payment_card">
+                <span class="modalClose">
+                    <div class="bi bi-x-lg"></div>
+                </span>
+                <div class="card-header">
+                    <h5 class="card-title">Bank Payment</h5>
+                </div>
+                <div class="card-body">
+                    <div class="payment_modal__payment_detail center">
+                        <h2 class="h2 text-center">Guaranty Trust Bank</h2>
+                        <div class="splide">
+                            <div class="splide__track">
+                                <ul class="splide__list">
+                                    {% for account in bank_accounts %}
+                                    {% if account.bank.bank_name == "Guaranty Trust Bank" %}
+                                    <li class="splide__slide ">
+                                        <div class="payment_modal__payment_detail_content">
+                                            <h5 class="h5">Bank: <strong>{{ account.bank.bank_name }}</strong></h5>
+                                            <h5 class="h5">Currency: <strong>{{ account.currency}}</strong></h5>
+                                            <h5 class="h5">Account Name: <br><br><br><br><strong>{{ account.account_holder }}</strong></h5>
+                                            <h5 class="h5">Account Number: <strong>{{ account.account_number}}</strong></h5>
+                                            {% if account.swift_code != "" %}
+                                            <h5 class="h5">Swift Code: <strong>{{ account.swift_code}}</strong></h5>
+                                            <h5 class="h5">Location: <strong>{{ account.location}}</strong></h5>
+                                            {% endif %}
+                                        </div>
+                                    </li>
+                                    {% elif account.bank.bank_name == "Zenith Bank" %}
+                                    <li class="splide__slide bd-danger">
+                                        <div class="payment_modal__payment_detail_content">
+                                            <h5 class="h5">Bank: <strong>{{ account.bank.bank_name }}</strong></h5>
+                                            <h5 class="h5">Currency: <strong>{{ account.currency}}</strong></h5>
+                                            <h5 class="h5">Account Name: <br><br><br><br><strong>{{ account.account_holder }}</strong></h5>
+                                            <h5 class="h5">Account Number: <strong>{{ account.account_number}}</strong></h5>
+                                            {% if account.swift_code != "" %}
+                                            <h5 class="h5">Swift Code: <strong>{{ account.swift_code}}</strong></h5>
+                                            <h5 class="h5">Location: <strong>{{ account.location}}</strong></h5>
+                                            {% endif %}
+                                        </div>
+                                    </li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- crypto payment  -->
+    <section class="payment_modal__payment" id="modalCryptoPayment">
+        <div class="payment_modal__payment_content container wow zoomInUp">
+            <div class="card payment_modal__payment_card">
+                <!-- close crypto modal button -->
+                <span class="modalClose">
+                    <div class="bi bi-x-lg"></div>
+                </span>
+                <div class="card-header">
+                    <h5 class="card-title">Crypto Payment</h5>
+                </div>
+                <div class="card-body">
+                    <div class="payment_modal__payment_detail row justify-content-center">
+
+                        <div class="row justify-content-between">
+
+                            {% for currency in crypto_currencies %}
+                            <div class="col-sm-12 col-md-6">
+
+                                <div class="payment_modal__payment_detail_content bg-danger">
+
+                                    <!-- qrcode -->
+                                    <div class="qrcode-wrapper">
+                                        <div id="qrcode" class="text-center"></div>
+                                    </div>
+
+                                    <!-- crypto text -->
+                                    <div class="payment_modal__payment_detail_content_text">
+                                        <span class="mr-2">{{ etherum.symbol|upper }}:</span>
+                                        <input class="h4 text-center" id="cryptoAddress" type="text"
+                                            value="{{ etherum.address }}" disabled />
+                                        <button id="copyTextBtn" data-clipboard-target="#cryptoAddress">
+                                            <i class="bi bi-clipboard"></i>
+                                        </button>
+                                    </div>
+                                    <span class="mr-4 text-center">{{ etherum.network }}</span>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="payment_modal__content container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-sm-12 col-md-6 justify-self-evenly">
+                <div class="payment_modal__modal_image_wrapper">
+                    <a href="" class="payment_modal__payment_link" id="bankPaymentBtn">
+                        <img src="{% static 'home/images/bank.svg' %}" alt="" class="payment_modal__model_images">
+                    </a>
+                </div>
+                <h5 class="text-center text-danger text-capitalize mt-3">Bank Transfers</h5>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="payment_modal__modal_image_wrapper">
+                    <a href="" class="payment_modal__payment_link" id="cryptoPaymentBtn">
+                        <img src="{% static 'home/images/ethereum.svg' %}" alt="" class="payment_modal__model_images">
+                    </a>
+                </div>
+                <h5 class="text-center text-capitalize mt-3 pay">Crypto Payment</h5>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock body %}
+{% block script %}
+<script>
+    new Splide('.splide', {
+        perPage: 3,
+	    rewind : true,
+    }).mount();
+
+    let address = "{{ etherum.address }}"
+    console.log(address);
+    qrCode.makeCode(address);
+</script>
+{% endblock script %}

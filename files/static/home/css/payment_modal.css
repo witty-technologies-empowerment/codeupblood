@@ -1,0 +1,127 @@
+main{
+    position: relative;
+    overflow: hidden;
+}
+
+
+.payment_modal__wrapper{
+    padding: 7em 0px;
+}
+.payment_modal__content{
+    overflow: hidden;
+    padding: 50px 0px;
+}
+.payment_modal__modal_image_wrapper{
+    max-width: 100px;
+    max-height: 100px;
+    overflow: hidden;
+    border-radius: 5px;
+    margin: auto;
+    /* padding: 20px 0px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .5s;
+}
+.payment_modal__modal_image_wrapper:hover{
+    box-shadow: 4px 4px 30px #ddd;
+}
+/* .payment_modal__modal_image_wrapper:hover .payment_modal__payment_link{
+    margin-bottom: 40px;
+} */
+.payment_modal__model_images{
+    width: 100%;
+    height: auto;
+    transition: .5s;
+}
+
+/* Payment modal */
+.payment_modal__payment{
+    display: none;
+}
+.payment_modal__payment::after{
+    content: "";
+    width: 100%;
+    background-color: rgba(0, 0, 0, .80);
+    position: absolute;
+    height: 100%;
+    inset: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.payment_modal__payment_content{
+    background: #fff;
+    padding: 50px;
+    z-index: 9999;
+    position: relative;
+    border-radius: 10px;
+    width: 80vw;
+    top: -150px;
+}
+.payment_modal__payment_card{
+    position: relative;
+}
+.payment_modal__payment_detail_content{
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-right: 1px solid #bbb;
+}
+.payment_modal__payment_detail_content h5{
+    line-height: 8px;
+}
+
+@media (max-width: 414px) {
+    .payment_modal__payment{
+        background-color: red;
+    }
+}
+
+/* close button */
+.payment_modal__payment_card .modalClose{
+    position: absolute;
+    right: 20px;
+}
+.payment_modal__payment_card .modalClose:hover{
+    color: #b80c0c;
+}
+
+/* copy button */
+#copyTextBtn:hover{
+    cursor: pointer;
+    border-radius: 3px;
+}
+#copyTextBtn{
+    border: 1px solid transparent;
+    transition: .3s;
+    border: 1px solid #333;
+    padding: 2px 5px;
+    background: transparent;
+}
+/* crypto address */
+#cryptoAddress{
+    border: none;
+    background: transparent;
+    width: 80%;
+    padding: 0;
+    font-size: 13px;
+}
+#cryptoAddress::focus{
+    background: transparent;
+    border: none;
+}
+
+.payment_modal__payment_detail_content_text{
+    width: 100%;
+    margin: auto;
+}
+
+.qrcode-wrapper{
+    width: 220px;
+    margin: auto;
+}
